@@ -1,12 +1,9 @@
 package sk.upjs.ics.chladnicka;
 
-import java.util.List;
-
 import sk.upjs.ics.chladnicka.storage.AllergieDao;
 import sk.upjs.ics.chladnicka.storage.DaoFactory;
 import sk.upjs.ics.chladnicka.storage.DietDao;
 import sk.upjs.ics.chladnicka.storage.FavouriteDao;
-import sk.upjs.ics.chladnicka.storage.Ingredient;
 import sk.upjs.ics.chladnicka.storage.IngredientDao;
 import sk.upjs.ics.chladnicka.storage.MeasureDao;
 import sk.upjs.ics.chladnicka.storage.Recipe;
@@ -51,8 +48,8 @@ public class App {
 //		System.out.println(Mingredient);
 //		Ingredient ingredient = DaoFactory.INSTANCE.getIngredientDao().getByID(1);
 //		System.out.println(ingredient);
-		List<Ingredient> allIngredient = ingredientDao.getAll();
-		System.out.println(allIngredient);
+//		List<Ingredient> allIngredient = ingredientDao.getAll();
+//		System.out.println(allIngredient);
 //		List<Recipe> recipe = recipeDao.getAll();
 //		System.out.println(recipe);
 //		List<Favourite> favourites = favouriteDao.getAll();
