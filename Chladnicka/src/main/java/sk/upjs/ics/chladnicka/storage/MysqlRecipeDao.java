@@ -2,7 +2,9 @@ package sk.upjs.ics.chladnicka.storage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -92,29 +94,30 @@ public class MysqlRecipeDao implements RecipeDao {
  
 	}
 	
-//	public Map<Ingredient, Double> getAmountByID(Recipe recipe) {
-//		List<Ingredient> ingredients = DaoFactory.INSTANCE.getIngredientDao().getByRecipe(recipe);
-//		Map<Ingredient, Double> values = new HashMap<>();
-//
-//		
-//		for (Ingredient ingredient : ingredients) {
-//			String sql = "SELECT recipe_amount FROM recipe_has_ingredient "
-//					+"WHERE recipe_recipe_id = " + recipe.getId()
-//					+" AND ingredient_ingredient_id = " + ingredient.getId();
-//			
-//			
-////			double amount = jdbcTemplate.query(sql, new RowMapper<double>(){
-////
-////				@Override
-////				public double mapRow(ResultSet rs, int rowNum) throws SQLException {
-////					double rec_amount = rs.getDouble("recipe_amount");
-////					return null;
-////				}
-////				
-////			}
-//		}
-//		
-//	}
+	public Map<Ingredient, Double> getAmountByRecipe(Recipe recipe) {
+		List<Ingredient> ingredients = DaoFactory.INSTANCE.getIngredientDao().getByRecipe(recipe);
+		Map<Ingredient, Double> values = new HashMap<>();
+
+		
+		for (Ingredient ingredient : ingredients) {
+			String sql = "SELECT recipe_amount FROM recipe_has_ingredient "
+					+"WHERE recipe_recipe_id = " + recipe.getId()
+					+" AND ingredient_ingredient_id = " + ingredient.getId();
+			
+			
+			double amount = jdbcTemplate.queryForObject(sql, new RowMapper<Double>(){
+
+				@Override
+				public Double mapRow(ResultSet rs, int rowNum) throws SQLException {
+					double rec_amount = rs.getDouble("recipe_amount");
+					return rec_amount;
+				}
+				
+			});
+			values.put(ingredient,amount);
+		}
+		return values;
+	}
 
 	private class RecipeRowMapper implements RowMapper<Recipe> {
 
