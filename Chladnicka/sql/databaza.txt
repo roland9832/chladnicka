@@ -1,0 +1,77 @@
+#alergeny
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('1', '1', 'Obilniny obsahujúce lepok');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('2', '2', 'Kôrovce a výrobky z nich');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('3', '3', 'Vajcia a výrobky z nich');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('4', '4', 'Ryby a výrobky z nich okrem');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('5', '5', 'Arašídy a výrobky z nich');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('6', '6', 'Sójové zrná a výrobky z nich okrem');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('7', '7', 'Mlieko výrobky z neho (vrátane laktózy) okrem');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('8', '8', 'Orechy');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('9', '9', 'Zeler a výrobky z neho');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('10', '10', 'Horčica a výrobky z nej');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('11', '11', 'Sézamové semená a výrobky z nich');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('12', '12', 'Kysličník síričitý a síričitany v koncentráciách vyšších ako 10 mg/kg alebo 10mg/liter vyjadrené  ako SO2');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('13', '13', 'None');
+
+
+INSERT INTO `chladnickatest`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('1', '1', 'Obilniny obsahujúce lepok');
+INSERT INTO `chladnickatest`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('2', '2', 'Kôrovce a výrobky z nich');
+INSERT INTO `chladnickatest`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('3', '3', 'Vajcia a výrobky z nich');
+INSERT INTO `chladnickatest`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('4', '4', 'Ryby a výrobky z nich okrem');
+INSERT INTO `chladnickatest`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('5', '5', 'Arašídy a výrobky z nich');
+INSERT INTO `chladnickatest`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('6', '6', 'Sójové zrná a výrobky z nich okrem');
+INSERT INTO `chladnickatest`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('7', '7', 'Mlieko výrobky z neho (vrátane laktózy) okrem');
+INSERT INTO `chladnickatest`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('8', '8', 'Orechy');
+INSERT INTO `chladnickatest`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('9', '9', 'Zeler a výrobky z neho');
+INSERT INTO `chladnickatest`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('10', '10', 'Horčica a výrobky z nej');
+INSERT INTO `chladnickatest`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('11', '11', 'Sézamové semená a výrobky z nich');
+INSERT INTO `chladnickatest`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('12', '12', 'Kysličník síričitý a síričitany v koncentráciách vyšších ako 10 mg/kg alebo 10mg/liter vyjadrené  ako SO2');
+INSERT INTO `chladnickatest`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('13', '13', 'None');
+
+
+
+#measure
+INSERT INTO `chladnicka`.`measure` (`measure_id`, `unit`) VALUES ('1', 'g');
+INSERT INTO `chladnicka`.`measure` (`measure_id`, `unit`) VALUES ('2', 'ml');
+INSERT INTO `chladnicka`.`measure` (`measure_id`, `unit`) VALUES ('3', 'ks');
+
+INSERT INTO `chladnickatest`.`measure` (`measure_id`, `unit`) VALUES ('1', 'g');
+INSERT INTO `chladnickatest`.`measure` (`measure_id`, `unit`) VALUES ('2', 'ml');
+INSERT INTO `chladnickatest`.`measure` (`measure_id`, `unit`) VALUES ('3', 'ks');
+
+
+#diet
+INSERT INTO `chladnicka`.`diet` (`diet_id`, `diet_name`) VALUES ('1', 'none');
+INSERT INTO `chladnicka`.`diet` (`diet_id`, `diet_name`) VALUES ('2', 'vegan');
+INSERT INTO `chladnicka`.`diet` (`diet_id`, `diet_name`) VALUES ('3', 'vegetarian');
+
+INSERT INTO `chladnickatest`.`diet` (`diet_id`, `diet_name`) VALUES ('1', 'none');
+INSERT INTO `chladnickatest`.`diet` (`diet_id`, `diet_name`) VALUES ('2', 'vegan');
+INSERT INTO `chladnickatest`.`diet` (`diet_id`, `diet_name`) VALUES ('3', 'vegetarian');
+
+#ingredient
+
+INSERT INTO `chladnickatest`.`ingredient` (`ingredient_id`, `ingredient_name`, `quantity_fridge`, `allergie_allergie_id`, `measure_measure_id`) VALUES ('1', 'maslo', '500', '7', '1');
+INSERT INTO `chladnickatest`.`ingredient` (`ingredient_id`, `ingredient_name`, `quantity_fridge`, `allergie_allergie_id`, `measure_measure_id`) VALUES ('2', 'mlieko', '1000', '7', '2');
+INSERT INTO `chladnickatest`.`ingredient` (`ingredient_id`, `ingredient_name`, `quantity_fridge`, `allergie_allergie_id`, `measure_measure_id`) VALUES ('3', 'hladka muka', '1000', '1', '1');
+INSERT INTO `chladnickatest`.`ingredient` (`ingredient_id`, `ingredient_name`, `quantity_fridge`, `allergie_allergie_id`, `measure_measure_id`) VALUES ('4', 'vajce', '10', '3', '3');
+INSERT INTO `chladnickatest`.`ingredient` (`ingredient_id`, `ingredient_name`, `quantity_fridge`, `allergie_allergie_id`, `measure_measure_id`) VALUES ('5', 'sol', '500', '13', '1');
+
+#recipe
+INSERT INTO `chladnickatest`.`recipe` (`recipe_id`, `recipe_name`, `calorific value`, `description`, `diet_diet_id`) VALUES ('1', 'palacinky', '186', 'Ako prvé si nachystáme potrebné suroviny. Z uvedených surovín vypracujeme (rozhabarkujeme) hladké cesto. Cesto lejeme naberačkou na rozpálenú panvicu a kvapkou oleja alebo masla a pečieme z oboch strán. Hotové palacinky plníme džemom a posypeme cukrom. Plnku môžete použiť podľa vlastnej chute a fantázie. Dobrú chuť!', '1');
+
+#recipe has ingred
+INSERT INTO `chladnickatest`.`recipe_has_ingredient` (`recipe_recipe_id`, `ingredient_ingredient_id`, `recipe_amout`) VALUES ('1', '2', '400');
+INSERT INTO `chladnickatest`.`recipe_has_ingredient` (`recipe_recipe_id`, `ingredient_ingredient_id`, `recipe_amout`) VALUES ('1', '3', '200');
+INSERT INTO `chladnickatest`.`recipe_has_ingredient` (`recipe_recipe_id`, `ingredient_ingredient_id`, `recipe_amout`) VALUES ('1', '4', '1');
+INSERT INTO `chladnickatest`.`recipe_has_ingredient` (`recipe_recipe_id`, `ingredient_ingredient_id`, `recipe_amout`) VALUES ('1', '5', '3');
+
+#fridge
+INSERT INTO `chladnickatest`.`fridge` (`username`, `password`) VALUES ('Adm', '123');
+
+#favourite
+INSERT INTO `chladnickatest`.`favourite` (`recipe_recipe_id`, `hodnotenie`, `fridge_username`, `fridge_password`) VALUES ('1', '5', 'Adm', '123');
+
+
+
+
