@@ -19,15 +19,15 @@ public class MainSceneController {
     void showFavorites(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader =
-                    new FXMLLoader(getClass().getResource("Favorites.fxml"));
+                    new FXMLLoader(getClass().getResource("Favourites.fxml"));
             //Subject subject = subjectsComboBox.getSelectionModel().getSelectedItem();
-            IngredientsController controller = new IngredientsController();
+            FavouritesController controller = new FavouritesController();
             fxmlLoader.setController(controller);
             Parent parent = fxmlLoader.load();
             Scene scene = new Scene(parent);
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.setTitle("Favorites");
+            stage.setTitle("Favourites");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
             //updateTable();
