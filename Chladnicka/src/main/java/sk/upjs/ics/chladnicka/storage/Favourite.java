@@ -1,5 +1,7 @@
 package sk.upjs.ics.chladnicka.storage;
 
+import java.util.Objects;
+
 public class Favourite {
 	private Long id;
 	private Recipe recipe;
@@ -55,6 +57,23 @@ public class Favourite {
 	@Override
 	public String toString() {
 		return "Favourite [id=" + id + ", recipe=" + recipe + ", hodnotenie=" + hodnotenie + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, recipe);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Favourite other = (Favourite) obj;
+		return Objects.equals(id, other.id) && Objects.equals(recipe, other.recipe);
 	}
 
 	

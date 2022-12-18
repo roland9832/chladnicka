@@ -50,16 +50,21 @@ public class editFavouritesController {
 	@FXML
 	void addToFavoritesButton(ActionEvent event) {
 		Recipe recipe = recipesListView.getSelectionModel().getSelectedItem();
-		System.out.println(recipe);
-		System.out.println();
+//		System.out.println(recipe);
+//		System.out.println("by Recipe");
+//		System.out.println(favouriteDao.getByRecipe(recipe));
+//		System.out.println(selectedFavouriteModel);
+		
 		if (!hodnotenieTextField.getText().isBlank() && recipe != null) {
 			int hodnotenie = Integer.parseInt(hodnotenieTextField.getText());
 			if(hodnotenie>=0 && hodnotenie<=5) {
 				System.out.println(hodnotenie);
 			}
-			if (!selectedFavouriteModel.contains(favouriteDao.getByRecipe(recipe))) {
-				System.out.println("este nemam");
+			
+			if(!selectedFavouriteModel.contains(favouriteDao.getByRecipe(recipe))) {
+				System.out.println("aaaaaaa");
 			}
+
 		}
 	}
 

@@ -1,5 +1,7 @@
 package sk.upjs.ics.chladnicka.storage;
 
+import java.util.Objects;
+
 public class Measure {
 	private Long id;
 	private String unit;
@@ -33,5 +35,23 @@ public class Measure {
 	public String toString() {
 		return "Measure [id=" + id + ", unit=" + unit + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, unit);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Measure other = (Measure) obj;
+		return Objects.equals(id, other.id) && Objects.equals(unit, other.unit);
+	}
+	
 	
 }

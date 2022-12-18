@@ -1,5 +1,7 @@
 package sk.upjs.ics.chladnicka.storage;
 
+import java.util.Objects;
+
 public class Ingredient {
 	private Long id;
 	private String name;
@@ -74,6 +76,25 @@ public class Ingredient {
 	public String toString() {
 		return "Ingredient [id=" + id + ", name=" + name + ", quantity_fridge=" + quantity_fridge + ", alergie="
 				+ alergie + ", measure=" + measure + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(alergie, id, measure, name, quantity_fridge);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Ingredient other = (Ingredient) obj;
+		return Objects.equals(alergie, other.alergie) && Objects.equals(id, other.id)
+				&& Objects.equals(measure, other.measure) && Objects.equals(name, other.name)
+				&& Double.doubleToLongBits(quantity_fridge) == Double.doubleToLongBits(other.quantity_fridge);
 	}
 
 	

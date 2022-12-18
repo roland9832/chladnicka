@@ -1,5 +1,7 @@
 package sk.upjs.ics.chladnicka.storage;
 
+import java.util.Objects;
+
 public class Allergie {
 
 	private Long id;
@@ -43,6 +45,24 @@ public class Allergie {
 	@Override
 	public String toString() {
 		return "Allergie [id=" + id + ", category=" + category + ", information=" + information + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(category, id, information);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Allergie other = (Allergie) obj;
+		return Objects.equals(category, other.category) && Objects.equals(id, other.id)
+				&& Objects.equals(information, other.information);
 	}
 	
 	
