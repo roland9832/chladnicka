@@ -20,7 +20,13 @@ public class editFavouritesController {
     	model = new FavouriteFxModel();
     }
     
-    @FXML
+    public editFavouritesController(ListView<Favourite> favouriteListView) {
+    	model = new FavouriteFxModel(favouriteListView);
+    }
+    
+    
+
+	@FXML
     void initialize() {
     	recipesListView.setItems(model.getRecipeModel());
     	favoriteListView.setItems(model.getFavouriteModel());

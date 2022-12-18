@@ -7,13 +7,15 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
 import sk.upjs.ics.chladnicka.storage.DaoFactory;
 import sk.upjs.ics.chladnicka.storage.Favourite;
 import sk.upjs.ics.chladnicka.storage.Recipe;
 
 public class FavouriteFxModel{
 		
-	private Long id;
+	
+//	private Long id;
 	private StringProperty recipe_name = new SimpleStringProperty();
 	private ObservableList<Recipe> recipes;
 	private ObservableList<Favourite> favourites;
@@ -28,12 +30,29 @@ public class FavouriteFxModel{
 	
 	
 
-	public FavouriteFxModel(Favourite favourite) {
-		this.id = favourite.getId();
-		setRecipe_name(DaoFactory.INSTANCE.getRecipeDao().getByID(id).getRecipe_name());
-		List<Recipe> list = DaoFactory.INSTANCE.getRecipeDao().getAll();
-		recipes = FXCollections.observableArrayList(list);
+//	public FavouriteFxModel(Favourite favourite) {
+//		this.id = favourite.getId();
+//		setRecipe_name(DaoFactory.INSTANCE.getRecipeDao().getByID(id).getRecipe_name());
+//		List<Recipe> list = DaoFactory.INSTANCE.getRecipeDao().getAll();
+//		
+//		
+//		recipes = FXCollections.observableArrayList(list);
+//	}
+
+	public FavouriteFxModel(ListView<Favourite> favouriteListView) {
+		List<Recipe> Rlist = DaoFactory.INSTANCE.getRecipeDao().getAll();
+		recipes = FXCollections.observableArrayList(Rlist);
+		favourites = extracted(favouriteListView);
 	}
+
+
+
+	@SuppressWarnings("unchecked")
+	private ObservableList<Favourite> extracted(ListView<Favourite> favouriteListView) {
+		return (ObservableList<Favourite>) favouriteListView;
+	}
+
+
 
 	public StringProperty nameProperty() {
 		return recipe_name;

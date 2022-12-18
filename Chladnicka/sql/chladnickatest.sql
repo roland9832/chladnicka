@@ -185,6 +185,7 @@ INSERT INTO `chladnickatest`.`ingredient` (`ingredient_id`, `ingredient_name`, `
 INSERT INTO `chladnickatest`.`ingredient` (`ingredient_id`, `ingredient_name`, `quantity_fridge`, `allergie_allergie_id`, `measure_measure_id`) VALUES ('4', 'vajce', '10', '3', '3');
 INSERT INTO `chladnickatest`.`ingredient` (`ingredient_id`, `ingredient_name`, `quantity_fridge`, `allergie_allergie_id`, `measure_measure_id`) VALUES ('5', 'sol', '500', '13', '1');
 INSERT INTO `chladnickatest`.`ingredient` (`ingredient_name`, `quantity_fridge`, `allergie_allergie_id`, `measure_measure_id`) VALUES ('mrkva', '1000', '13', '1');
+INSERT INTO `chladnickatest`.`ingredient` (`ingredient_name`, `quantity_fridge`, `allergie_allergie_id`, `measure_measure_id`) VALUES ('paradajky', '500', '13', '1');
 
 
 INSERT INTO `chladnickatest`.`recipe` (`recipe_id`, `recipe_name`, `calorific_value`, `description`, `diet_diet_id`) VALUES ('1', 'palacinky', '186', 'Ako prvé si nachystáme potrebné suroviny. Z uvedených surovín vypracujeme (rozhabarkujeme) hladké cesto. Cesto lejeme naberačkou na rozpálenú panvicu a kvapkou oleja alebo masla a pečieme z oboch strán. Hotové palacinky plníme džemom a posypeme cukrom. Plnku môžete použiť podľa vlastnej chute a fantázie. Dobrú chuť!', '1');

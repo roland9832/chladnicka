@@ -16,27 +16,28 @@ public class FavouritesController {
 	private FavouriteFxModel model;
 	
 	@FXML
-    private ListView<Favourite> recipesListView;
+    private ListView<Favourite> favouriteListView;
 	
-	
+	 
+
+	 
 	public FavouritesController() {
     	model = new FavouriteFxModel();
     }
     
     @FXML
     void initialize() {
-    	recipesListView.setItems(model.getFavouriteModel());
+    	favouriteListView.setItems(model.getFavouriteModel());
     	
     }
     
 
     @FXML
-    void addToFavoritesButton(ActionEvent event) {
+    void editFavoritesButton(ActionEvent event) {
     	 try {
              FXMLLoader fxmlLoader =
                      new FXMLLoader(getClass().getResource("EditFavourites.fxml"));
-             //Subject subject = subjectsComboBox.getSelectionModel().getSelectedItem();
-             editFavouritesController controller = new editFavouritesController();
+             editFavouritesController controller = new editFavouritesController(favouriteListView);
              fxmlLoader.setController(controller);
              Parent parent = fxmlLoader.load();
              Scene scene = new Scene(parent);
