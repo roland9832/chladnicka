@@ -7,7 +7,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
 import sk.upjs.ics.chladnicka.storage.DaoFactory;
 import sk.upjs.ics.chladnicka.storage.Favourite;
 import sk.upjs.ics.chladnicka.storage.Recipe;
@@ -39,18 +38,18 @@ public class FavouriteFxModel{
 //		recipes = FXCollections.observableArrayList(list);
 //	}
 
-	public FavouriteFxModel(ListView<Favourite> favouriteListView) {
-		List<Recipe> Rlist = DaoFactory.INSTANCE.getRecipeDao().getAll();
-		recipes = FXCollections.observableArrayList(Rlist);
-		favourites = extracted(favouriteListView);
-	}
-
-
-
-	@SuppressWarnings("unchecked")
-	private ObservableList<Favourite> extracted(ListView<Favourite> favouriteListView) {
-		return (ObservableList<Favourite>) favouriteListView;
-	}
+//	public FavouriteFxModel(ListView<Favourite> favouriteListView) {
+//		List<Recipe> Rlist = DaoFactory.INSTANCE.getRecipeDao().getAll();
+//		recipes = FXCollections.observableArrayList(Rlist);
+//		favourites = extracted(favouriteListView);
+//	}
+//
+//
+//
+//	@SuppressWarnings("unchecked")
+//	private ObservableList<Favourite> extracted(ListView<Favourite> favouriteListView) {
+//		return (ObservableList<Favourite>) favouriteListView;
+//	}
 
 
 

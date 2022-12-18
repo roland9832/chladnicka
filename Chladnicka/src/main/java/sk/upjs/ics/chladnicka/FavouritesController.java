@@ -1,6 +1,9 @@
 package sk.upjs.ics.chladnicka;
 import java.io.IOException;
+import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,26 +12,29 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sk.upjs.ics.chladnicka.storage.DaoFactory;
 import sk.upjs.ics.chladnicka.storage.Favourite;
+import sk.upjs.ics.chladnicka.storage.FavouriteDao;
 
 public class FavouritesController {
-
-	private FavouriteFxModel model;
+	
+	
+	private ObservableList<Favourite> favouriteModel;
+	 
+	private FavouriteDao favouriteDao = DaoFactory.INSTANCE.getFavouriteDao();
+	
+	private List<Favourite> favourite;
 	
 	@FXML
     private ListView<Favourite> favouriteListView;
 	
 	 
-
-	 
-	public FavouritesController() {
-    	model = new FavouriteFxModel();
-    }
     
     @FXML
     void initialize() {
-    	favouriteListView.setItems(model.getFavouriteModel());
-    	
+    	favourite = favouriteDao.getAll();
+    	favouriteModel = FXCollections.observableArrayList(favourite);
+    	favouriteListView.setItems(favouriteModel);
     }
     
 
@@ -37,7 +43,7 @@ public class FavouritesController {
     	 try {
              FXMLLoader fxmlLoader =
                      new FXMLLoader(getClass().getResource("EditFavourites.fxml"));
-             editFavouritesController controller = new editFavouritesController(favouriteListView);
+             editFavouritesController controller = new editFavouritesController();
              fxmlLoader.setController(controller);
              Parent parent = fxmlLoader.load();
              Scene scene = new Scene(parent);

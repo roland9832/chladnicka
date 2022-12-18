@@ -20,7 +20,6 @@ public class MainSceneController {
         try {
             FXMLLoader fxmlLoader =
                     new FXMLLoader(getClass().getResource("Favourites.fxml"));
-            //Subject subject = subjectsComboBox.getSelectionModel().getSelectedItem();
             FavouritesController controller = new FavouritesController();
             fxmlLoader.setController(controller);
             Parent parent = fxmlLoader.load();
