@@ -64,7 +64,6 @@ public class editFavouritesController {
 			if(!selectedFavouriteModel.contains(favouriteDao.getByRecipe(recipe))) {
 				System.out.println("aaaaaaa");
 			}
-
 		}
 	}
 

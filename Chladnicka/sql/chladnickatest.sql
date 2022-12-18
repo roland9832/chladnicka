@@ -186,14 +186,23 @@ INSERT INTO `chladnickatest`.`ingredient` (`ingredient_id`, `ingredient_name`, `
 INSERT INTO `chladnickatest`.`ingredient` (`ingredient_id`, `ingredient_name`, `quantity_fridge`, `allergie_allergie_id`, `measure_measure_id`) VALUES ('5', 'sol', '500', '13', '1');
 INSERT INTO `chladnickatest`.`ingredient` (`ingredient_name`, `quantity_fridge`, `allergie_allergie_id`, `measure_measure_id`) VALUES ('mrkva', '1000', '13', '1');
 INSERT INTO `chladnickatest`.`ingredient` (`ingredient_name`, `quantity_fridge`, `allergie_allergie_id`, `measure_measure_id`) VALUES ('paradajky', '500', '13', '1');
+INSERT INTO `chladnickatest`.`ingredient` (`ingredient_id`, `ingredient_name`, `quantity_fridge`, `allergie_allergie_id`, `measure_measure_id`) VALUES ('8', 'zemiaky', '1000', '13', '1');
+INSERT INTO `chladnickatest`.`ingredient` (`ingredient_id`, `ingredient_name`, `quantity_fridge`, `allergie_allergie_id`, `measure_measure_id`) VALUES ('9', 'olej', '1000', '13', '2');
+
 
 
 INSERT INTO `chladnickatest`.`recipe` (`recipe_id`, `recipe_name`, `calorific_value`, `description`, `diet_diet_id`) VALUES ('1', 'palacinky', '186', 'Ako prvé si nachystáme potrebné suroviny. Z uvedených surovín vypracujeme (rozhabarkujeme) hladké cesto. Cesto lejeme naberačkou na rozpálenú panvicu a kvapkou oleja alebo masla a pečieme z oboch strán. Hotové palacinky plníme džemom a posypeme cukrom. Plnku môžete použiť podľa vlastnej chute a fantázie. Dobrú chuť!', '1');
+INSERT INTO `chladnickatest`.`recipe` (`recipe_id`, `recipe_name`, `calorific_value`, `description`, `diet_diet_id`) VALUES ('2', 'hranolky', '312', 'Ci uz robite hranolky domace,alebo ich kupite mrazene,pre naozaj chutne a chrumkave hranolky existuje trik. Hranolky vyprazajte v oleji,do ktoreho ste dali mast.Najlepsie tak 50na50. Vyprazajte na dva krat.Najprv preprazte asi na 2 min,vyberte a nechajte asi 1min.vonku.Potom pokracujte a hranolky doprazte az do konca.', '2');
+
 
 INSERT INTO `chladnickatest`.`recipe_has_ingredient` (`recipe_recipe_id`, `ingredient_ingredient_id`, `recipe_amount`) VALUES ('1', '2', '400');
 INSERT INTO `chladnickatest`.`recipe_has_ingredient` (`recipe_recipe_id`, `ingredient_ingredient_id`, `recipe_amount`) VALUES ('1', '3', '200');
 INSERT INTO `chladnickatest`.`recipe_has_ingredient` (`recipe_recipe_id`, `ingredient_ingredient_id`, `recipe_amount`) VALUES ('1', '4', '1');
 INSERT INTO `chladnickatest`.`recipe_has_ingredient` (`recipe_recipe_id`, `ingredient_ingredient_id`, `recipe_amount`) VALUES ('1', '5', '3');
+INSERT INTO `chladnickatest`.`recipe_has_ingredient` (`recipe_recipe_id`, `ingredient_ingredient_id`, `recipe_amount`) VALUES ('2', '8', '600');
+INSERT INTO `chladnickatest`.`recipe_has_ingredient` (`recipe_recipe_id`, `ingredient_ingredient_id`, `recipe_amount`) VALUES ('2', '9', '500');
+INSERT INTO `chladnickatest`.`recipe_has_ingredient` (`recipe_recipe_id`, `ingredient_ingredient_id`, `recipe_amount`) VALUES ('2', '5', '5');
+
 
 
 INSERT INTO `chladnickatest`.`favourite` (`hodnotenie`, `recipe_recipe_id`) VALUES ('5', '1');
