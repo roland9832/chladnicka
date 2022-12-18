@@ -13,11 +13,16 @@ import sk.upjs.ics.chladnicka.storage.Recipe;
 
 public class FavouriteFxModel{
 		
-	
-//	private Long id;
-	private StringProperty recipe_name = new SimpleStringProperty();
+	private StringProperty name = new SimpleStringProperty();
 	private ObservableList<Recipe> recipes;
 	private ObservableList<Favourite> favourites;
+	
+	
+//	public FavouriteFxModel() {
+//		recipes = FXCollections.observableArrayList();
+//		favourites = FXCollections.observableArrayList();
+//	}
+	
 	
 	
 	public FavouriteFxModel() {
@@ -28,43 +33,20 @@ public class FavouriteFxModel{
 	}
 	
 	
-
-//	public FavouriteFxModel(Favourite favourite) {
-//		this.id = favourite.getId();
-//		setRecipe_name(DaoFactory.INSTANCE.getRecipeDao().getByID(id).getRecipe_name());
-//		List<Recipe> list = DaoFactory.INSTANCE.getRecipeDao().getAll();
-//		
-//		
-//		recipes = FXCollections.observableArrayList(list);
-//	}
-
-//	public FavouriteFxModel(ListView<Favourite> favouriteListView) {
-//		List<Recipe> Rlist = DaoFactory.INSTANCE.getRecipeDao().getAll();
-//		recipes = FXCollections.observableArrayList(Rlist);
-//		favourites = extracted(favouriteListView);
-//	}
-//
-//
-//
-//	@SuppressWarnings("unchecked")
-//	private ObservableList<Favourite> extracted(ListView<Favourite> favouriteListView) {
-//		return (ObservableList<Favourite>) favouriteListView;
-//	}
-
-
-
-	public StringProperty nameProperty() {
-		return recipe_name;
-	}
 	
+	
+	public StringProperty getNameProperty() {
+		return name;
+	}
+
 	public String getName() {
-		return recipe_name.get();
+		return name.get();
 	}
-	
-	public void setRecipe_name(String name) {
-		this.recipe_name.set(name);
+
+	public void setName(String name) {
+		this.name.set(name);
 	}
-	
+
 	public ObservableList<Recipe> getRecipeModel() {
 		return recipes;
 	}
@@ -80,14 +62,4 @@ public class FavouriteFxModel{
 	public List<Favourite> getFavourite(){
 		return new ArrayList<>(favourites);
 	}
-	
-
-
-
-	
-//	public Favourite getFavourite() {
-//		return new Favourite(id, );
-//	}
-//	
-	
 }

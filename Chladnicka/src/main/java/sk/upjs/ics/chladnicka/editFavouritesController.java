@@ -1,61 +1,76 @@
 package sk.upjs.ics.chladnicka;
-import java.util.List;
+
+import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import sk.upjs.ics.chladnicka.storage.DaoFactory;
 import sk.upjs.ics.chladnicka.storage.Favourite;
+import sk.upjs.ics.chladnicka.storage.FavouriteDao;
 import sk.upjs.ics.chladnicka.storage.Recipe;
 
 public class editFavouritesController {
 
+	private FavouriteDao favouriteDao = DaoFactory.INSTANCE.getFavouriteDao();
+
 	private FavouriteFxModel model;
-	
-	private List<Favourite> favourite;
-		
-    @FXML
-    private ListView<Favourite> favouriteListView;
 
-    @FXML
-    private ListView<Recipe> recipesListView;
-    
- 
-    public editFavouritesController() {
-    	model = new FavouriteFxModel();
-    }
+//	private List<Favourite> favourite;
 
-//	public editFavouritesController(List<Favourite> favouriteListView) {
-//		this.favourite = favouriteListView;
-//		this.favouriteListView = FXCollections.observableArrayList(favourite);
-//	}
+	private ObservableList<Favourite> selectedFavouriteModel = FXCollections
+			.observableArrayList(new ArrayList<Favourite>());
 
 	@FXML
-    void initialize() {
-    	recipesListView.setItems(model.getRecipeModel());
-    	favouriteListView.setItems(model.getFavouriteModel());
-    }
-    
-    
-    
-    
-    
-    
+	private ListView<Favourite> favouriteListView;
+//    private ListView<Favourite> tempFavouriteListView;
 
-    @FXML
-    void addToFavoritesButton(ActionEvent event) {
+	@FXML
+	private ListView<Recipe> recipesListView;
 
-    }
+	@FXML
+	private TextField hodnotenieTextField;
 
-    @FXML
-    void insertIntoFavoritesButton(ActionEvent event) {
+	public editFavouritesController() {
+		model = new FavouriteFxModel();
+	}
 
-    }
+	@FXML
+	void initialize() {
+		recipesListView.setItems(model.getRecipeModel());
+		favouriteListView.setItems(model.getFavouriteModel());
+//    	favouriteListView.setItems(selectedFavouriteModel);
+		selectedFavouriteModel.setAll(favouriteListView.getItems());
+//    	System.out.println(selectedFavouriteModel);
+	}
 
-    @FXML
-    void removeFromFavoritesButton(ActionEvent event) {
+	@FXML
+	void addToFavoritesButton(ActionEvent event) {
+		Recipe recipe = recipesListView.getSelectionModel().getSelectedItem();
+		System.out.println(recipe);
+		System.out.println();
+		if (!hodnotenieTextField.getText().isBlank() && recipe != null) {
+			int hodnotenie = Integer.parseInt(hodnotenieTextField.getText());
+			if(hodnotenie>=0 && hodnotenie<=5) {
+				System.out.println(hodnotenie);
+			}
+			if (!selectedFavouriteModel.contains(favouriteDao.getByRecipe(recipe))) {
+				System.out.println("este nemam");
+			}
+		}
+	}
 
-    }
+	@FXML
+	void removeFromFavoritesButton(ActionEvent event) {
+
+	}
+
+	@FXML
+	void saveFavoritesButton(ActionEvent event) {
+
+	}
 
 }
-
