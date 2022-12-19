@@ -27,15 +27,14 @@ public class editFavouritesController {
 
 	@FXML
 	private ListView<Favourite> favouriteListView;
-     
 
 	@FXML
 	private ListView<Recipe> recipesListView;
 
 	@FXML
 	private TextField hodnotenieTextField;
-	
-	private List<Favourite> favouriteToAdd;
+
+	private List<Favourite> favouriteToAdd = new ArrayList<>();
 
 	public editFavouritesController() {
 		model = new FavouriteFxModel();
@@ -54,34 +53,33 @@ public class editFavouritesController {
 	void addToFavoritesButton(ActionEvent event) {
 		Recipe recipe = recipesListView.getSelectionModel().getSelectedItem();
 
-		
 		if (!hodnotenieTextField.getText().isBlank() && recipe != null) {
 			int hodnotenie = Integer.parseInt(hodnotenieTextField.getText());
-			if(hodnotenie>=0 && hodnotenie<=5) {
-				Favourite favourite = new Favourite(recipe,hodnotenie);
-				if(!selectedFavouriteModel.contains(favourite)) {
-					FavouriteFxModel model1 = new FavouriteFxModel(favourite);
-					ListView<Favourite> tempFavouriteListView = new ListView<Favourite>();
-					tempFavouriteListView.setItems(model1.getFavouriteModel());
-					favouriteListView = tempFavouriteListView;
+			if (hodnotenie >= 0 && hodnotenie <= 5) {
+				Favourite favourite = new Favourite(recipe, hodnotenie);
+				if (!selectedFavouriteModel.contains(favourite)) {
+					List<Favourite> favourites = favouriteDao.getAll();
+					favourites.add(favourite);
+					selectedFavouriteModel = FXCollections.observableArrayList(favourites);
+					favouriteListView.setItems(selectedFavouriteModel);
 					favouriteToAdd.add(favourite);
-					
-					
 				}
 			}
 		}
 	}
 
-
 	@FXML
 	void removeFromFavoritesButton(ActionEvent event) {
+		Favourite favourite = favouriteListView.getSelectionModel().getSelectedItem();
 		
 	}
 
 	@FXML
 	void saveFavoritesButton(ActionEvent event) {
-		for (Favourite favourite : favouriteToAdd) {
-			favouriteDao.save(favourite);
+		if (!favouriteToAdd.isEmpty()) {
+			for (Favourite favourite : favouriteToAdd) {
+				favouriteDao.save(favourite);
+			}
 		}
 	}
 

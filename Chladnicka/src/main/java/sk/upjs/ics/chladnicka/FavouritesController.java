@@ -75,7 +75,8 @@ public class FavouritesController {
 			}
 			favourites.remove(favourite);
 			this.favourite = favourites;
-			favouriteModel = FXCollections.observableArrayList(favourite);
+			favouriteModel = FXCollections.observableArrayList(this.favourite);
+			System.out.println(favouriteModel);
 			favouriteListView.setItems(favouriteModel);
 		}
 		
