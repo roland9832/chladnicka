@@ -1,6 +1,7 @@
 package sk.upjs.ics.chladnicka.storage;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public interface IngredientDao {
 	List<Ingredient> getAll();
@@ -13,5 +14,9 @@ public interface IngredientDao {
 	
 	Ingredient getByID(long id);
 
-	Ingredient save(Ingredient ingredient);
+	Ingredient save(Ingredient ingredient) throws NoSuchElementException,NullPointerException;
+	
+	boolean delete(Ingredient ingredient) throws ObjectUndeletableException;
+	
+	
 }

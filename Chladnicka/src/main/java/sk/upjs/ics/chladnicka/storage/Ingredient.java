@@ -74,8 +74,8 @@ public class Ingredient {
 
 	@Override
 	public String toString() {
-		return "Ingredient [id=" + id + ", name=" + name + ", quantity_fridge=" + quantity_fridge + ", alergie="
-				+ alergie + ", measure=" + measure + "]";
+		return "(" + id + ") " + name + ", " + quantity_fridge + measure.getUnit() +  ", "
+				+ alergie.getCategory();
 	}
 
 	@Override

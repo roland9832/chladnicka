@@ -6,15 +6,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ListView fx:id="recipesListView" layoutX="32.0" layoutY="130.0" prefHeight="441.0" prefWidth="536.0" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="174.0" layoutY="47.0" prefHeight="49.0" prefWidth="253.0" text="Favorite Recipes">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="432.0" layoutY="589.0" mnemonicParsing="false" onAction="#addToFavoritesButton" prefHeight="31.0" prefWidth="135.0" text="Add to Favorites" />
+      <Button layoutX="400.0" layoutY="589.0" mnemonicParsing="false" onAction="#editFavoritesButton" prefHeight="31.0" prefWidth="135.0" text="Edit Favorites" />
+      <Button layoutX="74.0" layoutY="589.0" mnemonicParsing="false" onAction="#deleteFavoritesButton" prefHeight="31.0" prefWidth="135.0" text="Delete Favourites" />
+      <ListView fx:id="favouriteListView" layoutX="69.0" layoutY="119.0" prefHeight="384.0" prefWidth="462.0" />
    </children>
 </AnchorPane>

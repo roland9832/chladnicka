@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ListView fx:id="recipesListView" layoutX="358.0" layoutY="130.0" prefHeight="442.0" prefWidth="210.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="173.0" layoutY="39.0" prefHeight="49.0" prefWidth="253.0" text="Add Favorite Recipes">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="432.0" layoutY="589.0" mnemonicParsing="false" onAction="#saveFavoritesButton" prefHeight="31.0" prefWidth="135.0" text="Save Favorites" />
+      <ListView fx:id="favouriteListView" layoutX="30.0" layoutY="130.0" prefHeight="442.0" prefWidth="210.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="98.0" prefHeight="31.0" prefWidth="210.0" text="Favourites">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="358.0" layoutY="98.0" prefHeight="31.0" prefWidth="210.0" text="Recipes">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="260.0" layoutY="267.0" mnemonicParsing="false" onAction="#addToFavoritesButton" prefHeight="31.0" prefWidth="79.0" text="&lt;&lt;&lt;" />
+      <Button layoutX="260.0" layoutY="309.0" mnemonicParsing="false" onAction="#removeFromFavoritesButton" prefHeight="31.0" prefWidth="79.0" text="&gt;&gt;&gt;" />
+      <TextField fx:id="hodnotenieTextField" layoutX="264.0" layoutY="392.0" prefHeight="26.0" prefWidth="71.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="260.0" layoutY="360.0" prefHeight="31.0" prefWidth="79.0" text="Hodnotenie">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

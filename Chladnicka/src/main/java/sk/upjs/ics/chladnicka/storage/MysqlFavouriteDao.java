@@ -2,15 +2,12 @@ package sk.upjs.ics.chladnicka.storage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 
 public class MysqlFavouriteDao implements FavouriteDao {
@@ -64,6 +61,9 @@ public class MysqlFavouriteDao implements FavouriteDao {
 	public void save(Favourite favourite) {
 		if (favourite == null) {
 			throw new NullPointerException("Cannot save null Favourite");
+		}
+		if(favourite.getRecipe() == null) {
+			throw new NullPointerException("Cannot save null Recipe");
 		}
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT INTO favourite (hodnotenie, recipe_recipe_id) VALUES ");

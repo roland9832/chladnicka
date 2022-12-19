@@ -3,8 +3,8 @@ package sk.upjs.ics.chladnicka;
 import sk.upjs.ics.chladnicka.storage.AllergieDao;
 import sk.upjs.ics.chladnicka.storage.DaoFactory;
 import sk.upjs.ics.chladnicka.storage.DietDao;
-import sk.upjs.ics.chladnicka.storage.Favourite;
 import sk.upjs.ics.chladnicka.storage.FavouriteDao;
+import sk.upjs.ics.chladnicka.storage.Ingredient;
 import sk.upjs.ics.chladnicka.storage.IngredientDao;
 import sk.upjs.ics.chladnicka.storage.MeasureDao;
 import sk.upjs.ics.chladnicka.storage.Recipe;
@@ -62,6 +62,17 @@ public class App {
 //		Favourite favourite = new Favourite(recipeDao.getByID(2), 5);
 //		favouriteDao.save(favourite);
 		
+		Ingredient ingredient = new Ingredient(); 
+		Ingredient ingredient2 = ingredient;
+		Long c = (long) 10;
+		ingredient2.setId(c);
+		ingredient2.setQuantity_fridge(500);
+		ingredient.setName("cukor");
+		ingredient.setQuantity_fridge(800);
+		ingredient.setAlergie(allergieDao.getByID(13));
+		ingredient.setMeasure(measureDao.getByID(1));
+//		ingredientDao.save(ingredient);
+		ingredientDao.save(ingredient2);
 	}
 
 }
