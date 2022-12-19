@@ -1,7 +1,10 @@
 package sk.upjs.ics.chladnicka;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,7 +29,7 @@ public class editFavouritesController {
 
 	@FXML
 	private ListView<Favourite> favouriteListView;
-//    private ListView<Favourite> tempFavouriteListView;
+     
 
 	@FXML
 	private ListView<Recipe> recipesListView;
@@ -50,26 +53,42 @@ public class editFavouritesController {
 	@FXML
 	void addToFavoritesButton(ActionEvent event) {
 		Recipe recipe = recipesListView.getSelectionModel().getSelectedItem();
-//		System.out.println(recipe);
-//		System.out.println("by Recipe");
-//		System.out.println(favouriteDao.getByRecipe(recipe));
-//		System.out.println(selectedFavouriteModel);
+
 		
 		if (!hodnotenieTextField.getText().isBlank() && recipe != null) {
 			int hodnotenie = Integer.parseInt(hodnotenieTextField.getText());
 			if(hodnotenie>=0 && hodnotenie<=5) {
-				System.out.println(hodnotenie);
-			}
-			
-			if(!selectedFavouriteModel.contains(favouriteDao.getByRecipe(recipe))) {
-				System.out.println("aaaaaaa");
+				Favourite favourite = new Favourite(recipe,hodnotenie);
+				if(!selectedFavouriteModel.contains(favourite)) {
+					FavouriteFxModel model1 = new FavouriteFxModel(favourite);
+					ListView<Favourite> tempFavouriteListView = new ListView<Favourite>();
+					tempFavouriteListView.setItems(model1.getFavouriteModel());
+					favouriteListView = tempFavouriteListView;
+					favouriteListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Favourite>() {
+
+						@Override
+						public void changed(ObservableValue<? extends Favourite> observable, Favourite oldValue,
+								Favourite newValue) {
+							if (newValue != null) {
+								
+							}
+							
+						}
+					});
+					
+					
+				}
 			}
 		}
 	}
 
 	@FXML
 	void removeFromFavoritesButton(ActionEvent event) {
-
+		Favourite favourite = favouriteListView.getSelectionModel().getSelectedItem();
+		List<Favourite> favourites = new ArrayList<>();
+		if(favourite != null) {
+			
+		}
 	}
 
 	@FXML

@@ -5,8 +5,10 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+
 
 public class MysqlFavouriteDao implements FavouriteDao {
 	private JdbcTemplate jdbcTemplate;
@@ -53,6 +55,18 @@ public class MysqlFavouriteDao implements FavouriteDao {
 		} catch (Exception e) {
 			throw new NoSuchElementException("Favourite with recipe "+ recipe +" not in DB");
 		}
+	}
+
+	@Override
+	public boolean delete(Recipe recipe) throws ObjectUndeletableException {
+		int wasDeleted;
+		try {
+			wasDeleted = jdbcTemplate.update("DELETE FROM favourite WHERE id = " + recipe.getId());
+		} catch (DataIntegrityViolationException e) {
+			throw new ObjectUndeletableException("Term with id: " + recipe.getId() + "cannot be deleted, some candidate/program already has this term");
+		}
+				
+		return wasDeleted == 1;
 	}
 
 }

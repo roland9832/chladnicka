@@ -32,7 +32,13 @@ public class FavouriteFxModel{
 		favourites = FXCollections.observableArrayList(Flist);
 	}
 	
-	
+	public FavouriteFxModel(Favourite favourite) {
+		List<Recipe> Rlist = DaoFactory.INSTANCE.getRecipeDao().getAll();
+		recipes = FXCollections.observableArrayList(Rlist);
+		List<Favourite> Flist = DaoFactory.INSTANCE.getFavouriteDao().getAll();
+		Flist.add(favourite);
+		favourites = FXCollections.observableArrayList(Flist);
+	}
 	
 	
 	public StringProperty getNameProperty() {
