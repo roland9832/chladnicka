@@ -118,7 +118,7 @@ public class MysqlIngredientDao implements IngredientDao {
 			long id = saveInsert.executeAndReturnKey(values).longValue();
 			return new Ingredient(id,ingredient.getName(), ingredient.getQuantity_fridge(), ingredient.getAlergie(), ingredient.getMeasure());
 		} else {
-			String sql = "UPDATE ingredient SET ingredient_name= ?, quantity_fridge= ?, allergie_allergie_id= ?, measure_measure_id= ?" + "WHERE ingredient_id = ?";
+			String sql = "UPDATE ingredient SET ingredient_name= ?, quantity_fridge= ?, allergie_allergie_id= ?, measure_measure_id= ? " + " WHERE ingredient_id = ?";
 			int updated = jdbcTemplate.update(sql, ingredient.getName(), ingredient.getQuantity_fridge(), ingredient.getAlergie().getId(), ingredient.getMeasure().getId(), ingredient.getId());
 			if (updated == 1) {
 				return ingredient;

@@ -1,7 +1,6 @@
 package sk.upjs.ics.chladnicka;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -54,7 +53,10 @@ public class FavouritesController {
 			stage.setTitle("Edit Favourites");
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.showAndWait();
-			// updateTable();
+			favouriteModel.clear();
+			List<Favourite> tempList = favouriteDao.getAll();
+			favouriteModel.addAll(tempList);
+			favouriteListView.setItems(favouriteModel);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -63,16 +63,19 @@ public class App {
 //		favouriteDao.save(favourite);
 		
 		Ingredient ingredient = new Ingredient(); 
-		Ingredient ingredient2 = ingredient;
+		
 		Long c = (long) 10;
-		ingredient2.setId(c);
-		ingredient2.setQuantity_fridge(500);
 		ingredient.setName("cukor");
 		ingredient.setQuantity_fridge(800);
 		ingredient.setAlergie(allergieDao.getByID(13));
 		ingredient.setMeasure(measureDao.getByID(1));
 //		ingredientDao.save(ingredient);
+		Ingredient ingredient2 = ingredient;
+		ingredient2.setId(c);
+		ingredient2.setQuantity_fridge(500);
 		ingredientDao.save(ingredient2);
+		
+		
 	}
 
 }
