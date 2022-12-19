@@ -65,6 +65,15 @@ public class FavouriteFxModel{
 		return favourites;
 	}
 	
+	
+	public ObservableList<Favourite> getFavourites() {
+		return favourites;
+	}
+
+	public void setFavourites(ObservableList<Favourite> favourites) {
+		this.favourites = favourites;
+	}
+
 	public List<Favourite> getFavourite(){
 		return new ArrayList<>(favourites);
 	}

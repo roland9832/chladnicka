@@ -3,6 +3,7 @@ package sk.upjs.ics.chladnicka;
 import sk.upjs.ics.chladnicka.storage.AllergieDao;
 import sk.upjs.ics.chladnicka.storage.DaoFactory;
 import sk.upjs.ics.chladnicka.storage.DietDao;
+import sk.upjs.ics.chladnicka.storage.Favourite;
 import sk.upjs.ics.chladnicka.storage.FavouriteDao;
 import sk.upjs.ics.chladnicka.storage.IngredientDao;
 import sk.upjs.ics.chladnicka.storage.MeasureDao;
@@ -58,6 +59,8 @@ public class App {
 //		System.out.println(favourite);
 		
 //		System.out.println(recipeDao.getAmountByRecipe(recipe));
+//		Favourite favourite = new Favourite(recipeDao.getByID(2), 5);
+//		favouriteDao.save(favourite);
 		
 	}
 

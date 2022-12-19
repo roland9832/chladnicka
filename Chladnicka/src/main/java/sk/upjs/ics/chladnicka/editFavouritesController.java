@@ -3,8 +3,6 @@ package sk.upjs.ics.chladnicka;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,6 +34,8 @@ public class editFavouritesController {
 
 	@FXML
 	private TextField hodnotenieTextField;
+	
+	private List<Favourite> favouriteToAdd;
 
 	public editFavouritesController() {
 		model = new FavouriteFxModel();
@@ -64,17 +64,7 @@ public class editFavouritesController {
 					ListView<Favourite> tempFavouriteListView = new ListView<Favourite>();
 					tempFavouriteListView.setItems(model1.getFavouriteModel());
 					favouriteListView = tempFavouriteListView;
-					favouriteListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Favourite>() {
-
-						@Override
-						public void changed(ObservableValue<? extends Favourite> observable, Favourite oldValue,
-								Favourite newValue) {
-							if (newValue != null) {
-								
-							}
-							
-						}
-					});
+					favouriteToAdd.add(favourite);
 					
 					
 				}
@@ -82,18 +72,17 @@ public class editFavouritesController {
 		}
 	}
 
+
 	@FXML
 	void removeFromFavoritesButton(ActionEvent event) {
-		Favourite favourite = favouriteListView.getSelectionModel().getSelectedItem();
-		List<Favourite> favourites = new ArrayList<>();
-		if(favourite != null) {
-			
-		}
+		
 	}
 
 	@FXML
 	void saveFavoritesButton(ActionEvent event) {
-
+		for (Favourite favourite : favouriteToAdd) {
+			favouriteDao.save(favourite);
+		}
 	}
 
 }
