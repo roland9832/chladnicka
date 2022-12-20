@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="84.0" layoutY="34.0" prefHeight="63.0" prefWidth="419.0">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="115.0" prefHeight="17.0" prefWidth="148.0" text="Calories:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="caloriesLabel" layoutX="157.0" layoutY="115.0" prefHeight="17.0" prefWidth="170.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="173.0" prefHeight="17.0" prefWidth="119.0" text="Ingredients:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="stepsLabel" contentDisplay="TOP" layoutX="48.0" layoutY="423.0" prefHeight="200.0" prefWidth="492.0" wrapText="true" />
+      <Label layoutX="48.0" layoutY="402.0" prefHeight="17.0" prefWidth="119.0" text="Steps:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="145.0" prefHeight="17.0" prefWidth="148.0" text="Diet:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="dietLabel" layoutX="157.0" layoutY="145.0" prefHeight="17.0" prefWidth="170.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ListView fx:id="ingredientsList2" layoutX="48.0" layoutY="196.0" prefHeight="200.0" prefWidth="508.0" />
+   </children>
+</AnchorPane>

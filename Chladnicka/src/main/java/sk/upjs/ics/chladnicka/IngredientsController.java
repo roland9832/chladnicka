@@ -174,7 +174,7 @@ public class IngredientsController {
     		
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditIngredient.fxml"));
 //			System.out.println(ingredient);
-			editIngredientController controller = new editIngredientController(ingredient);
+			EditIngredientController controller = new EditIngredientController(ingredient);
 //			System.out.println(ingredient);
 			fxmlLoader.setController(controller);
 			Parent parent = fxmlLoader.load();

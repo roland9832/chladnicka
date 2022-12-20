@@ -1,17 +1,14 @@
 package sk.upjs.ics.chladnicka;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import sk.upjs.ics.chladnicka.storage.DaoFactory;
-import sk.upjs.ics.chladnicka.storage.Diet;
-import sk.upjs.ics.chladnicka.storage.Ingredient;
-import sk.upjs.ics.chladnicka.storage.Measure;
-import sk.upjs.ics.chladnicka.storage.Recipe;
+import sk.upjs.ics.chladnicka.storage.*;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class RecipesFxModel {
 
@@ -108,9 +105,5 @@ public class RecipesFxModel {
     public Diet getDietById(Long id){
         return DaoFactory.INSTANCE.getDietDao().getByID(id);
     }
-
-//    public Recipe getRecipeByName(String name) {
-//        return DaoFactory.INSTANCE.getRecipeDao().getByName(name);
-//    }
 
 }

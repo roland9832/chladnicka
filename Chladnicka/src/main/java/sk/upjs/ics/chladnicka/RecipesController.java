@@ -25,9 +25,9 @@ public class RecipesController {
 
     private RecipeDao recipeDao;
 
-    private ObservableList<String> items;
+    private ObservableList<Diet> items;
 
-    private ObservableList<String> ingredient;
+    private ObservableList<Ingredient> ingredients;
 
     private List<Recipe> selectedRecipes;
 
@@ -38,16 +38,16 @@ public class RecipesController {
 
     private List<Diet> selectedDiets;
 
-    private ObservableList<String> item;
+    private ObservableList<Recipe> item;
 
     @FXML
-    private ComboBox<String> ingredientsComboBox;
+    private ComboBox<Ingredient> ingredientsComboBox;
 
     @FXML
-    private ComboBox<String> diet;
+    private ComboBox<Diet> diet;
 
     @FXML
-    private ListView<String> recipesListView;
+    private ListView<Recipe> recipesListView;
 
     public RecipesController(){
         model = new RecipesFxModel();
@@ -60,6 +60,8 @@ public class RecipesController {
     private ObservableList<Ingredient> ingredientsModel;
 
     private List<Diet> dietModel;
+    
+    private ObservableList<Recipe> listView = FXCollections.observableArrayList();
 
     @FXML
     void initialize() {
@@ -67,24 +69,13 @@ public class RecipesController {
         // Ingredient
         List<Ingredient> ingredients = ingredientDao.getAll();
         ingredientsModel = FXCollections.observableArrayList(ingredients);
-        ingredient = FXCollections.observableArrayList();
-        ingredient.add("");
-        for (int i = 0; i < model.getIngredientModel().size(); i++) {
-            ingredient.add(model.getIngredientModel().get(i).getName());
-        }
-        System.out.println(ingredientsModel);
-        ingredientsComboBox.setItems(ingredient);
-        ingredientsComboBox.getSelectionModel().selectFirst();
+        ingredientsComboBox.setItems(ingredientsModel);
+        ingredientsComboBox.getSelectionModel();
         // Diet
         List<Diet> diets = dietDao.getAll();
-        dietModel = FXCollections.observableArrayList(diets);
-        items = FXCollections.observableArrayList();
-        items.add("");
-        for (int i = 0; i < model.getDietModel().size(); i++) {
-           items.add(model.getDietModel().get(i).getName());
-        }
+        items = FXCollections.observableArrayList(diets);
         diet.setItems(items);
-        diet.getSelectionModel().selectFirst();
+        diet.getSelectionModel();
     }
 
     @FXML
@@ -112,42 +103,56 @@ public class RecipesController {
     void searchButton(ActionEvent event){
         // if ingredient and diet is not initial -> treba najst prienik
         item = FXCollections.observableArrayList(); // tu sa budu ukladat dobre recepty
-        if (!ingredientsComboBox.getSelectionModel().getSelectedItem().equals("") && !(diet.getSelectionModel().getSelectedItem().equals(""))) {
-            Ingredient ingredient = model.getByName(ingredientsComboBox.getSelectionModel().getSelectedItem()); //Ingredient
-            Diet dietIn = model.getDietByName(diet.getSelectionModel().getSelectedItem()); // Diet
+        if (ingredientsComboBox.getSelectionModel().getSelectedItem() != null && diet.getSelectionModel().getSelectedItem() != null) {
+            Ingredient ingredient = ingredientsComboBox.getSelectionModel().getSelectedItem(); //Ingredient
+            Diet dietIn = diet.getSelectionModel().getSelectedItem(); // Diet
             selectedByIngredient = recipeDao.getByIngredient(ingredient);
             selectedByDiet = recipeDao.getByDiet(dietIn);
-            for (int i = 0; i < selectedByIngredient.size(); i++) {
-                for (int j = 0; j < selectedByDiet.size(); j++) {
-                    if (selectedByIngredient.get(i).getRecipe_name().equals(selectedByDiet.get(j).getRecipe_name())) {
-                        item.add(selectedByDiet.get(j).getRecipe_name());
-                    }
-                }
-            }
+            System.out.println(selectedByIngredient);
+            System.out.println(selectedByDiet);
+//            List<Recipe> recipes = new ArrayList<>();
+//            for (Recipe recipe : selectedByIngredient) {
+//				if(selectedByDiet.contains(recipe)) {
+//					recipes.add(recipe);
+//				}
+//			}
+            
+//            for (int i = 0; i < selectedByIngredient.size(); i++) {
+//                for (int j = 0; j < selectedByDiet.size(); j++) {
+//                    if (selectedByIngredient.get(i).getRecipe_name().equals(selectedByDiet.get(j).getRecipe_name())) {
+//                        item.add(selectedByDiet.get(j));
+//                    }
+//                }
+//            }
         }
         // if ingredient is not initial and diet is initial
-        else if (!ingredientsComboBox.getSelectionModel().getSelectedItem().equals("")  && diet.getSelectionModel().getSelectedItem().equals("")) {
-            Ingredient ingredient = model.getByName(ingredientsComboBox.getSelectionModel().getSelectedItem());
+        else if (ingredientsComboBox.getSelectionModel().getSelectedItem() != null && diet.getSelectionModel().getSelectedItem() == null) {
+            Ingredient ingredient = ingredientsComboBox.getSelectionModel().getSelectedItem();
             selectedByIngredient = recipeDao.getByIngredient(ingredient);
             for (int i = 0; i < selectedByIngredient.size(); i++) {
-                item.add(selectedByIngredient.get(i).getRecipe_name());
+                item.add(selectedByIngredient.get(i));
             }
         }
         // if ingredient is initial and diet is not initial
-        else if (ingredientsComboBox.getSelectionModel().getSelectedItem().equals("") && !(diet.getSelectionModel().getSelectedItem().equals(""))) {
-            Diet dietIn = model.getDietByName(diet.getSelectionModel().getSelectedItem());
+        else if (ingredientsComboBox.getSelectionModel().getSelectedItem() == null && diet.getSelectionModel().getSelectedItem() != null) {
+            Diet dietIn = diet.getSelectionModel().getSelectedItem();
             selectedByDiet = recipeDao.getByDiet(dietIn);
             for (int i = 0; i < selectedByDiet.size(); i++) {
-                item.add(selectedByDiet.get(i).getRecipe_name());
+                item.add(selectedByDiet.get(i));
             }
         }
-        System.out.println(item);
-        recipesListView.setItems(item);
+
+        for (int i = 0; i < item.size(); i++) {
+            listView.add(item.get(i).getRecipe_name());
+        }
+        
+        
+        recipesListView.setItems(listView);
     }
 
     @FXML
     void showRecipeButton(ActionEvent event) {
-        Recipe selectedRecipe = model.getRecipeByName(recipesListView.getSelectionModel().getSelectedItem());
+        Recipe selectedRecipe = recipesListView.getSelectionModel().getSelectedItem();
         System.out.println(selectedRecipe);
         System.out.println(recipesListView.getSelectionModel().getSelectedItem());
         try {

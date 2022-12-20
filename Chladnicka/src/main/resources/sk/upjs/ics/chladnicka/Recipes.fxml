@@ -37,6 +37,6 @@
          </font>
       </Button>
       <ListView fx:id="recipesListView" layoutX="26.0" layoutY="302.0" prefHeight="278.0" prefWidth="550.0" />
-      <Button layoutX="436.0" layoutY="594.0" mnemonicParsing="false"  prefHeight="35.0" prefWidth="143.0" text="Show Recipe" />
+      <Button layoutX="436.0" layoutY="594.0" mnemonicParsing="false" onAction="#showRecipeButton" prefHeight="35.0" prefWidth="143.0" text="Show Recipe" />
    </children>
 </AnchorPane>

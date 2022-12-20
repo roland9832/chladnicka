@@ -18,7 +18,7 @@ import sk.upjs.ics.chladnicka.storage.IngredientDao;
 import sk.upjs.ics.chladnicka.storage.Measure;
 import sk.upjs.ics.chladnicka.storage.MeasureDao;
 
-public class editIngredientController {
+public class EditIngredientController {
 
 	AllergieDao allergieDao = DaoFactory.INSTANCE.getAllergieDao();
 
@@ -47,7 +47,7 @@ public class editIngredientController {
 
 	private Ingredient ingredient;
 
-	public editIngredientController(Ingredient ingredient) {
+	public EditIngredientController(Ingredient ingredient) {
 		System.out.println(ingredient);
 		this.ingredient = ingredient;
 		
