@@ -167,7 +167,7 @@ public class IngredientsController {
     }
     
     @FXML
-    void editQuantityButton(ActionEvent event) {
+    void editIngredientButton(ActionEvent event) {
 //    	Ingredient ingredient = ingredientsListView.getSelectionModel().getSelectedItem();
 //    	try {
 //			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditIngredient.fxml"));
