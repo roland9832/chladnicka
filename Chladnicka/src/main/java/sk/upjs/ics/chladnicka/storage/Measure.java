@@ -33,7 +33,7 @@ public class Measure {
 
 	@Override
 	public String toString() {
-		return "Measure [id=" + id + ", unit=" + unit + "]";
+		return  unit;
 	}
 
 	@Override

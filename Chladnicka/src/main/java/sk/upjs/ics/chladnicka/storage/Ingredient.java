@@ -32,6 +32,22 @@ public class Ingredient {
 	
 	}
 
+	public Ingredient(Long id, String name, double quantity_fridge, Measure measure) {
+		this.id = id;
+		this.name = name;
+		this.quantity_fridge = quantity_fridge;
+		this.measure = measure;
+	}
+
+	
+
+	public Ingredient(String name, double quantity_fridge, Allergie alergie, Measure measure) {
+		this.name = name;
+		this.quantity_fridge = quantity_fridge;
+		this.alergie = alergie;
+		this.measure = measure;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -74,8 +90,13 @@ public class Ingredient {
 
 	@Override
 	public String toString() {
-		return "(" + id + ") " + name + ", " + quantity_fridge + measure.getUnit() +  ", "
-				+ alergie.getCategory();
+		if(alergie.getId() == 13) {
+			return "(" + id + ") " + name + ", " + quantity_fridge + measure.getUnit() +  ", Allergy: None";
+		}else {
+			return "(" + id + ") " + name + ", " + quantity_fridge + measure.getUnit() +  ", Allergy: "
+					+ alergie.getCategory();
+		}
+		
 	}
 
 	@Override

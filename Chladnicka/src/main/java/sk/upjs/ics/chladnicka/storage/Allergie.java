@@ -44,7 +44,7 @@ public class Allergie {
 
 	@Override
 	public String toString() {
-		return "Allergie [id=" + id + ", category=" + category + ", information=" + information + "]";
+		return  category;
 	}
 
 	@Override
