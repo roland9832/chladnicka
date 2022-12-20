@@ -6,6 +6,8 @@ import java.util.NoSuchElementException;
 public interface IngredientDao {
 	List<Ingredient> getAll();
 	
+	Ingredient getByName(String name);
+	
 	List<Ingredient> getByAllergie(Allergie allergie);
 	
 	List<Ingredient> getByMeasure(Measure measure);

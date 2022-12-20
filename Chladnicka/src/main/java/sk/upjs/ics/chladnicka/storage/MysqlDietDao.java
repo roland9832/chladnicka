@@ -24,6 +24,16 @@ public class MysqlDietDao implements DietDao {
 
 	}
 	
+	@Override
+	public Diet getByName(String name) {
+		String sql = "SELECT diet_id, diet_name FROM diet WHERE diet_name  =?";
+		try {
+			return jdbcTemplate.queryForObject(sql, new DietRowMapper(), name);
+		} catch (EmptyResultDataAccessException e) {
+			throw new NoSuchElementException("");
+		}
+	}
+	
 	public Diet getByID(long id) {
 		String sql = "SELECT diet_id, diet_name FROM diet WHERE diet_id = " + id;
 		try {

@@ -40,6 +40,16 @@ public class MysqlIngredientDao implements IngredientDao {
 		return ingredient;
 
 	}
+	
+	@Override
+	public Ingredient getByName(String name) {
+		String sql = "SELECT ingredient_id, ingredient_name, quantity_fridge, allergie_allergie_id, measure_measure_id FROM INGREDIENT WHERE ingredient_name =?";
+		try {
+			return jdbcTemplate.queryForObject(sql, new IngredientRowMapper(), name);
+		} catch (EmptyResultDataAccessException e) {
+			throw new NoSuchElementException("Allergie with name " + name + " not in DB");
+		}
+	}
 
 	@Override
 	public List<Ingredient> getByAllergie(Allergie allergie) {
@@ -100,6 +110,9 @@ public class MysqlIngredientDao implements IngredientDao {
 			}
 		});
 	}
+	
+	
+	
 
 	public Ingredient save(Ingredient ingredient) throws NoSuchElementException,NullPointerException {
 		if (ingredient == null) {

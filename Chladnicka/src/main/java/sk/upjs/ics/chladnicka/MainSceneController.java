@@ -1,5 +1,6 @@
 package sk.upjs.ics.chladnicka;
 import java.io.IOException;
+import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sk.upjs.ics.chladnicka.storage.DaoFactory;
+import sk.upjs.ics.chladnicka.storage.Recipe;
 
 public class MainSceneController {
 
@@ -65,7 +68,7 @@ public class MainSceneController {
         try {
             FXMLLoader fxmlLoader =
                     new FXMLLoader(getClass().getResource("Recipes.fxml"));
-            //Subject subject = subjectsComboBox.getSelectionModel().getSelectedItem();
+            List<Recipe> list = DaoFactory.INSTANCE.getRecipeDao().getAll();
             RecipesController controller3 = new RecipesController();
             fxmlLoader.setController(controller3);
             Parent parent = fxmlLoader.load();
