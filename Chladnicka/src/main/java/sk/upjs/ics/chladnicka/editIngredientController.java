@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import sk.upjs.ics.chladnicka.storage.Allergie;
 import sk.upjs.ics.chladnicka.storage.AllergieDao;
 import sk.upjs.ics.chladnicka.storage.DaoFactory;
@@ -17,7 +18,7 @@ import sk.upjs.ics.chladnicka.storage.IngredientDao;
 import sk.upjs.ics.chladnicka.storage.Measure;
 import sk.upjs.ics.chladnicka.storage.MeasureDao;
 
-public class editQuantityController {
+public class editIngredientController {
 
 	AllergieDao allergieDao = DaoFactory.INSTANCE.getAllergieDao();
 
@@ -35,7 +36,7 @@ public class editQuantityController {
 	private ComboBox<Allergie> allergenComboBox;
 
 	@FXML
-	private TextField ingredientNameTextField;
+    private Text ingredientText;
 
 	@FXML
 	private ComboBox<Measure> measureComboBox;
@@ -45,11 +46,12 @@ public class editQuantityController {
 
 	private Ingredient ingredient;
 
-	public editQuantityController(Ingredient ingredient) {
+	public editIngredientController(Ingredient ingredient) {
 		this.ingredient = ingredient;
 	}
 	
 	void initialize() {
+		ingredientText.setText(ingredient.getName());
 		List<Measure> measures = measureDao.getAll();
     	selectedMeasureModel = FXCollections.observableArrayList(measures);
     	measureComboBox.setItems(selectedMeasureModel);

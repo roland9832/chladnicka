@@ -168,24 +168,24 @@ public class IngredientsController {
     
     @FXML
     void editIngredientButton(ActionEvent event) {
-//    	Ingredient ingredient = ingredientsListView.getSelectionModel().getSelectedItem();
-//    	try {
-//			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditIngredient.fxml"));
-//			editQuantityController controller = new editQuantityController(ingredient);
-//			fxmlLoader.setController(controller);
-//			Parent parent = fxmlLoader.load();
-//			Scene scene = new Scene(parent);
-//			Stage stage = new Stage();
-//			stage.setScene(scene);
-//			stage.setTitle("Edit Favourites");
-//			stage.initModality(Modality.APPLICATION_MODAL);
-//			stage.showAndWait();
-//		
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//    	
+    	Ingredient ingredient = ingredientsListView.getSelectionModel().getSelectedItem();
+    	try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditIngredient.fxml"));
+			editIngredientController controller = new editIngredientController(ingredient);
+			fxmlLoader.setController(controller);
+			Parent parent = fxmlLoader.load();
+			Scene scene = new Scene(parent);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle("Edit Favourites");
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.showAndWait();
+		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
     }
 
 }
