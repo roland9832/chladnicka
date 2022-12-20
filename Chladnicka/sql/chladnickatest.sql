@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `chladnickatest`.`ingredient` (
   `ingredient_id` INT NOT NULL AUTO_INCREMENT,
   `ingredient_name` VARCHAR(45) NOT NULL,
   `quantity_fridge` DECIMAL(6,2) NULL,
-  `allergie_allergie_id` INT NULL,
+  `allergie_allergie_id` INT NOT NULL,
   `measure_measure_id` INT NOT NULL,
   PRIMARY KEY (`ingredient_id`),
   INDEX `fk_ingredient_allergie1_idx` (`allergie_allergie_id` ASC) VISIBLE,
