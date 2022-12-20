@@ -1,26 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField fx:id="recipeName" alignment="CENTER" layoutX="57.0" layoutY="42.0" onAction="#recipeName" prefHeight="56.0" prefWidth="485.0" promptText="Názov receptu">
+      <TextField fx:id="recipeNameField" alignment="CENTER" layoutX="58.0" layoutY="27.0" prefHeight="56.0" prefWidth="485.0" promptText="Recipe Name">
          <font>
             <Font size="19.0" />
          </font>
       </TextField>
-      <TextArea fx:id="Ingredients" layoutX="57.0" layoutY="155.0" prefHeight="188.0" prefWidth="301.0" />
-      <ScrollBar layoutX="342.0" layoutY="155.0" orientation="VERTICAL" prefHeight="188.0" prefWidth="11.0" />
-      <Label layoutX="57.0" layoutY="130.0" prefHeight="17.0" prefWidth="167.0" text="Ingrediencie" />
-      <TextArea fx:id="Steps" layoutX="57.0" layoutY="390.0" prefHeight="200.0" prefWidth="508.0" />
-      <Label layoutX="57.0" layoutY="366.0" prefHeight="17.0" prefWidth="167.0" text="Postup" />
-      <Button fx:id = "createButton" onAction="#createButton" layoutX="463.0" layoutY="601.0" mnemonicParsing="false"  prefHeight="26.0" prefWidth="106.0" text="Vytvoriť" />
-      <ScrollBar layoutX="549.0" layoutY="390.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="16.0" />
+      <Label layoutX="28.0" layoutY="270.0" prefHeight="17.0" prefWidth="167.0" text="Ingredients:">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <TextArea fx:id="stepsTextArea" layoutX="28.0" layoutY="425.0" prefHeight="183.0" prefWidth="553.0" />
+      <Label layoutX="27.0" layoutY="402.0" prefHeight="17.0" prefWidth="167.0" text="Steps:">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Button fx:id="createButton" layoutX="475.0" layoutY="613.0" mnemonicParsing="false" onAction="#createButton" prefHeight="26.0" prefWidth="106.0" text="Vytvoriť" />
+      <ListView fx:id="ingredientsListView" layoutX="27.0" layoutY="292.0" prefHeight="109.0" prefWidth="553.0" />
+      <Button layoutX="209.0" layoutY="237.0" mnemonicParsing="false" onAction="#addToStock" prefHeight="18.0" prefWidth="158.0" text="Add Ingredient To Stock " />
+      <Button layoutX="32.0" layoutY="237.0" mnemonicParsing="false" onAction="#addToRecipe" prefHeight="26.0" prefWidth="158.0" text="Add Ingredient To Recipe" />
+      <ComboBox fx:id="ingredientComboBox" layoutX="163.0" layoutY="111.0" prefHeight="26.0" prefWidth="138.0" />
+      <TextField fx:id="quantityField" layoutX="163.0" layoutY="153.0" prefHeight="26.0" prefWidth="138.0" />
+      <ComboBox fx:id="measureComboBox" layoutX="163.0" layoutY="195.0" prefHeight="26.0" prefWidth="138.0" />
+      <Label layoutX="40.0" layoutY="115.0" prefHeight="17.0" prefWidth="106.0" text="Ingredient name:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="40.0" layoutY="157.0" prefHeight="17.0" prefWidth="106.0" text="Quantity:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="40.0" layoutY="199.0" prefHeight="17.0" prefWidth="106.0" text="Measure:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Line endX="-46.5" endY="91.0" layoutX="429.0" layoutY="166.0" startX="-46.5" startY="-61.0" />
+      <Label layoutX="397.0" layoutY="124.0" prefHeight="18.0" prefWidth="138.0" text="Calories:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="caloriesField" layoutX="395.0" layoutY="150.0" />
+      <Label layoutX="397.0" layoutY="206.0" prefHeight="18.0" prefWidth="138.0" text="Diet:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="dietComboBox" layoutX="395.0" layoutY="235.0" prefHeight="26.0" prefWidth="160.0" />
    </children>
 </AnchorPane>

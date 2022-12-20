@@ -17,7 +17,7 @@ import sk.upjs.ics.chladnicka.storage.Favourite;
 import sk.upjs.ics.chladnicka.storage.FavouriteDao;
 import sk.upjs.ics.chladnicka.storage.Recipe;
 
-public class editFavouritesController {
+public class EditFavouritesController {
 
 	private DialogPane dialog;
 
@@ -41,7 +41,7 @@ public class editFavouritesController {
 
 	private List<Favourite> favouriteToAdd = new ArrayList<>();
 
-	public editFavouritesController() {
+	public EditFavouritesController() {
 		model = new FavouriteFxModel();
 	}
 

@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import sk.upjs.ics.chladnicka.storage.DaoFactory;
 import sk.upjs.ics.chladnicka.storage.Diet;
 import sk.upjs.ics.chladnicka.storage.Ingredient;
+import sk.upjs.ics.chladnicka.storage.Measure;
 import sk.upjs.ics.chladnicka.storage.Recipe;
 
 public class RecipesFxModel {
@@ -21,31 +22,32 @@ public class RecipesFxModel {
     private ObservableList<Ingredient> ingredients;
     private ObservableList<Diet> diets;
 
+    private ObservableList<Measure> measures;
+
+    private ObservableList<Recipe> recipes;
+
 
     public RecipesFxModel() {
         List<Ingredient> Rlist = DaoFactory.INSTANCE.getIngredientDao().getAll();
         List<Diet> dietList = DaoFactory.INSTANCE.getDietDao().getAll();
+        List<Recipe> recipeList = DaoFactory.INSTANCE.getRecipeDao().getAll();
+        List<Measure> measureList = DaoFactory.INSTANCE.getMeasureDao().getAll();
+        measures = FXCollections.observableArrayList(measureList);
+        recipes = FXCollections.observableArrayList(recipeList);
         ingredients = FXCollections.observableArrayList(Rlist);
         diets = FXCollections.observableArrayList(dietList);
     }
 
-	public RecipesFxModel(List<Recipe> recipes, List<Diet> diets) {
+	public RecipesFxModel(List<Recipe> recipes, List<Diet> diets, Recipe recipe) {
 		List<Ingredient> list = DaoFactory.INSTANCE.getIngredientDao().getAll();
         List<Diet> dietList = DaoFactory.INSTANCE.getDietDao().getAll();
+        List<Recipe> recipeList = DaoFactory.INSTANCE.getRecipeDao().getAll();
+        List<Measure> measureList = DaoFactory.INSTANCE.getMeasureDao().getAll();
+        this.measures = FXCollections.observableArrayList(measureList);
         this.diets = FXCollections.observableArrayList(dietList);
 		this.ingredients = FXCollections.observableArrayList(list);
+        this.recipes = FXCollections.observableArrayList(recipeList);
 	}
-
-    //public RecipesFxModel(ListView<Recipe> favouriteListView) {
-      //  List<Recipe> Rlist = DaoFactory.INSTANCE.getRecipeDao().getAll();
-        //recipes = FXCollections.observableArrayList(Rlist);
-        //favourites = extracted(favouriteListView);
-    //}
-
-    @SuppressWarnings("unchecked")
-    //private ObservableList<Recipe> extracted(ListView<Recipe> favouriteListView) {
-      //  return (ObservableList<Recipe>) favouriteListView;
-    //}
 
     public StringProperty nameProperty() {
         return recipe_name;
@@ -71,6 +73,10 @@ public class RecipesFxModel {
         return diets;
     }
 
+    public ObservableList<Measure> getMeasureModel() {
+        return measures;
+    }
+
     public List<Ingredient> getIngredient(){
         return new ArrayList<>(ingredients);
     }
@@ -81,6 +87,10 @@ public class RecipesFxModel {
 
     public List<Diet> getDietDao(){
         return diets;
+    }
+
+    public List<Recipe> getRecipeDao(){
+        return recipes;
     }
 
     public String getDietName(Diet diet){
@@ -98,5 +108,9 @@ public class RecipesFxModel {
     public Diet getDietById(Long id){
         return DaoFactory.INSTANCE.getDietDao().getByID(id);
     }
+
+//    public Recipe getRecipeByName(String name) {
+//        return DaoFactory.INSTANCE.getRecipeDao().getByName(name);
+//    }
 
 }

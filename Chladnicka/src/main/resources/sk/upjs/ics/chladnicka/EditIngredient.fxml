@@ -6,7 +6,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="325.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -39,10 +38,10 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Text fx:id="ingredientText" layoutX="211.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="210.936767578125">
+      <Label fx:id="ingredientLable" layoutX="211.0" layoutY="71.0" prefHeight="35.0" prefWidth="214.0">
          <font>
-            <Font size="24.0" />
+            <Font size="14.0" />
          </font>
-      </Text>
+      </Label>
    </children>
 </AnchorPane>

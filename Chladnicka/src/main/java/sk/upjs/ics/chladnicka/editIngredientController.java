@@ -8,8 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import sk.upjs.ics.chladnicka.storage.Allergie;
 import sk.upjs.ics.chladnicka.storage.AllergieDao;
 import sk.upjs.ics.chladnicka.storage.DaoFactory;
@@ -36,22 +36,26 @@ public class editIngredientController {
 	private ComboBox<Allergie> allergenComboBox;
 
 	@FXML
-    private Text ingredientText;
-
+    private Label ingredientLable;
+	
 	@FXML
 	private ComboBox<Measure> measureComboBox;
 
 	@FXML
 	private TextField quantityTextField;
+	
 
 	private Ingredient ingredient;
 
 	public editIngredientController(Ingredient ingredient) {
+		System.out.println(ingredient);
 		this.ingredient = ingredient;
+		
 	}
 	
+	@FXML
 	void initialize() {
-		ingredientText.setText(ingredient.getName());
+		ingredientLable.setText(ingredient.getName());
 		List<Measure> measures = measureDao.getAll();
     	selectedMeasureModel = FXCollections.observableArrayList(measures);
     	measureComboBox.setItems(selectedMeasureModel);
@@ -59,11 +63,23 @@ public class editIngredientController {
     	List<Allergie> allergies = allergieDao.getAll();
     	selectedAllergieModel = FXCollections.observableArrayList(allergies);
     	allergenComboBox.setItems(selectedAllergieModel);
+    	allergenComboBox.setPromptText("Select");
 	}
 	
 	
 	@FXML
 	void editButton(ActionEvent event) {
-		
+//		Ingredient ingredient = new Ingredient();
+//		ingredient.setId(this.ingredient.getId());
+//		if(!quantityTextField.getText().isBlank()) {
+//    		ingredient.setQuantity_fridge(Double.parseDouble(quantityTextField.getText()));
+//    	}else {
+//    		ingredient.setQuantity_fridge(this.ingredient.getQuantity_fridge());
+//    	}
+//		if(allergenComboBox.getSelectionModel().getSelectedItem() != null) {
+//			ingredient.setAlergie(allergenComboBox.getSelectionModel().getSelectedItem());
+//		}else {
+//			ingre
+//		}
 	}
 }

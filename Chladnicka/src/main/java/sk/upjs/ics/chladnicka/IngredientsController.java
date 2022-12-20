@@ -12,16 +12,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import sk.upjs.ics.chladnicka.storage.Allergie;
 import sk.upjs.ics.chladnicka.storage.AllergieDao;
 import sk.upjs.ics.chladnicka.storage.DaoFactory;
-import sk.upjs.ics.chladnicka.storage.Favourite;
 import sk.upjs.ics.chladnicka.storage.Ingredient;
 import sk.upjs.ics.chladnicka.storage.IngredientDao;
 import sk.upjs.ics.chladnicka.storage.Measure;
@@ -169,9 +168,14 @@ public class IngredientsController {
     @FXML
     void editIngredientButton(ActionEvent event) {
     	Ingredient ingredient = ingredientsListView.getSelectionModel().getSelectedItem();
+//    	System.out.println(ingredient);
+    	
     	try {
+    		
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditIngredient.fxml"));
+//			System.out.println(ingredient);
 			editIngredientController controller = new editIngredientController(ingredient);
+//			System.out.println(ingredient);
 			fxmlLoader.setController(controller);
 			Parent parent = fxmlLoader.load();
 			Scene scene = new Scene(parent);

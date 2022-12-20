@@ -44,7 +44,7 @@ public class FavouritesController {
 	void editFavoritesButton(ActionEvent event) {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditFavourites.fxml"));
-			editFavouritesController controller = new editFavouritesController();
+			EditFavouritesController controller = new EditFavouritesController();
 			fxmlLoader.setController(controller);
 			Parent parent = fxmlLoader.load();
 			Scene scene = new Scene(parent);
