@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import sk.upjs.ics.chladnicka.storage.DaoFactory;
 import sk.upjs.ics.chladnicka.storage.Favourite;
 import sk.upjs.ics.chladnicka.storage.FavouriteDao;
-import sk.upjs.ics.chladnicka.storage.ObjectUndeletableException;
+import sk.upjs.ics.chladnicka.storage.EntityUndeletableException;
 
 public class FavouritesController {
 
@@ -70,7 +70,7 @@ public class FavouritesController {
 		if(favourite != null) {
 			try {
 				favouriteDao.delete(favourite.getRecipe());
-			}catch (ObjectUndeletableException e) {
+			}catch (EntityUndeletableException e) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setContentText(e.getMessage());
 	    		alert.showAndWait();

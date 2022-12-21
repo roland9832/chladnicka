@@ -25,7 +25,7 @@ import sk.upjs.ics.chladnicka.storage.Ingredient;
 import sk.upjs.ics.chladnicka.storage.IngredientDao;
 import sk.upjs.ics.chladnicka.storage.Measure;
 import sk.upjs.ics.chladnicka.storage.MeasureDao;
-import sk.upjs.ics.chladnicka.storage.ObjectUndeletableException;
+import sk.upjs.ics.chladnicka.storage.EntityUndeletableException;
 
 public class IngredientsController {
 	
@@ -154,10 +154,12 @@ public class IngredientsController {
     	if(ingredient != null) {
     		try {
 				ingredientDao.delete(ingredient);
-			}catch (ObjectUndeletableException e) {
+				
+			}catch (EntityUndeletableException e) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setContentText(e.getMessage());
 	    		alert.showAndWait();
+	    		return;
 			}
     		ingredients.remove(ingredient);
     		selectedIngredientModel = FXCollections.observableArrayList(ingredients);

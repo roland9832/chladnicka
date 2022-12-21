@@ -86,8 +86,7 @@ public class Recipe {
 
 	@Override
 	public String toString() {
-		return "Recipe [id=" + id + ", recipe_name=" + recipe_name + ", calorific=" + calorific + ", description="
-				+ description + ", diet=" + diet + ", ingredient=" + ingredient + "]";
+		return "(" + id + "), " + recipe_name + ", calorific value: " + calorific;
 	}
 
 	@Override

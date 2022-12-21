@@ -18,7 +18,7 @@ public interface IngredientDao {
 
 	Ingredient save(Ingredient ingredient) throws NoSuchElementException,NullPointerException;
 	
-	boolean delete(Ingredient ingredient) throws ObjectUndeletableException;
+	boolean delete(Ingredient ingredient) throws EntityUndeletableException;
 	
 	
 }

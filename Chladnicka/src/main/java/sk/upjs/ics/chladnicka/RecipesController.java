@@ -83,7 +83,6 @@ public class RecipesController {
         try {
             FXMLLoader fxmlLoader =
                     new FXMLLoader(getClass().getResource("NewRecipe.fxml"));
-            //Subject subject = subjectsComboBox.getSelectionModel().getSelectedItem();
             NewRecipeController controller4 = new NewRecipeController();
             fxmlLoader.setController(controller4);
             Parent parent = fxmlLoader.load();
@@ -108,53 +107,38 @@ public class RecipesController {
             Diet dietIn = diet.getSelectionModel().getSelectedItem(); // Diet
             selectedByIngredient = recipeDao.getByIngredient(ingredient);
             selectedByDiet = recipeDao.getByDiet(dietIn);
-            System.out.println(selectedByIngredient);
-            System.out.println(selectedByDiet);
-//            List<Recipe> recipes = new ArrayList<>();
-//            for (Recipe recipe : selectedByIngredient) {
-//				if(selectedByDiet.contains(recipe)) {
-//					recipes.add(recipe);
-//				}
-//			}
+            List<Recipe> recipes = new ArrayList<>();
+            for (Recipe recipe : selectedByIngredient) {
+				if(selectedByDiet.contains(recipe)) {
+					System.out.println(recipes.add(recipe));
+				}
+			}
+            listView = FXCollections.observableArrayList(recipes);
             
-//            for (int i = 0; i < selectedByIngredient.size(); i++) {
-//                for (int j = 0; j < selectedByDiet.size(); j++) {
-//                    if (selectedByIngredient.get(i).getRecipe_name().equals(selectedByDiet.get(j).getRecipe_name())) {
-//                        item.add(selectedByDiet.get(j));
-//                    }
-//                }
-//            }
+            
         }
         // if ingredient is not initial and diet is initial
         else if (ingredientsComboBox.getSelectionModel().getSelectedItem() != null && diet.getSelectionModel().getSelectedItem() == null) {
             Ingredient ingredient = ingredientsComboBox.getSelectionModel().getSelectedItem();
-            selectedByIngredient = recipeDao.getByIngredient(ingredient);
-            for (int i = 0; i < selectedByIngredient.size(); i++) {
-                item.add(selectedByIngredient.get(i));
-            }
+            List<Recipe> recipes = recipeDao.getByIngredient(ingredient);
+            listView = FXCollections.observableArrayList(recipes);
         }
         // if ingredient is initial and diet is not initial
         else if (ingredientsComboBox.getSelectionModel().getSelectedItem() == null && diet.getSelectionModel().getSelectedItem() != null) {
             Diet dietIn = diet.getSelectionModel().getSelectedItem();
-            selectedByDiet = recipeDao.getByDiet(dietIn);
-            for (int i = 0; i < selectedByDiet.size(); i++) {
-                item.add(selectedByDiet.get(i));
-            }
+            List<Recipe> recipes = recipeDao.getByDiet(dietIn);
+            listView = FXCollections.observableArrayList(recipes);
         }
-
-        for (int i = 0; i < item.size(); i++) {
-            listView.add(item.get(i).getRecipe_name());
+        else {
+        	List<Recipe> recipes = recipeDao.getAll();
+        	listView = FXCollections.observableArrayList(recipes);
         }
-        
-        
         recipesListView.setItems(listView);
     }
 
     @FXML
     void showRecipeButton(ActionEvent event) {
         Recipe selectedRecipe = recipesListView.getSelectionModel().getSelectedItem();
-        System.out.println(selectedRecipe);
-        System.out.println(recipesListView.getSelectionModel().getSelectedItem());
         try {
             FXMLLoader fxmlLoader =
                     new FXMLLoader(getClass().getResource("ShowRecipe.fxml"));

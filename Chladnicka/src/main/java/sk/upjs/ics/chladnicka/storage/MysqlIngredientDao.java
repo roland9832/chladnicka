@@ -147,8 +147,8 @@ public class MysqlIngredientDao implements IngredientDao {
 		try {
 			wasDeleted = jdbcTemplate.update("DELETE FROM ingredient WHERE ingredient_id = " + ingredient.getId());
 		} catch (DataIntegrityViolationException e) {
-			throw new ObjectUndeletableException("Ingredient with id: " + ingredient.getId()
-					+ "cannot be deleted");
+			throw new EntityUndeletableException("Ingredient with id: " + ingredient.getId()
+					+ "cannot be deleted, because it is used in recipe");
 		}
 		return wasDeleted == 1;
 	}

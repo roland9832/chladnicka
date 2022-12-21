@@ -77,12 +77,12 @@ public class MysqlFavouriteDao implements FavouriteDao {
 	}
 
 	@Override
-	public boolean delete(Recipe recipe) throws ObjectUndeletableException {
+	public boolean delete(Recipe recipe) throws EntityUndeletableException {
 		int wasDeleted;
 		try {
 			wasDeleted = jdbcTemplate.update("DELETE FROM favourite WHERE recipe_recipe_id = " + recipe.getId());
 		} catch (DataIntegrityViolationException e) {
-			throw new ObjectUndeletableException("Term with id: " + recipe.getId() + "cannot be deleted, some candidate/program already has this term");
+			throw new EntityUndeletableException("Term with id: " + recipe.getId() + "cannot be deleted, some candidate/program already has this term");
 		}
 				
 		return wasDeleted == 1;
