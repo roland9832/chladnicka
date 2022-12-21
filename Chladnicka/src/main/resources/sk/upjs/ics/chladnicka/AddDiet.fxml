@@ -9,15 +9,10 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="243.0" prefWidth="457.0" stylesheets="@recipe.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField fx:id="dietTextField" layoutX="164.0" layoutY="104.0" prefHeight="35.0" prefWidth="129.0" />
-      <Button layoutX="164.0" layoutY="167.0" mnemonicParsing="false" onAction="#addButton" prefHeight="35.0" prefWidth="129.0" text="Edit" />
+      <Button layoutX="164.0" layoutY="167.0" mnemonicParsing="false" onAction="#addButton" prefHeight="35.0" prefWidth="129.0" text="Add" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="35.0" prefHeight="26.0" prefWidth="185.0" text="Add Diet">
          <font>
             <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="ingredientLable" layoutX="211.0" layoutY="71.0" prefHeight="35.0" prefWidth="214.0">
-         <font>
-            <Font size="14.0" />
          </font>
       </Label>
    </children>

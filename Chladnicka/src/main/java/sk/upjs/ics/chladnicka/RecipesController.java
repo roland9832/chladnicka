@@ -30,7 +30,7 @@ import sk.upjs.ics.chladnicka.storage.RecipeDao;
 public class RecipesController {
 
 	private DialogPane dialog;
-	
+
 	private RecipesFxModel model;
 
 	private IngredientDao ingredientDao;
@@ -76,6 +76,7 @@ public class RecipesController {
 
 	private ObservableList<Recipe> listView = FXCollections.observableArrayList();
 	private ObservableList<Recipe> clear = FXCollections.observableArrayList();
+
 	@FXML
 	void initialize() {
 		// logger.debug("inicialize running");
@@ -152,7 +153,7 @@ public class RecipesController {
 	@FXML
 	void showRecipeButton(ActionEvent event) {
 		Recipe selectedRecipe = recipesListView.getSelectionModel().getSelectedItem();
-		
+
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ShowRecipe.fxml"));
 			ShowRecipeController controller5 = new ShowRecipeController(selectedRecipe);
@@ -176,25 +177,43 @@ public class RecipesController {
 			return;
 		}
 	}
-	
-	 @FXML
-	    void deleteRecipeButton(ActionEvent event) {
-		 Recipe selectedRecipe = recipesListView.getSelectionModel().getSelectedItem();
-		 List<Recipe> recipes = this.listView;
-		 if(recipesListView.getSelectionModel().getSelectedItem() != null) {
-			 try {
-					recipeDao.delete(selectedRecipe);
-				} catch (EntityUndeletableException e) {
-					Alert alert = new Alert(AlertType.WARNING);
-					alert.setContentText(e.getMessage());
-					alert.showAndWait();
-				}
-		 }
-		 recipes.remove(selectedRecipe);
-		 this.recipes = recipes;
-		 listView = FXCollections.observableArrayList(this.recipes);
-		 recipesListView.setItems(listView);
-		 
-	 
-	 }
+
+	@FXML
+	void deleteRecipeButton(ActionEvent event) {
+		Recipe selectedRecipe = recipesListView.getSelectionModel().getSelectedItem();
+		List<Recipe> recipes = this.listView;
+		if (recipesListView.getSelectionModel().getSelectedItem() != null) {
+			try {
+				recipeDao.delete(selectedRecipe);
+			} catch (EntityUndeletableException e) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setContentText(e.getMessage());
+				alert.showAndWait();
+			}
+		}
+		recipes.remove(selectedRecipe);
+		this.recipes = recipes;
+		listView = FXCollections.observableArrayList(this.recipes);
+		recipesListView.setItems(listView);
+
+	}
+
+	@FXML
+	void addDietButton(ActionEvent event) {
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddDiet.fxml"));
+			AddDietController controller = new AddDietController();
+			fxmlLoader.setController(controller);
+			Parent parent = fxmlLoader.load();
+			Scene scene = new Scene(parent);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle("Add Diet");
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.showAndWait();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

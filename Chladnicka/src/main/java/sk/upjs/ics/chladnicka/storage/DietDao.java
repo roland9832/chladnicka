@@ -6,6 +6,10 @@ public interface DietDao {
 	List<Diet> getAll();
 
 	Diet getByID(long id);
+	
+	void save(Diet diet);
 
-//	Diet getByName(String name);
+//	Diet getByName(String name);
+
+	boolean delete(long id) throws EntityUndeletableException;
 }

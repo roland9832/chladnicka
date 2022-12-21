@@ -54,7 +54,7 @@ public class Favourite {
 
 	@Override
 	public String toString() {
-		return "(id) " + id + ", Recipe name: " + recipe.getRecipe_name() + ", hodnotenie: " + hodnotenie;
+		return recipe.getRecipe_name() + ", hodnotenie: " + hodnotenie;
 	}
 
 	@Override
