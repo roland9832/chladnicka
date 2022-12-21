@@ -90,7 +90,7 @@ public class IngredientsController {
 
 		if (name.isBlank()) {
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setContentText("Nebol zadany nazov ingrediencie, prosim zadajte nazov ingrediencie");
+			alert.setContentText("Need to put ingredient name");
 			dialog = alert.getDialogPane();
 			dialog.getStyleClass().add("dialog");
 			alert.show();
@@ -110,7 +110,7 @@ public class IngredientsController {
 			}
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setContentText("Nebolo zadane mnozstvo v chladnicke");
+			alert.setContentText("Need to put quantity of ingredient");
 			dialog = alert.getDialogPane();
 			dialog.getStyleClass().add("dialog");
 			alert.show();
@@ -119,7 +119,7 @@ public class IngredientsController {
 
 		if (alergie == null) {
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setContentText("Neboli vybrate alergeny, prosim vyberte alergen");
+			alert.setContentText("Need to select allergen");
 			dialog = alert.getDialogPane();
 			dialog.getStyleClass().add("dialog");
 			alert.show();
