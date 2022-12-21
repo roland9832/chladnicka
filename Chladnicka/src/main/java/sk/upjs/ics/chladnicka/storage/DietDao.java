@@ -7,5 +7,5 @@ public interface DietDao {
 
 	Diet getByID(long id);
 
-	Diet getByName(String name);
+//	Diet getByName(String name);
 }

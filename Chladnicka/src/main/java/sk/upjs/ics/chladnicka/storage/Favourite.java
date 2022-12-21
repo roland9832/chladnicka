@@ -22,11 +22,11 @@ public class Favourite {
 		this.hodnotenie = hodnotenie;
 	}
 
-	public Favourite(Long id, Recipe recipe, int hodnotenie) {
-		this.id = id;
-		this.recipe = recipe;
-		this.hodnotenie = hodnotenie;
-	}
+//	public Favourite(Long id, Recipe recipe, int hodnotenie) {
+//		this.id = id;
+//		this.recipe = recipe;
+//		this.hodnotenie = hodnotenie;
+//	}
 
 	public Long getId() {
 		return id;

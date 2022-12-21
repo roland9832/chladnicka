@@ -101,9 +101,6 @@ public class RecipesFxModel {
         return DaoFactory.INSTANCE.getIngredientDao().getByName(name);
     }
 
-    public Diet getDietByName(String name){
-        return DaoFactory.INSTANCE.getDietDao().getByName(name);
-    }
 
     public Diet getDietById(Long id){
         return DaoFactory.INSTANCE.getDietDao().getByID(id);
