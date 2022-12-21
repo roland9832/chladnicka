@@ -8,8 +8,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -18,11 +20,13 @@ import sk.upjs.ics.chladnicka.storage.Diet;
 import sk.upjs.ics.chladnicka.storage.DietDao;
 import sk.upjs.ics.chladnicka.storage.Ingredient;
 import sk.upjs.ics.chladnicka.storage.IngredientDao;
-import sk.upjs.ics.chladnicka.storage.Measure;
 import sk.upjs.ics.chladnicka.storage.MeasureDao;
+import sk.upjs.ics.chladnicka.storage.Recipe;
 import sk.upjs.ics.chladnicka.storage.RecipeDao;
 
 public class NewRecipeController {
+
+	private DialogPane dialog;
 
 	private IngredientDao ingredientDao;
 
@@ -30,40 +34,30 @@ public class NewRecipeController {
 
 	private RecipeDao recipeDao;
 
-	private MeasureDao measureDao;
-
 	private ObservableList<Ingredient> ingredientsModel;
 
-	private ObservableList<Measure> measuresModel;
 
-	private ObservableList<Ingredient> ingredient;
 
-	private ObservableList<String> measure;
 
-	private ObservableList<String> diets2;
 
-	private ObservableList<String> oneIngredient;
+	private ObservableList<Diet> dietModel;
+
+
 
 	private RecipesFxModel model;
 
-	private List<Diet> dietModel;
+//	private List<Diet> dietModel;
 
 	private Map<Ingredient, Double> ingredientMap = new HashMap<>();
-
-	@FXML
-	private Button createButton;
 
 	@FXML
 	private ComboBox<Ingredient> ingredientComboBox;
 
 	@FXML
-	private ListView<String> ingredientsListView;
+	private ListView<Ingredient> ingredientsListView;
 
 	@FXML
-	private ComboBox<String> measureComboBox;
-
-	@FXML
-	private ComboBox<String> dietComboBox;
+	private ComboBox<Diet> dietComboBox;
 
 	@FXML
 	private TextField quantityField;
@@ -77,12 +71,14 @@ public class NewRecipeController {
 	@FXML
 	private TextArea stepsTextArea;
 
+	private ObservableList<Ingredient> ingredientsToSave = FXCollections.observableArrayList();
+
 	NewRecipeController() {
 		model = new RecipesFxModel();
 		ingredientDao = DaoFactory.INSTANCE.getIngredientDao();
-		measureDao = DaoFactory.INSTANCE.getMeasureDao();
 		dietDao = DaoFactory.INSTANCE.getDietDao();
 		recipeDao = DaoFactory.INSTANCE.getRecipeDao();
+//        recipeHasIngredientDao = DaoFactory.INSTANCE.getRecipeHasIngredientDao();
 	}
 
 	@FXML
@@ -90,49 +86,45 @@ public class NewRecipeController {
 		// ingredientComboBox
 		List<Ingredient> ingredients = ingredientDao.getAll();
 		ingredientsModel = FXCollections.observableArrayList(ingredients);
-		ingredient = FXCollections.observableArrayList();
-		for (int i = 0; i < model.getIngredientModel().size(); i++) {
-			ingredient.add(model.getIngredientModel().get(i));
-		}
-		ingredientComboBox.setItems(ingredient);
-		ingredientComboBox.getSelectionModel().selectFirst();
-		// measureComboBox
-		List<Measure> measures = measureDao.getAll();
-		measuresModel = FXCollections.observableArrayList(measures);
-		measure = FXCollections.observableArrayList();
-		measure.add("");
-		for (int i = 0; i < model.getMeasureModel().size(); i++) {
-			measure.add(model.getMeasureModel().get(i).getUnit());
-		}
-		measureComboBox.setItems(measure);
-		measureComboBox.getSelectionModel().selectFirst();
-		// dietComboBox
+		ingredientComboBox.setItems(ingredientsModel);
+		ingredientComboBox.setPromptText("Select");
 		List<Diet> diets = dietDao.getAll();
 		dietModel = FXCollections.observableArrayList(diets);
-		diets2 = FXCollections.observableArrayList();
-		diets2.add("");
-		for (int i = 0; i < model.getDietModel().size(); i++) {
-			diets2.add(model.getDietModel().get(i).getName());
-		}
-		dietComboBox.setItems(diets2);
-		dietComboBox.getSelectionModel().selectFirst();
+		dietComboBox.setItems(dietModel);
+		
+
 	}
 
 	@FXML
 	void addToRecipe(ActionEvent event) {
 		Ingredient ingredient = ingredientComboBox.getSelectionModel().getSelectedItem();
-		String ingredientName = (ingredientComboBox.getSelectionModel().getSelectedItem()).getName();
-		String measureName = measureComboBox.getSelectionModel().getSelectedItem();
-		Long ingredient_id = ingredient.getId(); // ingredient_ingredient_id
-		Double amount = Double.parseDouble(quantityField.getText()); // recipe_amount
-		// s tymito informaciami to priradime
-		oneIngredient = FXCollections.observableArrayList();
-		oneIngredient.add(amount + " - " + ingredientName);
-		ingredientsListView.setItems(oneIngredient);
-		ingredientMap.put(ingredient, amount);
-		measureComboBox.getSelectionModel().selectFirst();
-		ingredientComboBox.getSelectionModel().selectFirst();
-		quantityField.clear();
+		double quantity;
+		if (ingredientComboBox.getSelectionModel().getSelectedItem() != null) {
+			if (!quantityField.getText().isBlank()) {
+				try {
+					quantity = Double.parseDouble(quantityField.getText());
+				} catch (Exception e) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setContentText("Zadajte ciselnu hodnotu");
+					dialog = alert.getDialogPane();
+					dialog.getStyleClass().add("dialog");
+					alert.show();
+					return;
+				}
+			} else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setContentText("Nebola vyplnena quantita");
+				dialog = alert.getDialogPane();
+				dialog.getStyleClass().add("dialog");
+				alert.show();
+				return;
+			}
+			ingredientsToSave.add(ingredient);
+			ingredientMap.put(ingredient, quantity);
+		}
+		ingredientsListView.setItems(ingredientsToSave);
+
+//		System.out.println(ingredientMap.size());
 
 	}
 
@@ -143,23 +135,62 @@ public class NewRecipeController {
 
 	@FXML
 	void createButton(ActionEvent event) {
-		System.out.println(ingredientMap);
+		String name;
+		double calories;
+		String description;
+		Diet diet;
+		if (!recipeNameField.getText().isBlank()) {
+			name = recipeNameField.getText();
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText("Nebol vyplneny nazov");
+			dialog = alert.getDialogPane();
+			dialog.getStyleClass().add("dialog");
+			alert.show();
+			return;
+		}
+		if (!caloriesField.getText().isBlank()) {
+			try {
+				calories = Double.parseDouble(caloriesField.getText());
+			} catch (Exception e) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setContentText("Zadajte ciselnu hodnotu");
+				dialog = alert.getDialogPane();
+				dialog.getStyleClass().add("dialog");
+				alert.show();
+				return;
+			}
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText("Neboli vyplnene kalorie");
+			dialog = alert.getDialogPane();
+			dialog.getStyleClass().add("dialog");
+			alert.show();
+			return;
+		}
+		if (!stepsTextArea.getText().isBlank()) {
+			description = stepsTextArea.getText();
+		} else {
+			description = "";
+		}
 
-//        System.out.println("tu som");
-//        String recipeName = recipeNameField.getText();
-//        String steps = stepsTextArea.getText();
-//        String calories = caloriesField.getText();
-//        Diet recipeDiet = dietDao.getByName(dietComboBox.getSelectionModel().getSelectedItem());
-//        String dietId = String.valueOf(recipeDiet.getId());
-//        Recipe newRecipe = new Recipe(recipeName, Double.parseDouble(calories), steps, recipeDiet);
-//        recipeDao.save(newRecipe);
-//        // [Ingrediencia], amount
-//        List<String> igredients = ingredientsListView.getItems();
-//        //for () {
-//
-//        //}
-//        Long id = newRecipe.getId();
-
+		if (dietComboBox.getSelectionModel().getSelectedItem() != null) {
+			diet = dietComboBox.getSelectionModel().getSelectedItem();
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText("Nebol vybraty dietny typ");
+			dialog = alert.getDialogPane();
+			dialog.getStyleClass().add("dialog");
+			alert.show();
+			return;
+		}
+	
+		Recipe recipe = new Recipe(name, calories, description, diet);
+		List<Ingredient> ingredientToSave = ingredientsToSave;
+//		System.out.println(ingredientToSave);
+		recipeDao.save(recipe, ingredientMap, ingredientToSave);
+		
+		ingredientsListView.getScene().getWindow().hide();
 	}
 
 }

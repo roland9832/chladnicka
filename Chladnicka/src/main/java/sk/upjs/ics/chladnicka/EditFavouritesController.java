@@ -49,7 +49,6 @@ public class EditFavouritesController {
 	void initialize() {
 		recipesListView.setItems(model.getRecipeModel());
 		favouriteListView.setItems(model.getFavouriteModel());
-
 		selectedFavouriteModel.setAll(favouriteListView.getItems());
 
 	}
@@ -60,16 +59,21 @@ public class EditFavouritesController {
 
 		if (recipe != null) {
 			if (!hodnotenieTextField.getText().isBlank()) {
-				int hodnotenie = Integer.parseInt(hodnotenieTextField.getText());
-				if (hodnotenie >= 0 && hodnotenie <= 5) {
-					Favourite favourite = new Favourite(recipe, hodnotenie);
-					if (!selectedFavouriteModel.contains(favourite)) {
-						List<Favourite> favourites = favouriteDao.getAll();
-						favourites.add(favourite);
-						selectedFavouriteModel = FXCollections.observableArrayList(favourites);
-						favouriteListView.setItems(selectedFavouriteModel);
-						favouriteToAdd.add(favourite);
+				try {
+					int hodnotenie = Integer.parseInt(hodnotenieTextField.getText());
+					if (hodnotenie >= 0 && hodnotenie <= 5) {
+						Favourite favourite = new Favourite(recipe, hodnotenie);
+						if (!selectedFavouriteModel.contains(favourite)) {
+							List<Favourite> favourites = favouriteDao.getAll();
+							favourites.addAll(favouriteToAdd);
+							favourites.add(favourite);
+							selectedFavouriteModel = FXCollections.observableArrayList(favourites);
+							favouriteListView.setItems(selectedFavouriteModel);
+							favouriteToAdd.add(favourite);
+						}
 					}
+				} catch (Exception e) {
+					// TODO: handle exception
 				}
 			} else {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -92,6 +96,20 @@ public class EditFavouritesController {
 	@FXML
 	void removeFromFavoritesButton(ActionEvent event) {
 		Favourite favourite = favouriteListView.getSelectionModel().getSelectedItem();
+		if (favouriteListView.getSelectionModel().getSelectedItem() != null) {
+			if (favouriteToAdd.contains(favourite)) {
+				List<Favourite> favourites = favouriteListView.getSelectionModel().getSelectedItems();
+				favouriteToAdd.remove(favourite);
+				favourites.remove(favourite);
+				selectedFavouriteModel = FXCollections.observableArrayList(favourites);
+				favouriteListView.setItems(selectedFavouriteModel);
+			} else {
+				favouriteDao.delete(favourite.getRecipe());
+				List<Favourite> favourites = favouriteDao.getAll();
+				selectedFavouriteModel = FXCollections.observableArrayList(favourites);
+				favouriteListView.setItems(selectedFavouriteModel);
+			}
+		}
 
 	}
 

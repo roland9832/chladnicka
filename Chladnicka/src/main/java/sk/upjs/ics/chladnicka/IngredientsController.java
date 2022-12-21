@@ -98,7 +98,16 @@ public class IngredientsController {
 		}
 
 		if (!quantityTextField.getText().isBlank()) {
-			quantity = Double.parseDouble(quantityTextField.getText());
+			try {
+				quantity = Double.parseDouble(quantityTextField.getText());
+			}catch (Exception e) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setContentText("Insert numerical value");
+				dialog = alert.getDialogPane();
+				dialog.getStyleClass().add("dialog");
+				alert.show();
+				return;
+			}
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setContentText("Nebolo zadane mnozstvo v chladnicke");
@@ -169,9 +178,8 @@ public class IngredientsController {
 	@FXML
 	void editIngredientButton(ActionEvent event) {
 		Ingredient ingredient = ingredientsListView.getSelectionModel().getSelectedItem();
-
+		System.out.println(ingredient);
 		try {
-
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditIngredient.fxml"));
 
 			EditIngredientController controller = new EditIngredientController(ingredient);
@@ -184,7 +192,10 @@ public class IngredientsController {
 			stage.setTitle("Edit Favourites");
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.showAndWait();
-
+			selectedIngredientModel.clear();
+			List<Ingredient> tempList = ingredientDao.getAll();
+			selectedIngredientModel.addAll(tempList);
+			ingredientsListView.setItems(selectedIngredientModel);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

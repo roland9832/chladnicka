@@ -69,7 +69,7 @@ public class RecipesController {
 	private List<Diet> dietModel;
 
 	private ObservableList<Recipe> listView = FXCollections.observableArrayList();
-
+	private ObservableList<Recipe> clear = FXCollections.observableArrayList();
 	@FXML
 	void initialize() {
 		// logger.debug("inicialize running");
@@ -157,6 +157,9 @@ public class RecipesController {
 			stage.setTitle(selectedRecipe.getRecipe_name());
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.showAndWait();
+			ingredientsComboBox.getSelectionModel().clearSelection();
+			diet.getSelectionModel().clearSelection();
+			recipesListView.setItems(clear);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -47,7 +47,6 @@ public class EditIngredientController {
 	private Ingredient ingredient;
 
 	public EditIngredientController(Ingredient ingredient) {
-		System.out.println(ingredient);
 		this.ingredient = ingredient;
 
 	}
@@ -67,17 +66,26 @@ public class EditIngredientController {
 
 	@FXML
 	void editButton(ActionEvent event) {
-//		Ingredient ingredient = new Ingredient();
-//		ingredient.setId(this.ingredient.getId());
-//		if(!quantityTextField.getText().isBlank()) {
-//    		ingredient.setQuantity_fridge(Double.parseDouble(quantityTextField.getText()));
-//    	}else {
-//    		ingredient.setQuantity_fridge(this.ingredient.getQuantity_fridge());
-//    	}
-//		if(allergenComboBox.getSelectionModel().getSelectedItem() != null) {
-//			ingredient.setAlergie(allergenComboBox.getSelectionModel().getSelectedItem());
-//		}else {
-//			ingre
-//		}
+		
+		Ingredient ingredient = new Ingredient();
+		ingredient.setId(this.ingredient.getId());
+		ingredient.setName(this.ingredient.getName());
+		if(!quantityTextField.getText().isBlank()) {
+    		ingredient.setQuantity_fridge(Double.parseDouble(quantityTextField.getText()));
+    	}else {
+    		ingredient.setQuantity_fridge(this.ingredient.getQuantity_fridge());
+    	}
+		if(allergenComboBox.getSelectionModel().getSelectedItem() != null) {
+			ingredient.setAlergie(allergenComboBox.getSelectionModel().getSelectedItem());
+		}else {
+			ingredient.setAlergie(this.ingredient.getAlergie());
+		}
+		if(measureComboBox.getSelectionModel().getSelectedItem() != null) {
+			ingredient.setMeasure(measureComboBox.getSelectionModel().getSelectedItem());
+		}else {
+			ingredient.setMeasure(this.ingredient.getMeasure());
+		}
+		ingredientDao.save(ingredient);
+		allergenComboBox.getScene().getWindow().hide();
 	}
 }

@@ -42,5 +42,6 @@
       </Label>
       <ListView fx:id="ingredientsListView" layoutX="43.0" layoutY="70.0" prefHeight="299.0" prefWidth="514.0" />
       <Button layoutX="427.0" layoutY="517.0" mnemonicParsing="false" onAction="#removeButton" prefHeight="35.0" prefWidth="129.0" text="Remove" />
+      <Button layoutX="427.0" layoutY="462.0" mnemonicParsing="false" onAction="#editIngredientButton" prefHeight="35.0" prefWidth="129.0" text="Edit" />
    </children>
 </AnchorPane>

@@ -2,6 +2,7 @@ package sk.upjs.ics.chladnicka.storage;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 public interface RecipeDao {
 	List<Recipe> getAll();
@@ -13,4 +14,8 @@ public interface RecipeDao {
 	Map<Ingredient, Double> getAmountByRecipe(Recipe recipe);
 
 	Recipe getByID(long id);
+
+	void save(Recipe recipe, Map<Ingredient, Double> ingredientMap, List<Ingredient> ingredientToSave) throws NoSuchElementException, NullPointerException;
+
+	boolean delete(Recipe recipe) throws EntityUndeletableException;
 }

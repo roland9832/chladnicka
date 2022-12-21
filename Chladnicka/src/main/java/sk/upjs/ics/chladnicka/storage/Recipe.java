@@ -34,6 +34,13 @@ public class Recipe {
 		this.ingredient = ingredient;
 	}
 
+	public Recipe(String recipe_name, double calorific, String description, Diet diet) {
+		this.recipe_name = recipe_name;
+		this.calorific = calorific;
+		this.description = description;
+		this.diet = diet;
+	}
+
 	public Long getId() {
 		return id;
 	}

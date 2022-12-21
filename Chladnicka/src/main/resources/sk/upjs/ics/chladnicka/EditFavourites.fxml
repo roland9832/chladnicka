@@ -30,7 +30,7 @@
       <Button layoutX="260.0" layoutY="267.0" mnemonicParsing="false" onAction="#addToFavoritesButton" prefHeight="31.0" prefWidth="79.0" text="&lt;&lt;&lt;" />
       <Button layoutX="260.0" layoutY="309.0" mnemonicParsing="false" onAction="#removeFromFavoritesButton" prefHeight="31.0" prefWidth="79.0" text="&gt;&gt;&gt;" />
       <TextField fx:id="hodnotenieTextField" layoutX="264.0" layoutY="392.0" prefHeight="26.0" prefWidth="71.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="260.0" layoutY="360.0" prefHeight="31.0" prefWidth="79.0" text="Hodnotenie">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="260.0" layoutY="360.0" prefHeight="31.0" prefWidth="79.0" text="Rating">
          <font>
             <Font size="14.0" />
          </font>

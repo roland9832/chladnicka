@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 public class MysqlRecipeDao implements RecipeDao {
 	private JdbcTemplate jdbcTemplate;
@@ -113,6 +114,44 @@ public class MysqlRecipeDao implements RecipeDao {
 		}
 		return values;
 	}
+	@Override
+	public void save(Recipe recipe, Map<Ingredient, Double> ingredientMap, List<Ingredient> ingredients) throws NoSuchElementException, NullPointerException {
+		if(recipe == null) {
+			throw new NullPointerException("Cannot save null Ingredient");
+		}
+		if(recipe.getId() == null) {
+			SimpleJdbcInsert saveInsert = new SimpleJdbcInsert(jdbcTemplate);
+			saveInsert.withTableName("recipe");
+			saveInsert.usingColumns("recipe_name","calorific_value","description","diet_diet_id");
+			saveInsert.usingGeneratedKeyColumns("recipe_id");
+			saveInsert.usingGeneratedKeyColumns("ingredient_id");
+			Map<String, Object> values = new HashMap<>();
+			values.put("recipe_name", recipe.getRecipe_name());
+			values.put("calorific_value", recipe.getCalorific());
+			values.put("description", recipe.getDescription());
+			values.put("diet_diet_id", recipe.getDiet().getId());
+			long id = saveInsert.executeAndReturnKey(values).longValue();
+			for (Ingredient ingredient : ingredients) {
+				StringBuilder sb = new StringBuilder();
+				sb.append("INSERT INTO recipe_has_ingredient (recipe_recipe_id, ingredient_ingredient_id, recipe_amount) VALUES ");
+				sb.append("(").append(id);
+				sb.append(" , ").append(ingredient.getId());
+				sb.append(" , ").append(ingredientMap.get(ingredient));
+				sb.append(")");
+				System.out.println(sb.toString());
+				String sql = sb.substring(0,sb.length());
+				System.out.println(sql);
+				jdbcTemplate.update(sql);
+			}
+			
+		}	
+	}
+	
+	@Override
+	public boolean delete(Recipe recipe) throws EntityUndeletableException {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	private class RecipeRowMapper implements RowMapper<Recipe> {
 
@@ -130,5 +169,7 @@ public class MysqlRecipeDao implements RecipeDao {
 		}
 
 	}
+
+	
 
 }
