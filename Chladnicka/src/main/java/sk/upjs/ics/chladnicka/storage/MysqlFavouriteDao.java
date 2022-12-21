@@ -81,7 +81,7 @@ public class MysqlFavouriteDao implements FavouriteDao {
 			wasDeleted = jdbcTemplate.update("DELETE FROM favourite WHERE recipe_recipe_id = " + recipe.getId());
 		} catch (DataIntegrityViolationException e) {
 			throw new EntityUndeletableException("Term with id: " + recipe.getId()
-					+ "cannot be deleted, some candidate/program already has this term");
+					+ "Favourite is already in use");
 		}
 
 		return wasDeleted == 1;
