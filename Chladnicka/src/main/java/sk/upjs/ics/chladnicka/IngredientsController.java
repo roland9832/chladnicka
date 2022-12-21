@@ -127,7 +127,7 @@ public class IngredientsController {
 		}
 		if (measure == null) {
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setContentText("Nebola vybrana jednotka merania, prosim vyberte jednotku merania");
+			alert.setContentText("Need to select unit of measure");
 			dialog = alert.getDialogPane();
 			dialog.getStyleClass().add("dialog");
 			alert.show();
@@ -138,7 +138,7 @@ public class IngredientsController {
 		for (Ingredient ingredient : allIngredients) {
 			if (ingredient.getName().equals(name)) {
 				Alert alert = new Alert(AlertType.ERROR);
-				alert.setContentText("Ingrediencia sa uz nachadza v ingredienciach");
+				alert.setContentText("Ingredient is already in. Try editing it");
 				dialog = alert.getDialogPane();
 				dialog.getStyleClass().add("dialog");
 				alert.show();
@@ -197,8 +197,12 @@ public class IngredientsController {
 			selectedIngredientModel.addAll(tempList);
 			ingredientsListView.setItems(selectedIngredientModel);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText("Need to select ingredient to edit");
+			dialog = alert.getDialogPane();
+			dialog.getStyleClass().add("dialog");
+			alert.show();
+			return;
 		}
 
 	}

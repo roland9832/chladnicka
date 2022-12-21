@@ -11,8 +11,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sk.upjs.ics.chladnicka.storage.DaoFactory;
@@ -25,6 +28,8 @@ import sk.upjs.ics.chladnicka.storage.RecipeDao;
 
 public class RecipesController {
 
+	private DialogPane dialog;
+	
 	private RecipesFxModel model;
 
 	private IngredientDao ingredientDao;
@@ -146,6 +151,7 @@ public class RecipesController {
 	@FXML
 	void showRecipeButton(ActionEvent event) {
 		Recipe selectedRecipe = recipesListView.getSelectionModel().getSelectedItem();
+		
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ShowRecipe.fxml"));
 			ShowRecipeController controller5 = new ShowRecipeController(selectedRecipe);
@@ -161,8 +167,12 @@ public class RecipesController {
 			diet.getSelectionModel().clearSelection();
 			recipesListView.setItems(clear);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText("Need to select recipe to show");
+			dialog = alert.getDialogPane();
+			dialog.getStyleClass().add("dialog");
+			alert.show();
+			return;
 		}
 	}
 }

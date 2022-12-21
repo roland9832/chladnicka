@@ -33,8 +33,8 @@ DROP TABLE IF EXISTS `chladnicka`.`recipe` ;
 
 CREATE TABLE IF NOT EXISTS `chladnicka`.`recipe` (
   `recipe_id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `calorific value` DECIMAL(6,2) NULL,
+  `recipe_name` VARCHAR(45) NOT NULL,
+  `calorific_value` DECIMAL(6,2) NULL,
   `description` VARCHAR(1000) NULL,
   `diet_diet_id` INT NOT NULL,
   PRIMARY KEY (`recipe_id`),
@@ -79,9 +79,9 @@ DROP TABLE IF EXISTS `chladnicka`.`ingredient` ;
 
 CREATE TABLE IF NOT EXISTS `chladnicka`.`ingredient` (
   `ingredient_id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
+  `ingredient_name` VARCHAR(45) NOT NULL,
   `quantity_fridge` DECIMAL(6,2) NULL,
-  `allergie_allergie_id` INT NULL,
+  `allergie_allergie_id` INT NOT NULL,
   `measure_measure_id` INT NOT NULL,
   PRIMARY KEY (`ingredient_id`),
   INDEX `fk_ingredient_allergie1_idx` (`allergie_allergie_id` ASC) VISIBLE,
@@ -102,13 +102,13 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `chladnicka`.`fridge`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `chladnicka`.`fridge` ;
+-- DROP TABLE IF EXISTS `chladnickatest`.`fridge` ;
 
-CREATE TABLE IF NOT EXISTS `chladnicka`.`fridge` (
-  `username` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`username`, `password`))
-ENGINE = InnoDB;
+-- CREATE TABLE IF NOT EXISTS `chladnickatest`.`fridge` (
+--  `username` VARCHAR(45) NOT NULL,
+--   `password` VARCHAR(45) NOT NULL,
+--   PRIMARY KEY (`username`, `password`))
+-- ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -117,20 +117,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `chladnicka`.`favourite` ;
 
 CREATE TABLE IF NOT EXISTS `chladnicka`.`favourite` (
-  `recipe_recipe_id` INT NOT NULL,
   `hodnotenie` INT NOT NULL,
-  `fridge_username` VARCHAR(45) NOT NULL,
-  `fridge_password` VARCHAR(45) NOT NULL,
+  `recipe_recipe_id` INT NOT NULL,
   INDEX `fk_favourite_recipe1_idx` (`recipe_recipe_id` ASC) VISIBLE,
-  PRIMARY KEY (`fridge_username`, `fridge_password`),
   CONSTRAINT `fk_favourite_recipe1`
     FOREIGN KEY (`recipe_recipe_id`)
     REFERENCES `chladnicka`.`recipe` (`recipe_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_favourite_fridge1`
-    FOREIGN KEY (`fridge_username` , `fridge_password`)
-    REFERENCES `chladnicka`.`fridge` (`username` , `password`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -144,7 +136,7 @@ DROP TABLE IF EXISTS `chladnicka`.`recipe_has_ingredient` ;
 CREATE TABLE IF NOT EXISTS `chladnicka`.`recipe_has_ingredient` (
   `recipe_recipe_id` INT NOT NULL,
   `ingredient_ingredient_id` INT NOT NULL,
-  `recipe_amout` DECIMAL(6,2) NOT NULL,
+  `recipe_amount` DECIMAL(6,2) NOT NULL,
   PRIMARY KEY (`recipe_recipe_id`, `ingredient_ingredient_id`),
   INDEX `fk_recipe_has_ingredient_ingredient1_idx` (`ingredient_ingredient_id` ASC) VISIBLE,
   INDEX `fk_recipe_has_ingredient_recipe1_idx` (`recipe_recipe_id` ASC) VISIBLE,
@@ -164,3 +156,26 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('1', '1', 'Obilniny obsahujúce lepok');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('2', '2', 'Kôrovce a výrobky z nich');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('3', '3', 'Vajcia a výrobky z nich');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('4', '4', 'Ryby a výrobky z nich okrem');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('5', '5', 'Arašídy a výrobky z nich');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('6', '6', 'Sójové zrná a výrobky z nich okrem');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('7', '7', 'Mlieko výrobky z neho (vrátane laktózy) okrem');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('8', '8', 'Orechy');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('9', '9', 'Zeler a výrobky z neho');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('10', '10', 'Horčica a výrobky z nej');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('11', '11', 'Sézamové semená a výrobky z nich');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('12', '12', 'Kysličník síričitý a síričitany v koncentráciách vyšších ako 10 mg/kg alebo 10mg/liter vyjadrené  ako SO2');
+INSERT INTO `chladnicka`.`allergie` (`allergie_id`, `category`, `information`) VALUES ('13', '13', 'None');
+
+INSERT INTO `chladnicka`.`measure` (`measure_id`, `unit`) VALUES ('1', 'g');
+INSERT INTO `chladnicka`.`measure` (`measure_id`, `unit`) VALUES ('2', 'ml');
+INSERT INTO `chladnicka`.`measure` (`measure_id`, `unit`) VALUES ('3', 'ks');
+
+INSERT INTO `chladnicka`.`diet` (`diet_id`, `diet_name`) VALUES ('1', 'none');
+INSERT INTO `chladnicka`.`diet` (`diet_id`, `diet_name`) VALUES ('2', 'vegan');
+INSERT INTO `chladnicka`.`diet` (`diet_id`, `diet_name`) VALUES ('3', 'vegetarian');
+

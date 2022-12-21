@@ -57,7 +57,7 @@ public enum DaoFactory {
 		return favouriteDao;
 	}
 
-	private boolean testing = true;
+	private boolean testing = false;
 
 	public void setTesting() {
 		this.testing = true;
