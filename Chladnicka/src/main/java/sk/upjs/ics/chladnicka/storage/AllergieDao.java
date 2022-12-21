@@ -4,5 +4,6 @@ import java.util.List;
 
 public interface AllergieDao {
 	List<Allergie> getAll();
+
 	Allergie getByID(long id);
 }

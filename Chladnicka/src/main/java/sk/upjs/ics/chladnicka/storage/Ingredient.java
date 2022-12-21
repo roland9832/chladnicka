@@ -5,14 +5,12 @@ import java.util.Objects;
 public class Ingredient {
 	private Long id;
 	private String name;
-	private double quantity_fridge; /*Neviem ci moze byt double*/ 
+	private double quantity_fridge; /* Neviem ci moze byt double */
 	private Allergie alergie;
 	private Measure measure;
 
-	
-	
 	public Ingredient() {
-		
+
 	}
 
 	public Ingredient(Long id, String name, Allergie alergie, Measure measure) {
@@ -20,7 +18,7 @@ public class Ingredient {
 		this.name = name;
 		this.alergie = alergie;
 		this.measure = measure;
-		
+
 	}
 
 	public Ingredient(Long id, String name, double quantity_fridge, Allergie alergie, Measure measure) {
@@ -29,7 +27,7 @@ public class Ingredient {
 		this.quantity_fridge = quantity_fridge;
 		this.alergie = alergie;
 		this.measure = measure;
-	
+
 	}
 
 	public Ingredient(Long id, String name, double quantity_fridge, Measure measure) {
@@ -38,8 +36,6 @@ public class Ingredient {
 		this.quantity_fridge = quantity_fridge;
 		this.measure = measure;
 	}
-
-	
 
 	public Ingredient(String name, double quantity_fridge, Allergie alergie, Measure measure) {
 		this.name = name;
@@ -79,7 +75,7 @@ public class Ingredient {
 	public void setAlergie(Allergie alergie) {
 		this.alergie = alergie;
 	}
-	
+
 	public Measure getMeasure() {
 		return measure;
 	}
@@ -90,13 +86,13 @@ public class Ingredient {
 
 	@Override
 	public String toString() {
-		if(alergie.getId() == 13) {
-			return "(" + id + ") " + name + ", " + quantity_fridge + measure.getUnit() +  ", Allergy: None";
-		}else {
-			return "(" + id + ") " + name + ", " + quantity_fridge + measure.getUnit() +  ", Allergy: "
+		if (alergie.getId() == 13) {
+			return "(" + id + ") " + name + ", " + quantity_fridge + measure.getUnit() + ", Allergy: None";
+		} else {
+			return "(" + id + ") " + name + ", " + quantity_fridge + measure.getUnit() + ", Allergy: "
 					+ alergie.getCategory();
 		}
-		
+
 	}
 
 	@Override
@@ -118,8 +114,4 @@ public class Ingredient {
 				&& Double.doubleToLongBits(quantity_fridge) == Double.doubleToLongBits(other.quantity_fridge);
 	}
 
-	
-	
-	
-	
 }

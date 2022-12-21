@@ -10,14 +10,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 public class MysqlAllergieDao implements AllergieDao {
-	
+
 	private JdbcTemplate jdbcTemplate;
-	
+
 	public MysqlAllergieDao(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-	public List<Allergie> getAll(){
+	public List<Allergie> getAll() {
 		String sql = "SELECT allergie_id, category, information FROM allergie";
 		List<Allergie> allergie = jdbcTemplate.query(sql, new AllergieRowMapper());
 		return allergie;
@@ -32,8 +32,8 @@ public class MysqlAllergieDao implements AllergieDao {
 		}
 	}
 
-	private class AllergieRowMapper implements RowMapper<Allergie>{
-		
+	private class AllergieRowMapper implements RowMapper<Allergie> {
+
 		public Allergie mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Allergie allergie = new Allergie();
 			allergie.setId(rs.getLong("allergie_id"));
@@ -42,10 +42,5 @@ public class MysqlAllergieDao implements AllergieDao {
 			return allergie;
 		}
 	};
-
-	
-
-
-	
 
 }

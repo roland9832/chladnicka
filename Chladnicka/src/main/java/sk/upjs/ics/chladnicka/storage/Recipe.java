@@ -11,11 +11,11 @@ public class Recipe {
 	private String description;
 	private Diet diet;
 	private List<Ingredient> ingredient;
-	
+
 	public Recipe() {
-		
+
 	}
-	
+
 	public Recipe(Long id, String recipe_name, double calorific, String description, Diet diet) {
 		this.id = id;
 		this.recipe_name = recipe_name;
@@ -23,8 +23,6 @@ public class Recipe {
 		this.description = description;
 		this.diet = diet;
 	}
-	
-	
 
 	public Recipe(Long id, String recipe_name, double calorific, String description, Diet diet,
 			List<Ingredient> ingredient) {
@@ -108,7 +106,5 @@ public class Recipe {
 				&& Objects.equals(id, other.id) && Objects.equals(ingredient, other.ingredient)
 				&& Objects.equals(recipe_name, other.recipe_name);
 	}
-	
-	
-	
+
 }

@@ -55,9 +55,6 @@ public class MysqlRecipeDao implements RecipeDao {
 			}
 		});
 	}
-	
-
-
 
 	@Override
 	public List<Recipe> getByIngredient(Ingredient ingredient) {
@@ -92,30 +89,27 @@ public class MysqlRecipeDao implements RecipeDao {
 		} catch (Exception e) {
 			throw new NoSuchElementException("Recipe with id " + id + " not in DB");
 		}
- 
+
 	}
-	
+
 	public Map<Ingredient, Double> getAmountByRecipe(Recipe recipe) {
 		List<Ingredient> ingredients = DaoFactory.INSTANCE.getIngredientDao().getByRecipe(recipe);
 		Map<Ingredient, Double> values = new HashMap<>();
 
-		
 		for (Ingredient ingredient : ingredients) {
-			String sql = "SELECT recipe_amount FROM recipe_has_ingredient "
-					+"WHERE recipe_recipe_id = " + recipe.getId()
-					+" AND ingredient_ingredient_id = " + ingredient.getId();
-			
-			
-			double amount = jdbcTemplate.queryForObject(sql, new RowMapper<Double>(){
+			String sql = "SELECT recipe_amount FROM recipe_has_ingredient " + "WHERE recipe_recipe_id = "
+					+ recipe.getId() + " AND ingredient_ingredient_id = " + ingredient.getId();
+
+			double amount = jdbcTemplate.queryForObject(sql, new RowMapper<Double>() {
 
 				@Override
 				public Double mapRow(ResultSet rs, int rowNum) throws SQLException {
 					double rec_amount = rs.getDouble("recipe_amount");
 					return rec_amount;
 				}
-				
+
 			});
-			values.put(ingredient,amount);
+			values.put(ingredient, amount);
 		}
 		return values;
 	}

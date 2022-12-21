@@ -16,9 +16,9 @@ import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sk.upjs.ics.chladnicka.storage.DaoFactory;
+import sk.upjs.ics.chladnicka.storage.EntityUndeletableException;
 import sk.upjs.ics.chladnicka.storage.Favourite;
 import sk.upjs.ics.chladnicka.storage.FavouriteDao;
-import sk.upjs.ics.chladnicka.storage.EntityUndeletableException;
 
 public class FavouritesController {
 
@@ -64,24 +64,23 @@ public class FavouritesController {
 	}
 
 	@FXML
-    void deleteFavoritesButton(ActionEvent event) {
-    	Favourite favourite = favouriteListView.getSelectionModel().getSelectedItem();
-    	List<Favourite> favourites = this.favourite;
-		if(favourite != null) {
+	void deleteFavoritesButton(ActionEvent event) {
+		Favourite favourite = favouriteListView.getSelectionModel().getSelectedItem();
+		List<Favourite> favourites = this.favourite;
+		if (favourite != null) {
 			try {
 				favouriteDao.delete(favourite.getRecipe());
-			}catch (EntityUndeletableException e) {
+			} catch (EntityUndeletableException e) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setContentText(e.getMessage());
-	    		alert.showAndWait();
+				alert.showAndWait();
 			}
 			favourites.remove(favourite);
 			this.favourite = favourites;
 			favouriteModel = FXCollections.observableArrayList(this.favourite);
-			System.out.println(favouriteModel);
 			favouriteListView.setItems(favouriteModel);
 		}
-		
-    }
+
+	}
 
 }

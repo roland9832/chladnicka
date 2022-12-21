@@ -6,7 +6,6 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 
 public enum DaoFactory {
 	INSTANCE;
-	
 
 	private JdbcTemplate jdbcTemplate;
 	private DietDao dietDao;
@@ -15,58 +14,55 @@ public enum DaoFactory {
 	private IngredientDao ingredientDao;
 	private RecipeDao recipeDao;
 	private FavouriteDao favouriteDao;
-	
+
 	public DietDao getDietDao() {
-		if(dietDao == null) {
+		if (dietDao == null) {
 			dietDao = new MysqlDietDao(getJdbcTemplate());
 		}
 		return dietDao;
 	}
-	
+
 	public AllergieDao getAllergieDao() {
-		if(allergieDao == null) {
+		if (allergieDao == null) {
 			allergieDao = new MysqlAllergieDao(getJdbcTemplate());
 		}
 		return allergieDao;
 	}
-	
+
 	public MeasureDao getMeasureDao() {
-		if(measureDao == null) {
+		if (measureDao == null) {
 			measureDao = new MysqlMeasureDao(getJdbcTemplate());
 		}
 		return measureDao;
 	}
-	
+
 	public IngredientDao getIngredientDao() {
-		if(ingredientDao == null) {
+		if (ingredientDao == null) {
 			ingredientDao = new MysqlIngredientDao(getJdbcTemplate());
 		}
 		return ingredientDao;
 	}
-	
+
 	public RecipeDao getRecipeDao() {
-		if(recipeDao == null) {
+		if (recipeDao == null) {
 			recipeDao = new MysqlRecipeDao(getJdbcTemplate());
 		}
 		return recipeDao;
 	}
-	
+
 	public FavouriteDao getFavouriteDao() {
-		if(favouriteDao == null) {
+		if (favouriteDao == null) {
 			favouriteDao = new MysqlFavouriteDao(getJdbcTemplate());
 		}
 		return favouriteDao;
 	}
-	
-	
+
 	private boolean testing = true;
-	
+
 	public void setTesting() {
 		this.testing = true;
 	}
-	
-	
-	
+
 	private JdbcTemplate getJdbcTemplate() {
 		if (jdbcTemplate == null) {
 			MysqlDataSource dataSource = new MysqlDataSource();
@@ -79,7 +75,7 @@ public enum DaoFactory {
 			}
 			dataSource.setUser("Admin");
 			dataSource.setPassword("Chladnicka2022");
-			
+
 			jdbcTemplate = new JdbcTemplate(dataSource);
 		}
 		return jdbcTemplate;

@@ -36,37 +36,35 @@ public class EditIngredientController {
 	private ComboBox<Allergie> allergenComboBox;
 
 	@FXML
-    private Label ingredientLable;
-	
+	private Label ingredientLable;
+
 	@FXML
 	private ComboBox<Measure> measureComboBox;
 
 	@FXML
 	private TextField quantityTextField;
-	
 
 	private Ingredient ingredient;
 
 	public EditIngredientController(Ingredient ingredient) {
 		System.out.println(ingredient);
 		this.ingredient = ingredient;
-		
+
 	}
-	
+
 	@FXML
 	void initialize() {
 		ingredientLable.setText(ingredient.getName());
 		List<Measure> measures = measureDao.getAll();
-    	selectedMeasureModel = FXCollections.observableArrayList(measures);
-    	measureComboBox.setItems(selectedMeasureModel);
-    	measureComboBox.setPromptText("Select");
-    	List<Allergie> allergies = allergieDao.getAll();
-    	selectedAllergieModel = FXCollections.observableArrayList(allergies);
-    	allergenComboBox.setItems(selectedAllergieModel);
-    	allergenComboBox.setPromptText("Select");
+		selectedMeasureModel = FXCollections.observableArrayList(measures);
+		measureComboBox.setItems(selectedMeasureModel);
+		measureComboBox.setPromptText("Select");
+		List<Allergie> allergies = allergieDao.getAll();
+		selectedAllergieModel = FXCollections.observableArrayList(allergies);
+		allergenComboBox.setItems(selectedAllergieModel);
+		allergenComboBox.setPromptText("Select");
 	}
-	
-	
+
 	@FXML
 	void editButton(ActionEvent event) {
 //		Ingredient ingredient = new Ingredient();

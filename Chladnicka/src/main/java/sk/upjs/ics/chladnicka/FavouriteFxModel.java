@@ -11,27 +11,20 @@ import sk.upjs.ics.chladnicka.storage.DaoFactory;
 import sk.upjs.ics.chladnicka.storage.Favourite;
 import sk.upjs.ics.chladnicka.storage.Recipe;
 
-public class FavouriteFxModel{
-		
+public class FavouriteFxModel {
+
 	private StringProperty name = new SimpleStringProperty();
 	private ObservableList<Recipe> recipes;
 	private ObservableList<Favourite> favourites;
-	
-	
-//	public FavouriteFxModel() {
-//		recipes = FXCollections.observableArrayList();
-//		favourites = FXCollections.observableArrayList();
-//	}
-	
-	
-	
+
+
 	public FavouriteFxModel() {
 		List<Recipe> Rlist = DaoFactory.INSTANCE.getRecipeDao().getAll();
 		recipes = FXCollections.observableArrayList(Rlist);
 		List<Favourite> Flist = DaoFactory.INSTANCE.getFavouriteDao().getAll();
 		favourites = FXCollections.observableArrayList(Flist);
 	}
-	
+
 	public FavouriteFxModel(Favourite favourite) {
 		List<Recipe> Rlist = DaoFactory.INSTANCE.getRecipeDao().getAll();
 		recipes = FXCollections.observableArrayList(Rlist);
@@ -39,8 +32,7 @@ public class FavouriteFxModel{
 		Flist.add(favourite);
 		favourites = FXCollections.observableArrayList(Flist);
 	}
-	
-	
+
 	public StringProperty getNameProperty() {
 		return name;
 	}
@@ -56,16 +48,15 @@ public class FavouriteFxModel{
 	public ObservableList<Recipe> getRecipeModel() {
 		return recipes;
 	}
-	
-	public List<Recipe> getRecipe(){
+
+	public List<Recipe> getRecipe() {
 		return new ArrayList<>(recipes);
 	}
 
 	public ObservableList<Favourite> getFavouriteModel() {
 		return favourites;
 	}
-	
-	
+
 	public ObservableList<Favourite> getFavourites() {
 		return favourites;
 	}
@@ -74,7 +65,7 @@ public class FavouriteFxModel{
 		this.favourites = favourites;
 	}
 
-	public List<Favourite> getFavourite(){
+	public List<Favourite> getFavourite() {
 		return new ArrayList<>(favourites);
 	}
 }

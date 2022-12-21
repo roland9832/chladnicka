@@ -7,11 +7,11 @@ public class Allergie {
 	private Long id;
 	private String category;
 	private String information;
-	
+
 	public Allergie() {
-		
+
 	}
-	
+
 	public Allergie(Long id, String category, String information) {
 		this.id = id;
 		this.category = category;
@@ -44,7 +44,7 @@ public class Allergie {
 
 	@Override
 	public String toString() {
-		return  category;
+		return category;
 	}
 
 	@Override
@@ -64,8 +64,5 @@ public class Allergie {
 		return Objects.equals(category, other.category) && Objects.equals(id, other.id)
 				&& Objects.equals(information, other.information);
 	}
-	
-	
-	
-	
+
 }

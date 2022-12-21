@@ -5,11 +5,11 @@ import java.util.Objects;
 public class Measure {
 	private Long id;
 	private String unit;
-	
+
 	public Measure() {
-		
+
 	}
-	
+
 	public Measure(long id2, String unit) {
 		this.id = id2;
 		this.unit = unit;
@@ -33,7 +33,7 @@ public class Measure {
 
 	@Override
 	public String toString() {
-		return  unit;
+		return unit;
 	}
 
 	@Override
@@ -52,6 +52,5 @@ public class Measure {
 		Measure other = (Measure) obj;
 		return Objects.equals(id, other.id) && Objects.equals(unit, other.unit);
 	}
-	
-	
+
 }

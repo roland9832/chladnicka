@@ -6,16 +6,16 @@ public class Favourite {
 	private Long id;
 	private Recipe recipe;
 	private int hodnotenie;
-	
+
 	public Favourite() {
-		
+
 	}
 
 	public Favourite(Long id, int hodnotenie) {
 		this.id = id;
 		this.hodnotenie = hodnotenie;
 	}
-	
+
 	public Favourite(Recipe recipe, int hodnotenie) {
 		this.id = recipe.getId();
 		this.recipe = recipe;
@@ -36,8 +36,6 @@ public class Favourite {
 		this.id = id;
 	}
 
-	
-	
 	public Recipe getRecipe() {
 		return recipe;
 	}
@@ -76,7 +74,4 @@ public class Favourite {
 		return Objects.equals(id, other.id) && Objects.equals(recipe, other.recipe);
 	}
 
-	
-	
-	
 }

@@ -23,7 +23,7 @@ public class MysqlDietDao implements DietDao {
 		return diet;
 
 	}
-	
+
 	@Override
 	public Diet getByName(String name) {
 		String sql = "SELECT diet_id, diet_name FROM diet WHERE diet_name  =?";
@@ -33,7 +33,7 @@ public class MysqlDietDao implements DietDao {
 			throw new NoSuchElementException("");
 		}
 	}
-	
+
 	public Diet getByID(long id) {
 		String sql = "SELECT diet_id, diet_name FROM diet WHERE diet_id = " + id;
 		try {
@@ -42,7 +42,7 @@ public class MysqlDietDao implements DietDao {
 			throw new NoSuchElementException("Allergie with id " + id + " not in DB");
 		}
 	}
-	
+
 	private class DietRowMapper implements RowMapper<Diet> {
 
 		public Diet mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -52,7 +52,5 @@ public class MysqlDietDao implements DietDao {
 			return diet;
 		}
 	}
-
-	
 
 }

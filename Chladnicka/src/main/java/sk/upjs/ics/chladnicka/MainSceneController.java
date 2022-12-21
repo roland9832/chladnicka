@@ -32,7 +32,6 @@ public class MainSceneController {
             stage.setTitle("Favourites");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
-            //updateTable();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -45,7 +44,6 @@ public class MainSceneController {
         try {
             FXMLLoader fxmlLoader =
                     new FXMLLoader(getClass().getResource("Ingredients.fxml"));
-            //Subject subject = subjectsComboBox.getSelectionModel().getSelectedItem();
             IngredientsController controller2 = new IngredientsController();
             fxmlLoader.setController(controller2);
             Parent parent = fxmlLoader.load();
@@ -55,7 +53,6 @@ public class MainSceneController {
             stage.setTitle("Ingredients");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
-            //updateTable();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -78,7 +75,6 @@ public class MainSceneController {
             stage.setTitle("Recipes");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
-            //updateTable();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

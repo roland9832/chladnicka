@@ -49,9 +49,9 @@ public class EditFavouritesController {
 	void initialize() {
 		recipesListView.setItems(model.getRecipeModel());
 		favouriteListView.setItems(model.getFavouriteModel());
-//    	favouriteListView.setItems(selectedFavouriteModel);
+
 		selectedFavouriteModel.setAll(favouriteListView.getItems());
-//    	System.out.println(selectedFavouriteModel);
+
 	}
 
 	@FXML

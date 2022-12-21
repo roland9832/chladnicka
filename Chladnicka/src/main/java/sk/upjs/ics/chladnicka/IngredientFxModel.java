@@ -11,23 +11,21 @@ import sk.upjs.ics.chladnicka.storage.DaoFactory;
 import sk.upjs.ics.chladnicka.storage.Ingredient;
 
 public class IngredientFxModel {
-	
+
 	private StringProperty name = new SimpleStringProperty();
 	private ObservableList<Ingredient> ingredient;
-	
-	
-	
+
 	public IngredientFxModel() {
 		List<Ingredient> ingredients = DaoFactory.INSTANCE.getIngredientDao().getAll();
 		this.ingredient = FXCollections.observableArrayList(ingredients);
 	}
-	
+
 	public IngredientFxModel(Ingredient ingredient) {
 		List<Ingredient> ingredients = DaoFactory.INSTANCE.getIngredientDao().getAll();
 		ingredients.add(ingredient);
 		this.ingredient = FXCollections.observableArrayList(ingredients);
 	}
-	
+
 	public StringProperty getNameProperty() {
 		return name;
 	}
@@ -39,12 +37,12 @@ public class IngredientFxModel {
 	public void setName(String name) {
 		this.name.set(name);
 	}
-	
+
 	public ObservableList<Ingredient> getIngredientModel() {
 		return ingredient;
 	}
-	
-	public List<Ingredient> getIngredient(){
+
+	public List<Ingredient> getIngredient() {
 		return new ArrayList<>(ingredient);
 	}
 

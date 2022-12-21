@@ -9,7 +9,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-
 public class MysqlFavouriteDao implements FavouriteDao {
 	private JdbcTemplate jdbcTemplate;
 
@@ -53,16 +52,15 @@ public class MysqlFavouriteDao implements FavouriteDao {
 
 			});
 		} catch (Exception e) {
-			throw new NoSuchElementException("Favourite with recipe "+ recipe +" not in DB");
+			throw new NoSuchElementException("Favourite with recipe " + recipe + " not in DB");
 		}
 	}
-	
-	
+
 	public void save(Favourite favourite) {
 		if (favourite == null) {
 			throw new NullPointerException("Cannot save null Favourite");
 		}
-		if(favourite.getRecipe() == null) {
+		if (favourite.getRecipe() == null) {
 			throw new NullPointerException("Cannot save null Recipe");
 		}
 		StringBuilder sb = new StringBuilder();
@@ -71,7 +69,7 @@ public class MysqlFavouriteDao implements FavouriteDao {
 		sb.append(",").append(favourite.getRecipe().getId());
 		sb.append(")");
 		System.out.println(sb.toString());
-		String sql = sb.substring(0,sb.length());
+		String sql = sb.substring(0, sb.length());
 		System.out.println(sql);
 		jdbcTemplate.update(sql);
 	}
@@ -82,9 +80,10 @@ public class MysqlFavouriteDao implements FavouriteDao {
 		try {
 			wasDeleted = jdbcTemplate.update("DELETE FROM favourite WHERE recipe_recipe_id = " + recipe.getId());
 		} catch (DataIntegrityViolationException e) {
-			throw new EntityUndeletableException("Term with id: " + recipe.getId() + "cannot be deleted, some candidate/program already has this term");
+			throw new EntityUndeletableException("Term with id: " + recipe.getId()
+					+ "cannot be deleted, some candidate/program already has this term");
 		}
-				
+
 		return wasDeleted == 1;
 	}
 

@@ -40,7 +40,7 @@ public class MysqlIngredientDao implements IngredientDao {
 		return ingredient;
 
 	}
-	
+
 	@Override
 	public Ingredient getByName(String name) {
 		String sql = "SELECT ingredient_id, ingredient_name, quantity_fridge, allergie_allergie_id, measure_measure_id FROM INGREDIENT WHERE ingredient_name =?";
@@ -110,11 +110,8 @@ public class MysqlIngredientDao implements IngredientDao {
 			}
 		});
 	}
-	
-	
-	
 
-	public Ingredient save(Ingredient ingredient) throws NoSuchElementException,NullPointerException {
+	public Ingredient save(Ingredient ingredient) throws NoSuchElementException, NullPointerException {
 		if (ingredient == null) {
 			throw new NullPointerException("Cannot save null Ingredient");
 		}
@@ -129,10 +126,13 @@ public class MysqlIngredientDao implements IngredientDao {
 			values.put("allergie_allergie_id", ingredient.getAlergie().getId());
 			values.put("measure_measure_id", ingredient.getMeasure().getId());
 			long id = saveInsert.executeAndReturnKey(values).longValue();
-			return new Ingredient(id,ingredient.getName(), ingredient.getQuantity_fridge(), ingredient.getAlergie(), ingredient.getMeasure());
+			return new Ingredient(id, ingredient.getName(), ingredient.getQuantity_fridge(), ingredient.getAlergie(),
+					ingredient.getMeasure());
 		} else {
-			String sql = "UPDATE ingredient SET ingredient_name= ?, quantity_fridge= ?, allergie_allergie_id= ?, measure_measure_id= ? " + " WHERE ingredient_id = ?";
-			int updated = jdbcTemplate.update(sql, ingredient.getName(), ingredient.getQuantity_fridge(), ingredient.getAlergie().getId(), ingredient.getMeasure().getId(), ingredient.getId());
+			String sql = "UPDATE ingredient SET ingredient_name= ?, quantity_fridge= ?, allergie_allergie_id= ?, measure_measure_id= ? "
+					+ " WHERE ingredient_id = ?";
+			int updated = jdbcTemplate.update(sql, ingredient.getName(), ingredient.getQuantity_fridge(),
+					ingredient.getAlergie().getId(), ingredient.getMeasure().getId(), ingredient.getId());
 			if (updated == 1) {
 				return ingredient;
 			} else {
@@ -147,8 +147,8 @@ public class MysqlIngredientDao implements IngredientDao {
 		try {
 			wasDeleted = jdbcTemplate.update("DELETE FROM ingredient WHERE ingredient_id = " + ingredient.getId());
 		} catch (DataIntegrityViolationException e) {
-			throw new EntityUndeletableException("Ingredient with id: " + ingredient.getId()
-					+ "cannot be deleted, because it is used in recipe");
+			throw new EntityUndeletableException(
+					"Ingredient with id: " + ingredient.getId() + "cannot be deleted, because it is used in recipe");
 		}
 		return wasDeleted == 1;
 	}
