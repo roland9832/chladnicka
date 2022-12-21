@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="600.0" stylesheets="@recipe.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField fx:id="recipeNameField" alignment="CENTER" layoutX="58.0" layoutY="27.0" prefHeight="56.0" prefWidth="485.0" promptText="Recipe Name">
          <font>
@@ -28,22 +28,15 @@
          </font></Label>
       <Button fx:id="createButton" layoutX="475.0" layoutY="613.0" mnemonicParsing="false" onAction="#createButton" prefHeight="26.0" prefWidth="106.0" text="Vytvoriť" />
       <ListView fx:id="ingredientsListView" layoutX="27.0" layoutY="292.0" prefHeight="109.0" prefWidth="553.0" />
-      <Button layoutX="209.0" layoutY="237.0" mnemonicParsing="false" onAction="#addToStock" prefHeight="18.0" prefWidth="158.0" text="Add Ingredient To Stock " />
       <Button layoutX="32.0" layoutY="237.0" mnemonicParsing="false" onAction="#addToRecipe" prefHeight="26.0" prefWidth="158.0" text="Add Ingredient To Recipe" />
       <ComboBox fx:id="ingredientComboBox" layoutX="163.0" layoutY="111.0" prefHeight="26.0" prefWidth="138.0" />
       <TextField fx:id="quantityField" layoutX="163.0" layoutY="153.0" prefHeight="26.0" prefWidth="138.0" />
-      <ComboBox fx:id="measureComboBox" layoutX="163.0" layoutY="195.0" prefHeight="26.0" prefWidth="138.0" />
       <Label layoutX="40.0" layoutY="115.0" prefHeight="17.0" prefWidth="106.0" text="Ingredient name:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
       <Label layoutX="40.0" layoutY="157.0" prefHeight="17.0" prefWidth="106.0" text="Quantity:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="40.0" layoutY="199.0" prefHeight="17.0" prefWidth="106.0" text="Measure:">
          <font>
             <Font size="14.0" />
          </font>

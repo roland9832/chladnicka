@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import sk.upjs.ics.chladnicka.storage.DaoFactory;
 import sk.upjs.ics.chladnicka.storage.Diet;
 import sk.upjs.ics.chladnicka.storage.DietDao;
+import sk.upjs.ics.chladnicka.storage.EntityUndeletableException;
 import sk.upjs.ics.chladnicka.storage.Ingredient;
 import sk.upjs.ics.chladnicka.storage.IngredientDao;
 import sk.upjs.ics.chladnicka.storage.Recipe;
@@ -175,4 +176,25 @@ public class RecipesController {
 			return;
 		}
 	}
+	
+	 @FXML
+	    void deleteRecipeButton(ActionEvent event) {
+		 Recipe selectedRecipe = recipesListView.getSelectionModel().getSelectedItem();
+		 List<Recipe> recipes = this.listView;
+		 if(recipesListView.getSelectionModel().getSelectedItem() != null) {
+			 try {
+					recipeDao.delete(selectedRecipe);
+				} catch (EntityUndeletableException e) {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setContentText(e.getMessage());
+					alert.showAndWait();
+				}
+		 }
+		 recipes.remove(selectedRecipe);
+		 this.recipes = recipes;
+		 listView = FXCollections.observableArrayList(this.recipes);
+		 recipesListView.setItems(listView);
+		 
+	 
+	 }
 }

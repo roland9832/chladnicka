@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -149,8 +150,21 @@ public class MysqlRecipeDao implements RecipeDao {
 	
 	@Override
 	public boolean delete(Recipe recipe) throws EntityUndeletableException {
-		// TODO Auto-generated method stub
-		return false;
+		int wasDeleted;
+		try {
+			wasDeleted = jdbcTemplate.update("DELETE FROM recipe_has_ingredient WHERE recipe_recipe_id = " + recipe.getId());
+		} catch (DataIntegrityViolationException e) {
+			throw new EntityUndeletableException("Recipe with id: " + recipe.getId()
+					+ "Favourite is already in use");
+		}
+		try {
+			wasDeleted = jdbcTemplate.update("DELETE FROM recipe WHERE recipe_id = " + recipe.getId());
+		} catch (DataIntegrityViolationException e) {
+			throw new EntityUndeletableException("Recipe with id: " + recipe.getId()
+					+ "Favourite is already in use");
+		}
+		return wasDeleted == 1;
+		
 	}
 
 	private class RecipeRowMapper implements RowMapper<Recipe> {

@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
@@ -21,6 +22,8 @@ import sk.upjs.ics.chladnicka.storage.Favourite;
 import sk.upjs.ics.chladnicka.storage.FavouriteDao;
 
 public class FavouritesController {
+	
+	private DialogPane dialog;
 
 	private FavouriteFxModel model;
 
@@ -82,5 +85,34 @@ public class FavouritesController {
 		}
 
 	}
+	
+	@FXML
+    void showFavoritesButton(ActionEvent event) {
+		Favourite favourite = favouriteListView.getSelectionModel().getSelectedItem();
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ShowRecipe.fxml"));
+			ShowRecipeController controller5 = new ShowRecipeController(favourite.getRecipe());
+			fxmlLoader.setController(controller5);
+			Parent parent = fxmlLoader.load();
+			Scene scene = new Scene(parent);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle(favourite.getRecipe().getRecipe_name());
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.showAndWait();
+//			ingredientsComboBox.getSelectionModel().clearSelection();
+//			diet.getSelectionModel().clearSelection();
+//			recipesListView.setItems(clear);
+		} catch (IOException e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText("Need to select recipe to show");
+			dialog = alert.getDialogPane();
+			dialog.getStyleClass().add("dialog");
+			alert.show();
+			return;
+		}
+		
+		
+    }
 
 }
