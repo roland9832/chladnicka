@@ -20,7 +20,7 @@ USE `chladnickatest` ;
 DROP TABLE IF EXISTS `chladnickatest`.`diet` ;
 
 CREATE TABLE IF NOT EXISTS `chladnickatest`.`diet` (
-  `diet_id` INT NOT NULL,
+  `diet_id` INT NOT NULL AUTO_INCREMENT,
   `diet_name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`diet_id`))
 ENGINE = InnoDB;

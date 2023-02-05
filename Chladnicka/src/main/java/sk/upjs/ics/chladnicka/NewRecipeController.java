@@ -1,5 +1,6 @@
 package sk.upjs.ics.chladnicka;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,8 +9,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.ListView;
@@ -191,6 +197,41 @@ public class NewRecipeController {
 		recipeDao.save(recipe, ingredientMap, ingredientToSave);
 		
 		ingredientsListView.getScene().getWindow().hide();
+	}
+	@FXML
+    void addDietButton(ActionEvent event) {
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddDiet.fxml"));
+			AddDietController controller = new AddDietController();
+			fxmlLoader.setController(controller);
+			Parent parent = fxmlLoader.load();
+			Scene scene = new Scene(parent);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle("Add Diet");
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.showAndWait();
+			dietModel.clear();
+			List<Diet> tempList = dietDao.getAll();
+			dietModel.addAll(tempList);
+			dietComboBox.setItems(dietModel);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+	
+	@FXML
+    void removeFromRecipe(ActionEvent event) {
+		Ingredient selectedIngredient = ingredientsListView.getSelectionModel().getSelectedItem();
+	if(selectedIngredient != null) {
+		ingredientsToSave.remove(selectedIngredient);
+		ingredientMap.remove(selectedIngredient);
+	}
+	ingredientsListView.setItems(ingredientsToSave);
+	
+	
+	
 	}
 
 }

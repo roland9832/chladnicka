@@ -32,6 +32,7 @@ public class AddDietController {
     	Diet diet = new Diet();
     	diet.setName(name);
     	dietDao.save(diet);
+    	dietTextField.getScene().getWindow().hide();
     }
     
 }

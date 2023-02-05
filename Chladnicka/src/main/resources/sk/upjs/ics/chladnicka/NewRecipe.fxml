@@ -17,18 +17,18 @@
             <Font size="19.0" />
          </font>
       </TextField>
-      <Label layoutX="28.0" layoutY="270.0" prefHeight="17.0" prefWidth="167.0" text="Ingredients:">
+      <Label layoutX="27.0" layoutY="258.0" prefHeight="17.0" prefWidth="167.0" text="Ingredients:">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextArea fx:id="stepsTextArea" layoutX="28.0" layoutY="425.0" prefHeight="183.0" prefWidth="553.0" />
-      <Label layoutX="27.0" layoutY="402.0" prefHeight="17.0" prefWidth="167.0" text="Steps:">
+      <TextArea fx:id="stepsTextArea" layoutX="28.0" layoutY="414.0" prefHeight="183.0" prefWidth="553.0" />
+      <Label layoutX="27.0" layoutY="394.0" prefHeight="17.0" prefWidth="167.0" text="Steps:">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Button fx:id="createButton" layoutX="475.0" layoutY="613.0" mnemonicParsing="false" onAction="#createButton" prefHeight="26.0" prefWidth="106.0" text="Vytvoriť" />
-      <ListView fx:id="ingredientsListView" layoutX="27.0" layoutY="292.0" prefHeight="109.0" prefWidth="553.0" />
-      <Button layoutX="32.0" layoutY="237.0" mnemonicParsing="false" onAction="#addToRecipe" prefHeight="26.0" prefWidth="158.0" text="Add Ingredient To Recipe" />
+      <Button fx:id="createButton" layoutX="475.0" layoutY="613.0" mnemonicParsing="false" onAction="#createButton" prefHeight="26.0" prefWidth="106.0" text="Save" />
+      <ListView fx:id="ingredientsListView" layoutX="28.0" layoutY="278.0" prefHeight="109.0" prefWidth="553.0" />
+      <Button layoutX="32.0" layoutY="223.0" mnemonicParsing="false" onAction="#addToRecipe" prefHeight="26.0" prefWidth="158.0" text="Add Ingredient To Recipe" />
       <ComboBox fx:id="ingredientComboBox" layoutX="163.0" layoutY="111.0" prefHeight="26.0" prefWidth="138.0" />
       <TextField fx:id="quantityField" layoutX="163.0" layoutY="153.0" prefHeight="26.0" prefWidth="138.0" />
       <Label layoutX="40.0" layoutY="115.0" prefHeight="17.0" prefWidth="106.0" text="Ingredient name:">
@@ -42,17 +42,19 @@
          </font>
       </Label>
       <Line endX="-46.5" endY="91.0" layoutX="429.0" layoutY="166.0" startX="-46.5" startY="-61.0" />
-      <Label layoutX="397.0" layoutY="124.0" prefHeight="18.0" prefWidth="138.0" text="Calories:">
+      <Label layoutX="397.0" layoutY="114.0" prefHeight="18.0" prefWidth="138.0" text="Calories:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="caloriesField" layoutX="395.0" layoutY="150.0" />
-      <Label layoutX="397.0" layoutY="206.0" prefHeight="18.0" prefWidth="138.0" text="Diet:">
+      <TextField fx:id="caloriesField" layoutX="394.0" layoutY="134.0" prefHeight="26.0" prefWidth="147.0" />
+      <Label layoutX="397.0" layoutY="167.0" prefHeight="18.0" prefWidth="138.0" text="Diet:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="dietComboBox" layoutX="395.0" layoutY="235.0" prefHeight="26.0" prefWidth="160.0" />
+      <ComboBox fx:id="dietComboBox" layoutX="395.0" layoutY="187.0" prefHeight="26.0" prefWidth="160.0" />
+      <Button layoutX="394.0" layoutY="223.0" mnemonicParsing="false" onAction="#addDietButton" prefHeight="27.0" prefWidth="128.0" text="Add Diet" />
+      <Button layoutX="204.0" layoutY="223.0" mnemonicParsing="false" onAction="#removeFromRecipe" prefHeight="26.0" prefWidth="158.0" text="Remove Ingredient" />
    </children>
 </AnchorPane>

@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
-
 public class MysqlDietDao implements DietDao {
 
 	private JdbcTemplate jdbcTemplate;
@@ -39,19 +38,28 @@ public class MysqlDietDao implements DietDao {
 //		}
 //	}
 
+	public Diet getByID(long id) {
+		String sql = "SELECT diet_id, diet_name FROM diet WHERE diet_id = " + id;
+		try {
+			return jdbcTemplate.queryForObject(sql, new DietRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			throw new NoSuchElementException("Allergie with id " + id + " not in DB");
+		}
+	}
+
 	public void save(Diet diet) {
 		if (diet == null) {
 			throw new NullPointerException("Cannot save null Favourite");
 		}
 		if (diet.getId() == null) {
-						SimpleJdbcInsert saveInsert = new SimpleJdbcInsert(jdbcTemplate);
+			SimpleJdbcInsert saveInsert = new SimpleJdbcInsert(jdbcTemplate);
 			saveInsert.withTableName("diet");
 			saveInsert.usingColumns("diet_name");
 			saveInsert.usingGeneratedKeyColumns("diet_id");
 			Map<String, Object> values = new HashMap<>();
 			values.put("diet_name", diet.getName());
-			long id = saveInsert.executeAndReturnKey(values).longValue();
-		
+			saveInsert.executeAndReturnKey(values).longValue();
+
 		} else {
 			String sql = "UPDATE diet SET diet_name=?" + "WHERE id=?";
 			int updated = jdbcTemplate.update(sql, diet.getName(), diet.getId());
@@ -63,23 +71,13 @@ public class MysqlDietDao implements DietDao {
 		}
 	}
 
-	public Diet getByID(long id) {
-		String sql = "SELECT diet_id, diet_name FROM diet WHERE diet_id = " + id;
-		try {
-			return jdbcTemplate.queryForObject(sql, new DietRowMapper());
-		} catch (EmptyResultDataAccessException e) {
-			throw new NoSuchElementException("Allergie with id " + id + " not in DB");
-		}
-	}
-	
 	@Override
 	public boolean delete(long id) throws EntityUndeletableException {
 		int changed;
 		try {
 			changed = jdbcTemplate.update("DELETE FROM diet WHERE id = " + id);
 		} catch (DataIntegrityViolationException e) {
-			throw new EntityUndeletableException(
-				"Diet with id " + id + " is part of some recipe, cannot be deleted");
+			throw new EntityUndeletableException("Diet with id " + id + " is part of some recipe, cannot be deleted");
 		}
 		return changed == 1;
 	}
@@ -93,6 +91,5 @@ public class MysqlDietDao implements DietDao {
 			return diet;
 		}
 	}
-
 
 }

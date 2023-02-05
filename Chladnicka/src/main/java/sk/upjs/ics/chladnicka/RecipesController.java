@@ -90,6 +90,9 @@ public class RecipesController {
 		items = FXCollections.observableArrayList(diets);
 		diet.setItems(items);
 		diet.getSelectionModel();
+		List<Recipe> recipes = recipeDao.getAll();
+		item = FXCollections.observableArrayList(recipes);
+		recipesListView.setItems(item);
 	}
 
 	@FXML
@@ -105,6 +108,12 @@ public class RecipesController {
 			stage.setTitle("Recipes");
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.showAndWait();
+			item.clear();
+			List<Recipe> tempList = recipeDao.getAll();
+			item.addAll(tempList);
+			recipesListView.setItems(item);
+			
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -192,28 +201,15 @@ public class RecipesController {
 			}
 		}
 		recipes.remove(selectedRecipe);
-		this.recipes = recipes;
-		listView = FXCollections.observableArrayList(this.recipes);
-		recipesListView.setItems(listView);
+		item.clear();
+		List<Recipe> tempList = recipeDao.getAll();
+		item.addAll(tempList);
+		recipesListView.setItems(item);
 
 	}
 
-	@FXML
-	void addDietButton(ActionEvent event) {
-		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddDiet.fxml"));
-			AddDietController controller = new AddDietController();
-			fxmlLoader.setController(controller);
-			Parent parent = fxmlLoader.load();
-			Scene scene = new Scene(parent);
-			Stage stage = new Stage();
-			stage.setScene(scene);
-			stage.setTitle("Add Diet");
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.showAndWait();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	 @FXML
+	    void editRecipeButton(ActionEvent event) {
+
+	    }
 }
