@@ -117,8 +117,10 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `chladnicka`.`favourite` ;
 
 CREATE TABLE IF NOT EXISTS `chladnicka`.`favourite` (
+  `favourite_id` INT NOT NULL AUTO_INCREMENT,
   `hodnotenie` INT NOT NULL,
   `recipe_recipe_id` INT NOT NULL,
+  PRIMARY KEY (`favourite_id`),
   INDEX `fk_favourite_recipe1_idx` (`recipe_recipe_id` ASC) VISIBLE,
   CONSTRAINT `fk_favourite_recipe1`
     FOREIGN KEY (`recipe_recipe_id`)

@@ -16,8 +16,13 @@ public class Favourite {
 		this.hodnotenie = hodnotenie;
 	}
 
-	public Favourite(Recipe recipe, int hodnotenie) {
-		this.id = recipe.getId();
+	public Favourite(Long id, Recipe recipe, int hodnotenie) {
+		this.id = id;
+		this.recipe = recipe;
+		this.hodnotenie = hodnotenie;
+	}
+	
+	public Favourite( Recipe recipe, int hodnotenie) {
 		this.recipe = recipe;
 		this.hodnotenie = hodnotenie;
 	}

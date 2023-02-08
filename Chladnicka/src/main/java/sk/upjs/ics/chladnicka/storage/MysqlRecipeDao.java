@@ -144,8 +144,7 @@ public class MysqlRecipeDao implements RecipeDao {
 				System.out.println(sql);
 				jdbcTemplate.update(sql);
 			}
-			
-		}	
+		}
 	}
 	
 	@Override

@@ -117,8 +117,10 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `chladnickatest`.`favourite` ;
 
 CREATE TABLE IF NOT EXISTS `chladnickatest`.`favourite` (
+  `favourite_id` INT NOT NULL AUTO_INCREMENT,
   `hodnotenie` INT NOT NULL,
   `recipe_recipe_id` INT NOT NULL,
+  PRIMARY KEY (`favourite_id`),
   INDEX `fk_favourite_recipe1_idx` (`recipe_recipe_id` ASC) VISIBLE,
   CONSTRAINT `fk_favourite_recipe1`
     FOREIGN KEY (`recipe_recipe_id`)
@@ -204,6 +206,7 @@ INSERT INTO `chladnickatest`.`recipe_has_ingredient` (`recipe_recipe_id`, `ingre
 INSERT INTO `chladnickatest`.`recipe_has_ingredient` (`recipe_recipe_id`, `ingredient_ingredient_id`, `recipe_amount`) VALUES ('2', '5', '5');
 
 
+INSERT INTO `chladnickatest`.`favourite` (`favourite_id`, `hodnotenie`, `recipe_recipe_id`) VALUES ('1', '5', '1');
 
-INSERT INTO `chladnickatest`.`favourite` (`hodnotenie`, `recipe_recipe_id`) VALUES ('5', '1');
+
 

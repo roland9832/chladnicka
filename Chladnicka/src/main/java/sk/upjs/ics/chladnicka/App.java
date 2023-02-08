@@ -1,8 +1,11 @@
 package sk.upjs.ics.chladnicka;
 
+import java.util.List;
+
 import sk.upjs.ics.chladnicka.storage.AllergieDao;
 import sk.upjs.ics.chladnicka.storage.DaoFactory;
 import sk.upjs.ics.chladnicka.storage.DietDao;
+import sk.upjs.ics.chladnicka.storage.Favourite;
 import sk.upjs.ics.chladnicka.storage.FavouriteDao;
 import sk.upjs.ics.chladnicka.storage.Ingredient;
 import sk.upjs.ics.chladnicka.storage.IngredientDao;
@@ -35,7 +38,7 @@ public class App {
 		
 		
 		Recipe recipe = new Recipe();
-		Long a = (long) 1;
+		Long a = (long) 2;
 		recipe.setId(a);
 //		List<Ingredient> Ringredient = ingredientDao.getByRecipe(recipe);
 //		System.out.println(Ringredient);
@@ -57,6 +60,9 @@ public class App {
 //		System.out.println(favourites);
 //		Favourite favourite = favouriteDao.getByRecipe(recipe);
 //		System.out.println(favourite);
+		Favourite b = new Favourite();
+		
+		
 		
 //		System.out.println(recipeDao.getAmountByRecipe(recipe));
 //		Favourite favourite = new Favourite(recipeDao.getByID(2), 5);
@@ -65,15 +71,15 @@ public class App {
 		Ingredient ingredient = new Ingredient(); 
 		
 		Long c = (long) 10;
-		ingredient.setName("cukor");
-		ingredient.setQuantity_fridge(800);
-		ingredient.setAlergie(allergieDao.getByID(13));
-		ingredient.setMeasure(measureDao.getByID(1));
+//		ingredient.setName("cukor");
+//		ingredient.setQuantity_fridge(800);
+//		ingredient.setAlergie(allergieDao.getByID(13));
+//		ingredient.setMeasure(measureDao.getByID(1));
 //		ingredientDao.save(ingredient);
-		Ingredient ingredient2 = ingredient;
-		ingredient2.setId(c);
-		ingredient2.setQuantity_fridge(500);
-		ingredientDao.save(ingredient2);
+//		Ingredient ingredient2 = ingredient;
+//		ingredient2.setId(c);
+//		ingredient2.setQuantity_fridge(500);
+//		ingredientDao.save(ingredient2);
 		
 		
 	}

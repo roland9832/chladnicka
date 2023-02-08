@@ -6,6 +6,8 @@ public interface FavouriteDao {
 	List<Favourite> getAll();
 
 	Favourite getByRecipe(Recipe recipe);
+	
+	Favourite getByID(long id);
 
 	void save(Favourite favourite);
 

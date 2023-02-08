@@ -41,16 +41,8 @@ public class RecipesController {
 
 	private ObservableList<Diet> items;
 
-	private ObservableList<Ingredient> ingredients;
-
-	private List<Recipe> selectedRecipes;
-
 	private List<Recipe> selectedByIngredient;
 	private List<Recipe> selectedByDiet;
-
-	private List<Recipe> recipes;
-
-	private List<Diet> selectedDiets;
 
 	private ObservableList<Recipe> item;
 
