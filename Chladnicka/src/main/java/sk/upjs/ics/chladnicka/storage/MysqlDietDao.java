@@ -47,7 +47,7 @@ public class MysqlDietDao implements DietDao {
 		}
 	}
 
-	public void save(Diet diet) {
+	public Diet save(Diet diet) {
 		if (diet == null) {
 			throw new NullPointerException("Cannot save null Favourite");
 		}
@@ -58,13 +58,14 @@ public class MysqlDietDao implements DietDao {
 			saveInsert.usingGeneratedKeyColumns("diet_id");
 			Map<String, Object> values = new HashMap<>();
 			values.put("diet_name", diet.getName());
-			saveInsert.executeAndReturnKey(values).longValue();
+			long id = saveInsert.executeAndReturnKey(values).longValue();
+			return new Diet(id, diet.getName());
 
 		} else {
 			String sql = "UPDATE diet SET diet_name=?" + "WHERE id=?";
 			int updated = jdbcTemplate.update(sql, diet.getName(), diet.getId());
 			if (updated == 1) {
-				return;
+				return diet;
 			} else {
 				throw new NoSuchElementException("No diet with id " + diet.getId() + " in DB");
 			}
@@ -75,7 +76,7 @@ public class MysqlDietDao implements DietDao {
 	public boolean delete(long id) throws EntityUndeletableException {
 		int changed;
 		try {
-			changed = jdbcTemplate.update("DELETE FROM diet WHERE id = " + id);
+			changed = jdbcTemplate.update("DELETE FROM diet WHERE diet_id = " + id);
 		} catch (DataIntegrityViolationException e) {
 			throw new EntityUndeletableException("Diet with id " + id + " is part of some recipe, cannot be deleted");
 		}

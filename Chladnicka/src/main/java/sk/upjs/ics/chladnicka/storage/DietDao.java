@@ -7,7 +7,7 @@ public interface DietDao {
 
 	Diet getByID(long id);
 	
-	void save(Diet diet);
+	Diet save(Diet diet);
 
 //	Diet getByName(String name);
 

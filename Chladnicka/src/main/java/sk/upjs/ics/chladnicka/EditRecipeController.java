@@ -1,11 +1,13 @@
 package sk.upjs.ics.chladnicka;
-import java.util.List;
+import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -28,6 +30,9 @@ public class EditRecipeController {
 	private DietDao dietDao = DaoFactory.INSTANCE.getDietDao();
 
 	private RecipeDao recipeDao = DaoFactory.INSTANCE.getRecipeDao();
+	
+	private ObservableList<Ingredient> selectedIngredientModel = FXCollections
+			.observableArrayList(new ArrayList<Ingredient>());
 
     @FXML
     private TextField caloriesField;
@@ -47,8 +52,9 @@ public class EditRecipeController {
     @FXML
     private TextField quantityField;
 
+    
     @FXML
-    private TextField recipeNameField;
+    private Label recipeLable;
 
     @FXML
     private TextArea stepsTextArea;
@@ -59,8 +65,9 @@ public class EditRecipeController {
     }
     
     void initialize() {
-    	recipeNameField.setText(recipe.getRecipe_name());
-    	stepsTextArea.setText(recipe.getDescription());
+    	System.out.println(recipe.getRecipe_name());
+//    	recipeLable.setText(recipe.getRecipe_name());
+//    	stepsTextArea.setText(recipe.getDescription());
     	
     }
     

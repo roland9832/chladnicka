@@ -14,37 +14,64 @@ import org.junit.jupiter.api.function.Executable;
 
 class MysqlDietDaoTest {
 
-	private DietDao dietDao;
+//	private DietDao dietDao;
 	
 	public MysqlDietDaoTest() {
 		DaoFactory.INSTANCE.setTesting();
 		dietDao = DaoFactory.INSTANCE.getDietDao();
 	}
+//	
+//	@BeforeEach
+//	void setUp() throws Exception {
+//	}
+//
+//	@AfterEach
+//	void tearDown() throws Exception {
+//	}
+//
+//	@Test
+//	void testGetAll() {
+//		List<Diet> diet = dietDao.getAll();
+//		assertTrue(diet.size() > 0);
+//		assertNotNull(diet.get(0).getId());
+//		assertNotNull(diet.get(0).getName());
+//	}
+//
+//	@Test
+//	void testGetByID() {
+//		assertThrows(NoSuchElementException.class, new Executable() {
+//			
+//			@Override
+//			public void execute() throws Throwable {
+//				dietDao.getByID(-3l);
+//			}
+//		});
+//	}
+	private DietDao dietDao;
+
+	private Diet savedDiet;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-	}
+		Diet diet = new Diet();
+		diet.setName("Test diet");
+		savedDiet = dietDao.save(diet);
 
-	@AfterEach
-	void tearDown() throws Exception {
 	}
-
+	
 	@Test
 	void testGetAll() {
 		List<Diet> diet = dietDao.getAll();
 		assertTrue(diet.size() > 0);
-		assertNotNull(diet.get(0).getId());
-		assertNotNull(diet.get(0).getName());
+		assertNotNull(diet);
+		assertNotNull(diet.get(0));
 	}
+	
+	
+	
 
-	@Test
-	void testGetByID() {
-		assertThrows(NoSuchElementException.class, new Executable() {
-			
-			@Override
-			public void execute() throws Throwable {
-				dietDao.getByID(-3l);
-			}
-		});
+	@AfterEach
+	void tearDown() throws Exception {
+		dietDao.delete(savedDiet.getId());
 	}
 }

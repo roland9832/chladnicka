@@ -66,7 +66,7 @@ public class EditIngredientController {
 
 	@FXML
 	void editButton(ActionEvent event) {
-		
+	
 		Ingredient ingredient = new Ingredient();
 		ingredient.setId(this.ingredient.getId());
 		ingredient.setName(this.ingredient.getName());

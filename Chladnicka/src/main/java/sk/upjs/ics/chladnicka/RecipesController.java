@@ -204,6 +204,8 @@ public class RecipesController {
 		Recipe selectedRecipe = recipesListView.getSelectionModel().getSelectedItem();
 		if (recipesListView.getSelectionModel().getSelectedItem() != null) {
 			try {
+				
+				System.out.println(selectedRecipe);
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditRecipe.fxml"));
 				EditRecipeController controller4 = new EditRecipeController(selectedRecipe);
 				fxmlLoader.setController(controller4);
