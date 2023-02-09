@@ -145,6 +145,29 @@ public class MysqlRecipeDao implements RecipeDao {
 				jdbcTemplate.update(sql);
 			}
 		}
+		else {
+			String sql = "UPDATE recipe set recipe_name= ?, calorific_value= ?, description= ?, diet_diet_id= ?"
+					+ " where recipe_id = ? ";
+			jdbcTemplate.update(sql, recipe.getRecipe_name(), recipe.getCalorific(), recipe.getDescription(), recipe.getDiet().getId(), recipe.getId());
+			try {
+				jdbcTemplate.update("DELETE FROM recipe_has_ingredient WHERE recipe_recipe_id = " + recipe.getId());
+			} catch (DataIntegrityViolationException e) {
+				throw new EntityUndeletableException("Recipe with id: " + recipe.getId()
+						+ "Favourite is already in use");
+			}
+			for (Ingredient ingredient : ingredients) {
+				StringBuilder sb = new StringBuilder();
+				sb.append("INSERT INTO recipe_has_ingredient (recipe_recipe_id, ingredient_ingredient_id, recipe_amount) VALUES ");
+				sb.append("(").append(recipe.getId());
+				sb.append(" , ").append(ingredient.getId());
+				sb.append(" , ").append(ingredientMap.get(ingredient));
+				sb.append(")");
+				System.out.println(sb.toString());
+				String sql1 = sb.substring(0,sb.length());
+				System.out.println(sql1);
+				jdbcTemplate.update(sql1);
+			}
+		}
 	}
 	
 	@Override

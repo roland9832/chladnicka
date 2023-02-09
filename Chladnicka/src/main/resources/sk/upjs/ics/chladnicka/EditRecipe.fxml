@@ -12,11 +12,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="600.0" stylesheets="@recipe.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="recipeLable" layoutX="95.0" layoutY="25.0" prefHeight="50.0" prefWidth="420.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
       <TextArea fx:id="stepsTextArea" layoutX="28.0" layoutY="414.0" prefHeight="183.0" prefWidth="553.0" />
       <Label layoutX="27.0" layoutY="394.0" prefHeight="17.0" prefWidth="167.0" text="Steps:">
          <font>
@@ -53,5 +48,10 @@
       <ComboBox fx:id="dietComboBox" layoutX="395.0" layoutY="187.0" prefHeight="26.0" prefWidth="160.0" />
       <Button layoutX="394.0" layoutY="223.0" mnemonicParsing="false" onAction="#addDietButton" prefHeight="27.0" prefWidth="128.0" text="Add Diet" />
       <Button layoutX="204.0" layoutY="223.0" mnemonicParsing="false" onAction="#removeFromRecipe" prefHeight="26.0" prefWidth="158.0" text="Remove Ingredient" />
+      <TextField fx:id="nameTextField" alignment="CENTER" layoutX="119.0" layoutY="24.0" prefHeight="62.0" prefWidth="371.0">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

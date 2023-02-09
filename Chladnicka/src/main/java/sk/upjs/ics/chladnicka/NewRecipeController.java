@@ -135,11 +135,6 @@ public class NewRecipeController {
 	}
 
 	@FXML
-	void addToStock(ActionEvent event) {
-
-	}
-
-	@FXML
 	void createButton(ActionEvent event) {
 		String name;
 		double calories;
