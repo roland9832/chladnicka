@@ -99,6 +99,15 @@ public class MysqlFavouriteDao implements FavouriteDao {
 			values.put("recipe_recipe_id", favourite.getRecipe().getId());
 			long id = saveInsert.executeAndReturnKey(values).longValue();
 		}
+		else {
+			String sql = "UPDATE favourite SET hodnotenie= ?, recipe_recipe_id= ?"
+					+" WHERE favourite_id = ? ";
+			int updated = jdbcTemplate.update(sql, favourite.getHodnotenie(), favourite.getRecipe().getId(), favourite.getId());
+			if (updated == 1) {
+			} else {
+				throw new NoSuchElementException("Ingredient with id: " + favourite.getId() + " not in DB.");
+			}
+		}
 	
 	}
 

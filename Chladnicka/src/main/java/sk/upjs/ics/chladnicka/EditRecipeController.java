@@ -1,6 +1,5 @@
 package sk.upjs.ics.chladnicka;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,14 +12,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DialogPane;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sk.upjs.ics.chladnicka.storage.DaoFactory;
@@ -115,9 +113,9 @@ public class EditRecipeController {
     	
     	
     	
-    	
+    	stepsTextArea.setWrapText(true);
     	stepsTextArea.setText(recipe.getDescription());
-    	StringBuilder sb = new StringBuilder(); 
+    
     	
 
     }
