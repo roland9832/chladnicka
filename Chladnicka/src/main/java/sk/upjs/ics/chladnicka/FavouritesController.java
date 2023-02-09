@@ -89,7 +89,17 @@ public class FavouritesController {
 	@FXML
     void showFavoritesButton(ActionEvent event) {
 		Favourite favourite = favouriteListView.getSelectionModel().getSelectedItem();
+		
+		
 		try {
+			if(favourite == null) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setContentText("Need to select recipe to show");
+				dialog = alert.getDialogPane();
+				dialog.getStyleClass().add("dialog");
+				alert.show();
+				return;
+			}
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ShowRecipe.fxml"));
 			ShowRecipeController controller5 = new ShowRecipeController(favourite.getRecipe());
 			fxmlLoader.setController(controller5);

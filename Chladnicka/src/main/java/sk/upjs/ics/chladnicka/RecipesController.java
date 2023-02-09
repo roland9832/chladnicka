@@ -104,8 +104,7 @@ public class RecipesController {
 			List<Recipe> tempList = recipeDao.getAll();
 			item.addAll(tempList);
 			recipesListView.setItems(item);
-			
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -168,7 +167,7 @@ public class RecipesController {
 			stage.showAndWait();
 			ingredientsComboBox.getSelectionModel().clearSelection();
 			diet.getSelectionModel().clearSelection();
-			recipesListView.setItems(clear);
+//			recipesListView.setItems(clear);
 		} catch (IOException e) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setContentText("Need to select recipe to show");
@@ -200,8 +199,30 @@ public class RecipesController {
 
 	}
 
-	 @FXML
-	    void editRecipeButton(ActionEvent event) {
+	@FXML
+	void editRecipeButton(ActionEvent event) {
+		Recipe selectedRecipe = recipesListView.getSelectionModel().getSelectedItem();
+		if (recipesListView.getSelectionModel().getSelectedItem() != null) {
+			try {
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditRecipe.fxml"));
+				EditRecipeController controller4 = new EditRecipeController(selectedRecipe);
+				fxmlLoader.setController(controller4);
+				Parent parent = fxmlLoader.load();
+				Scene scene = new Scene(parent);
+				Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.setTitle("Recipes");
+				stage.initModality(Modality.APPLICATION_MODAL);
+				stage.showAndWait();
+				item.clear();
+				List<Recipe> tempList = recipeDao.getAll();
+				item.addAll(tempList);
+				recipesListView.setItems(item);
 
-	    }
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 }
