@@ -66,75 +66,27 @@ class MysqlDietDaoTest {
 		assertEquals(diet.getName(), saved.getName());
 		dietDao.delete(saved.getId());
 		assertThrows(NullPointerException.class,
-				() -> dietDao.save(new Diet()),"Diet name cannot be null");
+				() -> dietDao.save(new Diet(-1L,null)),"Diet name cannot be null");
 
 	}
-
+	
 	@Test
-	void testUpdate() {
-		assertThrows(NullPointerException.class, () -> dietDao.save(null), "Cannot save null");
-		Diet diet = new Diet();
-		diet.setName("New diet");
+	void updateTest() {
+		Diet updated = new Diet(savedDiet.getId(), "Changed name");
 		int size = dietDao.getAll().size();
-		Diet saved = dietDao.save(diet);
-		assertEquals(size + 1 , dietDao.getAll().size());
-		assertNotNull(saved.getId());
-		assertEquals(diet.getName(), saved.getName());
-		dietDao.delete(saved.getId());
-		assertThrows(NullPointerException.class,
-				() -> dietDao.save(new Diet()),"Diet name cannot be null");
+		dietDao.save(updated);
+		assertEquals(size, dietDao.getAll().size());
 
+		Diet fromDb = dietDao.getByID(savedDiet.getId());
+
+		assertEquals(updated.getId(), fromDb.getId());
+		assertEquals(updated.getName(), fromDb.getName());
+		assertThrows(NoSuchElementException.class,
+				()->dietDao.save(new Diet(-1L, "Changed")));
 	}
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//	@Test
-//	void updateTest() {
-//		Diet updated = new Diet(savedDiet.getId(), "Changed name");
-//		int size = dietDao.getAll().size();
-//		dietDao.save(updated);
-//		assertEquals(size, dietDao.getAll().size());
-//
-//		Diet fromDb = dietDao.getByID(savedDiet.getId());
-//
-//		assertEquals(updated.getId(), fromDb.getId());
-//		assertEquals(updated.getName(), fromDb.getName());
-//		assertThrows(NoSuchElementException.class,
-//				()->dietDao.save(new Diet(-1L, "Changed")));
-//	}
+
 
 
 }

@@ -51,6 +51,9 @@ public class MysqlDietDao implements DietDao {
 		if (diet == null) {
 			throw new NullPointerException("Cannot save null Favourite");
 		}
+		if (diet.getName() == null) {
+			throw new NullPointerException("Cannot save null Favourite");
+		}
 		if (diet.getId() == null) {
 			SimpleJdbcInsert saveInsert = new SimpleJdbcInsert(jdbcTemplate);
 			saveInsert.withTableName("diet");
@@ -62,7 +65,7 @@ public class MysqlDietDao implements DietDao {
 			return new Diet(id, diet.getName());
 
 		} else {
-			String sql = "UPDATE diet SET diet_name= ?" + " WHERE id= ? ";
+			String sql = "UPDATE diet SET diet_name= ?" + " WHERE diet_id= ? ";
 			int updated = jdbcTemplate.update(sql, diet.getName(), diet.getId());
 			if (updated == 1) {
 				return diet;
