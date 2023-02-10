@@ -133,6 +133,22 @@ public class MysqlRecipeDaoTest {
         assertThrows(NullPointerException.class,
                 () -> recipeDao.save(new Recipe(null, 0, null, null), null, null),"Recipe cannot be null");
     }
+    
+    @Test
+    void updateTest() {
+        Map<Ingredient, Double> ingredientMap = new HashMap<>();
+        List<Ingredient> ingredientToSave = new ArrayList<>();
+        Recipe updated = new Recipe(savedRecipe.getId(), "Test Recipe", 0, "Test", savedDiet);
+        int size = recipeDao.getAll().size();
+        recipeDao.save(updated, ingredientMap,  ingredientToSave);
+        assertEquals(size, recipeDao.getAll().size());
+        Recipe fromDb = recipeDao.getByID(savedRecipe.getId());
+        assertEquals(updated.getId(), fromDb.getId());
+        assertEquals(updated.getRecipe_name(), fromDb.getRecipe_name());
+        Recipe recipe2 = new Recipe(-1L, "Changed", 0, "Changed Test Descriptiton", savedDiet);
+        assertThrows(NoSuchElementException.class,
+                ()->recipeDao.save(recipe2, ingredientMap, ingredientToSave));
+    }
 }
 
 

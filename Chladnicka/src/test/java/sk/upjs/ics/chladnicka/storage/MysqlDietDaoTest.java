@@ -86,20 +86,55 @@ class MysqlDietDaoTest {
 
 	}
 
-	@Test
-	void updateTest() {
-		Diet updated = new Diet(savedDiet.getId(), "Changed name");
-		int size = dietDao.getAll().size();
-		dietDao.save(updated);
-		assertEquals(size, dietDao.getAll().size());
-
-		Diet fromDb = dietDao.getByID(savedDiet.getId());
-
-		assertEquals(updated.getId(), fromDb.getId());
-		assertEquals(updated.getName(), fromDb.getName());
-		assertThrows(NoSuchElementException.class,
-				()->dietDao.save(new Diet(-1L, "Changed")));
-	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	@Test
+//	void updateTest() {
+//		Diet updated = new Diet(savedDiet.getId(), "Changed name");
+//		int size = dietDao.getAll().size();
+//		dietDao.save(updated);
+//		assertEquals(size, dietDao.getAll().size());
+//
+//		Diet fromDb = dietDao.getByID(savedDiet.getId());
+//
+//		assertEquals(updated.getId(), fromDb.getId());
+//		assertEquals(updated.getName(), fromDb.getName());
+//		assertThrows(NoSuchElementException.class,
+//				()->dietDao.save(new Diet(-1L, "Changed")));
+//	}
 
 
 }

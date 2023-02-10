@@ -62,7 +62,7 @@ public class MysqlDietDao implements DietDao {
 			return new Diet(id, diet.getName());
 
 		} else {
-			String sql = "UPDATE diet SET diet_name=?" + "WHERE id=?";
+			String sql = "UPDATE diet SET diet_name= ?" + " WHERE id= ? ";
 			int updated = jdbcTemplate.update(sql, diet.getName(), diet.getId());
 			if (updated == 1) {
 				return diet;
