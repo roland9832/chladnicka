@@ -80,15 +80,6 @@ public class MysqlFavouriteDao implements FavouriteDao {
 		if (favourite.getRecipe() == null) {
 			throw new NullPointerException("Cannot save null Recipe");
 		}
-//		StringBuilder sb = new StringBuilder();
-//		sb.append("INSERT INTO favourite (hodnotenie, recipe_recipe_id) VALUES ");
-//		sb.append("(").append(favourite.getHodnotenie());
-//		sb.append(",").append(favourite.getRecipe().getId());
-//		sb.append(")");
-//		System.out.println(sb.toString());
-//		String sql = sb.substring(0, sb.length());
-//		System.out.println(sql);
-//		jdbcTemplate.update(sql);
 		if(favourite.getId() == null) {
 			SimpleJdbcInsert saveInsert = new SimpleJdbcInsert(jdbcTemplate);
 			saveInsert.withTableName("favourite");

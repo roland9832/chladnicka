@@ -178,6 +178,7 @@ public class EditRecipeController {
 		
 	
 		recipeDao.save(recipe, ingredientMap, ingredientToSave);
+		ingredientsListView.getScene().getWindow().hide();
     }
 
     @FXML
