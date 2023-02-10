@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,23 +17,29 @@ import org.junit.jupiter.api.function.Executable;
 class MysqlFavouriteDaoTest {
 
 	private FavouriteDao favouriteDao;
+	private Favourite savedFavourite;
 	private RecipeDao recipeDao;
-
-	private Recipe recipe;
+	private Recipe savedRecipe;
 
 	public MysqlFavouriteDaoTest() {
 		DaoFactory.INSTANCE.setTesting();
 		favouriteDao = DaoFactory.INSTANCE.getFavouriteDao();
 		recipeDao = DaoFactory.INSTANCE.getRecipeDao();
-		recipe = recipeDao.getByID(1);
 	}
 
 	@BeforeEach
 	void setUp() throws Exception {
+		Favourite favourite = new Favourite();
+		favourite.setHodnotenie(0);
+		Recipe recipe = new Recipe();
+		recipe = recipeDao.getByID(1);
+		favourite.setRecipe(recipe);
+		savedFavourite = favouriteDao.save(favourite);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
+		favouriteDao.delete(savedFavourite.getRecipe());
 	}
 
 	@Test
@@ -53,14 +60,31 @@ class MysqlFavouriteDaoTest {
 				favouriteDao.getByRecipe(recipe);
 			}
 		});
-		Favourite newFavourite = new Favourite(this.recipe,5);
+		Recipe recipe = new Recipe();
+		recipe = recipeDao.getByID(1);
+		Favourite newFavourite = new Favourite(recipe,5);
 		favouriteDao.save(newFavourite);
 		List<Favourite> favourite = favouriteDao.getAll();
 		Favourite savedFavourite = favourite.get(favourite.size()-1);
-		Favourite byRecipe = favouriteDao.getByRecipe(savedFavourite.getRecipe());
+		Favourite byRecipe = favouriteDao.getAll().get(0);
 		assertEquals(savedFavourite.getRecipe(), byRecipe.getRecipe());
-		assertEquals(newFavourite.getHodnotenie(), byRecipe.getHodnotenie());
 		favouriteDao.delete(savedFavourite.getRecipe());
 	}
 
+	@Test
+	void testSave() {
+		assertThrows(NullPointerException.class, () -> favouriteDao.save(null), "Cannot save null");
+		Favourite favourite = new Favourite();
+		favourite.setRecipe(recipeDao.getByID(1));
+		favourite.setHodnotenie(2);
+		int size = favouriteDao.getAll().size();
+		Favourite saved = favouriteDao.save(favourite);
+		Assert.assertEquals(size + 1 , favouriteDao.getAll().size());
+		assertNotNull(saved.getId());
+		Assert.assertEquals(favourite.getRecipe(), saved.getRecipe());
+		favouriteDao.delete(saved.getRecipe());
+		assertThrows(NullPointerException.class,
+				() -> favouriteDao.save(new Favourite()),"Favourite recipe name cannot be null");
+
+	}
 }

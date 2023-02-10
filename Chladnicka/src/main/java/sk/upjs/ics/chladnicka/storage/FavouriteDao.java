@@ -9,7 +9,7 @@ public interface FavouriteDao {
 	
 	Favourite getByID(long id);
 
-	void save(Favourite favourite);
+	Favourite save(Favourite favourite);
 
 	boolean delete(Recipe recipe) throws EntityUndeletableException;
 }

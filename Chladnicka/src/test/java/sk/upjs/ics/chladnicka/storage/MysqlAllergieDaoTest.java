@@ -1,8 +1,7 @@
 package sk.upjs.ics.chladnicka.storage;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
@@ -16,6 +15,8 @@ import org.junit.jupiter.api.function.Executable;
 class MysqlAllergieDaoTest {
 
 	private AllergieDao allergieDao;
+
+	private Allergie globalAllergie;
 	
 	
 	public MysqlAllergieDaoTest() {
@@ -25,7 +26,7 @@ class MysqlAllergieDaoTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		
+		globalAllergie = allergieDao.getByID(allergieDao.getAll().size()-1);
 	}
 
 	@AfterEach
@@ -44,12 +45,11 @@ class MysqlAllergieDaoTest {
 
 	@Test
 	void testGetByID() {
-		assertThrows(NoSuchElementException.class, new Executable() {
-			
-			@Override
-			public void execute() throws Throwable {
-				allergieDao.getByID(-1l);	
-			}
-		});
+		Allergie fromDB = allergieDao.getByID(allergieDao.getAll().size()-1);
+		assertEquals(globalAllergie.getId(), fromDB.getId());
+		assertEquals(globalAllergie.getCategory(), fromDB.getCategory());
+		assertEquals(globalAllergie.getClass(), fromDB.getClass());
+		assertEquals(globalAllergie.getCategory(), fromDB.getCategory());
+		assertThrows(NoSuchElementException.class,()->allergieDao.getByID(-1));
 	}
 }

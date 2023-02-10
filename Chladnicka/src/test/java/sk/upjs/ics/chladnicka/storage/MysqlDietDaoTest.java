@@ -11,45 +11,19 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MysqlDietDaoTest {
 
-//	private DietDao dietDao;
+	private DietDao dietDao;
+
+	private Diet savedDiet;
 	
 	public MysqlDietDaoTest() {
 		DaoFactory.INSTANCE.setTesting();
 		dietDao = DaoFactory.INSTANCE.getDietDao();
 	}
-//	
-//	@BeforeEach
-//	void setUp() throws Exception {
-//	}
-//
-//	@AfterEach
-//	void tearDown() throws Exception {
-//	}
-//
-//	@Test
-//	void testGetAll() {
-//		List<Diet> diet = dietDao.getAll();
-//		assertTrue(diet.size() > 0);
-//		assertNotNull(diet.get(0).getId());
-//		assertNotNull(diet.get(0).getName());
-//	}
-//
-//	@Test
-//	void testGetByID() {
-//		assertThrows(NoSuchElementException.class, new Executable() {
-//			
-//			@Override
-//			public void execute() throws Throwable {
-//				dietDao.getByID(-3l);
-//			}
-//		});
-//	}
-	private DietDao dietDao;
-
-	private Diet savedDiet;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -58,7 +32,12 @@ class MysqlDietDaoTest {
 		savedDiet = dietDao.save(diet);
 
 	}
-	
+
+	@AfterEach
+	void tearDown() throws Exception {
+		dietDao.delete(savedDiet.getId());
+	}
+
 	@Test
 	void testGetAll() {
 		List<Diet> diet = dietDao.getAll();
@@ -66,12 +45,61 @@ class MysqlDietDaoTest {
 		assertNotNull(diet);
 		assertNotNull(diet.get(0));
 	}
-	
-	
-	
 
-	@AfterEach
-	void tearDown() throws Exception {
-		dietDao.delete(savedDiet.getId());
+	@Test
+	void testGetByID() {
+		Diet fromDb = dietDao.getByID(savedDiet.getId());
+		assertEquals(savedDiet.getId(), fromDb.getId());
+		assertEquals(savedDiet.getName(), fromDb.getName());
+		assertThrows(NoSuchElementException.class, () -> dietDao.getByID(-1));
 	}
+
+	@Test
+	void testSave() {
+		assertThrows(NullPointerException.class, () -> dietDao.save(null), "Cannot save null");
+		Diet diet = new Diet();
+		diet.setName("New diet");
+		int size = dietDao.getAll().size();
+		Diet saved = dietDao.save(diet);
+		assertEquals(size + 1 , dietDao.getAll().size());
+		assertNotNull(saved.getId());
+		assertEquals(diet.getName(), saved.getName());
+		dietDao.delete(saved.getId());
+		assertThrows(NullPointerException.class,
+				() -> dietDao.save(new Diet()),"Diet name cannot be null");
+
+	}
+
+	@Test
+	void testUpdate() {
+		assertThrows(NullPointerException.class, () -> dietDao.save(null), "Cannot save null");
+		Diet diet = new Diet();
+		diet.setName("New diet");
+		int size = dietDao.getAll().size();
+		Diet saved = dietDao.save(diet);
+		assertEquals(size + 1 , dietDao.getAll().size());
+		assertNotNull(saved.getId());
+		assertEquals(diet.getName(), saved.getName());
+		dietDao.delete(saved.getId());
+		assertThrows(NullPointerException.class,
+				() -> dietDao.save(new Diet()),"Diet name cannot be null");
+
+	}
+
+	@Test
+	void updateTest() {
+		Diet updated = new Diet(savedDiet.getId(), "Changed name");
+		int size = dietDao.getAll().size();
+		dietDao.save(updated);
+		assertEquals(size, dietDao.getAll().size());
+
+		Diet fromDb = dietDao.getByID(savedDiet.getId());
+
+		assertEquals(updated.getId(), fromDb.getId());
+		assertEquals(updated.getName(), fromDb.getName());
+		assertThrows(NoSuchElementException.class,
+				()->dietDao.save(new Diet(-1L, "Changed")));
+	}
+
+
 }

@@ -73,7 +73,7 @@ public class MysqlFavouriteDao implements FavouriteDao {
 		}
 	}
 
-	public void save(Favourite favourite) {
+	public Favourite save(Favourite favourite) {
 		if (favourite == null) {
 			throw new NullPointerException("Cannot save null Favourite");
 		}
@@ -89,12 +89,14 @@ public class MysqlFavouriteDao implements FavouriteDao {
 			values.put("hodnotenie", favourite.getHodnotenie());
 			values.put("recipe_recipe_id", favourite.getRecipe().getId());
 			long id = saveInsert.executeAndReturnKey(values).longValue();
+			return new Favourite(id,favourite.getRecipe(),favourite.getHodnotenie());
 		}
 		else {
 			String sql = "UPDATE favourite SET hodnotenie= ?, recipe_recipe_id= ?"
 					+" WHERE favourite_id = ? ";
 			int updated = jdbcTemplate.update(sql, favourite.getHodnotenie(), favourite.getRecipe().getId(), favourite.getId());
 			if (updated == 1) {
+				return favourite;
 			} else {
 				throw new NoSuchElementException("Ingredient with id: " + favourite.getId() + " not in DB.");
 			}

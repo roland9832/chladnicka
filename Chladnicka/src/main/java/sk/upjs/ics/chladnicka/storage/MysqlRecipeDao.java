@@ -116,7 +116,7 @@ public class MysqlRecipeDao implements RecipeDao {
 		return values;
 	}
 	@Override
-	public void save(Recipe recipe, Map<Ingredient, Double> ingredientMap, List<Ingredient> ingredients) throws NoSuchElementException, NullPointerException {
+	public Recipe save(Recipe recipe, Map<Ingredient, Double> ingredientMap, List<Ingredient> ingredients) throws NoSuchElementException, NullPointerException {
 		if(recipe == null) {
 			throw new NullPointerException("Cannot save null Ingredient");
 		}
@@ -144,11 +144,12 @@ public class MysqlRecipeDao implements RecipeDao {
 				System.out.println(sql);
 				jdbcTemplate.update(sql);
 			}
+			return new Recipe(id, recipe.getRecipe_name(),recipe.getCalorific(),recipe.getDescription(),recipe.getDiet(), ingredients);
 		}
 		else {
 			String sql = "UPDATE recipe set recipe_name= ?, calorific_value= ?, description= ?, diet_diet_id= ?"
 					+ " where recipe_id = ? ";
-			jdbcTemplate.update(sql, recipe.getRecipe_name(), recipe.getCalorific(), recipe.getDescription(), recipe.getDiet().getId(), recipe.getId());
+			int updated = jdbcTemplate.update(sql, recipe.getRecipe_name(), recipe.getCalorific(), recipe.getDescription(), recipe.getDiet().getId(), recipe.getId());
 			try {
 				jdbcTemplate.update("DELETE FROM recipe_has_ingredient WHERE recipe_recipe_id = " + recipe.getId());
 			} catch (DataIntegrityViolationException e) {
@@ -166,6 +167,11 @@ public class MysqlRecipeDao implements RecipeDao {
 				String sql1 = sb.substring(0,sb.length());
 				System.out.println(sql1);
 				jdbcTemplate.update(sql1);
+			}
+			if (updated == 1) {
+				return recipe;
+			} else {
+				throw new NoSuchElementException("Recipe with id: " + recipe.getId() + " not in DB.");
 			}
 		}
 	}

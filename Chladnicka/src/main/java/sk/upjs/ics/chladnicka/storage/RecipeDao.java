@@ -15,7 +15,7 @@ public interface RecipeDao {
 
 	Recipe getByID(long id);
 
-	void save(Recipe recipe, Map<Ingredient, Double> ingredientMap, List<Ingredient> ingredientToSave) throws NoSuchElementException, NullPointerException;
+	Recipe save(Recipe recipe, Map<Ingredient, Double> ingredientMap, List<Ingredient> ingredientToSave) throws NoSuchElementException, NullPointerException;
 
 	boolean delete(Recipe recipe) throws EntityUndeletableException;
 }
